@@ -5,9 +5,7 @@ import java.util.Scanner;
 public class Main {
 	private static Scanner input = new Scanner(System.in);
 	public static void main(String[] args) {
-		boolean quit = false;
-		while(!quit)
-			quit = displayMenu();
+		while(!displayMenu());
 	}
 	
 	static boolean displayMenu() {		
@@ -41,12 +39,15 @@ public class Main {
 		
 		switch(getChoice()) {
 		case 1:
+			//Play menu
 			displayPlay();
 			break;
 		case 2:
+			//Settings menu
 			displaySetting();
 			break;
 		case 6:
+			//Quits the game
 			displayThanks();
 			quit = true;
 			break;			
@@ -167,6 +168,24 @@ public class Main {
 	}
 	
 	static void displayStats() {
+		System.out.printf("%20s", "Statistics");
+		System.out.println("Wins: " + "\n" +
+							"Loses: " + "\n" +
+							"Classic rounds: " + "\n" +
+							"Fight Night rounds: " + "\n" +
+							"Not BlackJack rounds: " + "\n" +
+							"For Fire rounds: " + "\n" +
+							"Blackjacks: " + "\n" +
+							"Credits earned: " + "\n" +
+							"Credits lost: " + "\n" +
+							"Credits lost: " + "\n" +
+							"Highest credit peak: " + "\n" +
+							"Bankruptcies: ");
+	}
+	
+	static void displayHOF() {
+		System.out.println("<=================== HALL OF FAME ===================>\n");
+		System.out.printf("%-20s%5s", "Hustler:", "Credits:");
 		
 	}
 	
@@ -178,6 +197,14 @@ public class Main {
 	static int getChoice() {
 		int choice = input.nextInt();
 		return choice;
+	}
+	
+	static char pressQ() {
+		char q = input.next().charAt(0);
+		while(q != 'q')
+			System.out.println("Enter q to quit");
+			q = input.next().charAt(0);
+		return q;
 	}
 	
 }
