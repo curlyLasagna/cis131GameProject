@@ -4,9 +4,42 @@ import java.util.Scanner;
 
 public class Main {
 	private static Scanner input = new Scanner(System.in);
+	private static int wins;
+	private static int extremeWins;
+	private static int fNRounds;
+	private static int nBJROunds;
+	private static int fFRounds;
+	private static int bJCount;
+	private static int creditsEarned;
+	private static int creditsLost; 
+	private static int highestCredits;
+	private static int bankRuptcies;
+	private static String currency;
+	
 	public static void main(String[] args) {
+		logIn();
 		while(!displayMenu());
 	}
+	
+	static void logIn() {
+		String userName = "";
+		String passwd = "";
+		System.out.print("Alias: ");
+		userName = input.next();
+		System.out.print("Password: ");
+		passwd = input.next();
+		Player currentPlayer = new Player(userName, passwd, wins, extremeWins,
+										fNRounds, nBJROunds, fFRounds, bJCount,
+										creditsEarned, creditsLost, highestCredits,
+										bankRuptcies, "credits");
+	
+		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
+			//ProjectFileIO_v2.updatePlayer(currentPlayer);
+			System.out.println("Welcome " + userName);
+		}
+		
+	}
+	
 	
 	static boolean displayMenu() {		
 		boolean quit = false;
@@ -34,7 +67,7 @@ public class Main {
 				" |                                4. Hall of Fame                                   |\n" +
 			    " |                                5. Credits                                        |\n" +
 				" |                                6. Exit                                           |\n" +
-			    " |                                                                                  |\n" +
+			    " | Enter 1 - 6 for selection                                                        |\n" +
 				" +==================================================================================+");
 		
 		switch(getChoice()) {
@@ -61,8 +94,8 @@ public class Main {
 	
 	static void displayPlay() {
 		System.out.printf("%35s\n","Play");
-		System.out.println("1. Classic Blackjack\n" +
-						   "2. Extreme Blackjack!\n" +
+		System.out.println("1. Extreme Blackjack!\n" +
+						   "2. Extras\n" +
 						   "3. Back");
 		switch(getChoice()) {
 		case 1:
@@ -77,12 +110,13 @@ public class Main {
 	}
 	
 	static void displayExtreme() {
-		System.out.printf("%25s\n", "Extreme Blackjack!");
+		System.out.printf("%25s\n", "Extras");
 		System.out.println("1. Fight Night\n" +
 						   "2. Not BlackJack\n" +
 				 		   "3. Fire\n" + 
 						   "4. Rules\n" +
 				 		   "5. Back");
+		
 		switch(getChoice()) {
 		case 1:
 			break;
@@ -91,15 +125,15 @@ public class Main {
 		case 3:
 			break;
 		case 4:
-			displayExtremeRules();
+			displayExtraRules();
 			break;
 		case 5:
 			displayPlay();
 			break;
 		}
 	}
-	
-	static void displayExtremeRules() {
+	//Enter number for prompt to the user
+	static void displayExtraRules() {
 		System.out.println("Fight Night\n" +
 						   ">Betting is set to your max credits\n" + 
 						   ">Minimum of 5 rounds\n" +
@@ -124,11 +158,10 @@ public class Main {
 	
 	static void displaySetting() {
 		System.out.printf("%35s\n", "Settings" );
-		System.out.println("1. Change currency (default: credits)\n" +
-						   "2. Change suite icons (default: [#, $, *, !])\n" +
-						   "3. Save settings\n" +
-						   "4. Load settings\n" +
-						   "5. Back");
+		System.out.println("1. Change currency (default: credits)\n" +	   
+						   "2. Save settings\n" +
+						   "3. Load settings\n" +
+						   "4. Back");
 		
 		switch(getChoice()) {
 		case 1:
@@ -136,14 +169,12 @@ public class Main {
 			break;
 		case 2:
 			
-		case 5:
+		case 4:
 			displayMenu();
 			break;
 		}
 		
 	}
-	
-	
 	
 	static String changeCurrency() {
 		String newCurrency = "";
@@ -160,18 +191,11 @@ public class Main {
 		return newCurrency;
 	}
 	
-	static String changeSuite() {
-		String setOfSuites = "";
-		System.out.printf("%31s\n", "Change suite icons ");
-		
-		return setOfSuites;
-	}
-	
 	static void displayStats() {
 		System.out.printf("%20s", "Statistics");
 		System.out.println("Wins: " + "\n" +
 							"Loses: " + "\n" +
-							"Classic rounds: " + "\n" +
+							"Extreme rounds: " + "\n" +
 							"Fight Night rounds: " + "\n" +
 							"Not BlackJack rounds: " + "\n" +
 							"For Fire rounds: " + "\n" +
@@ -179,7 +203,7 @@ public class Main {
 							"Credits earned: " + "\n" +
 							"Credits lost: " + "\n" +
 							"Credits lost: " + "\n" +
-							"Highest credit peak: " + "\n" +
+							"Highest credit : " + "\n" +
 							"Bankruptcies: ");
 	}
 	

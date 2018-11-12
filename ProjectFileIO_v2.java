@@ -85,7 +85,7 @@ public class ProjectFileIO_v2 {
         }
         catch (FileNotFoundException e) {
             System.out.println(FILE_NAME + " not found. Creating new file with sample player data.");
-            writeNewPlayer("Test", "pw123", 0, 0);
+            writeNewPlayer("Guest", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "credits");
                 
             writeFile();
             //readFile();
@@ -113,7 +113,7 @@ public class ProjectFileIO_v2 {
         
         String wins = getLine();
         
-        String classicRounds = getLine();
+        String extremeRounds = getLine();
 
         String fNRounds = getLine();
 
@@ -130,19 +130,23 @@ public class ProjectFileIO_v2 {
         String highestCredits = getLine();
 
         String bankRuptcies = getLine();
-
-        String prefCurrency = getLine();
-
-        String prefIcons = getLine();
         
-        writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(classicRounds),
-        		Integer.parseInt(fNRounds), Integer.parseInt(bJCount), Integer.parseInt(creditsEarned), 
-        		Integer.parseInt(creditsLost), Integer.parseInt(highestCredits), Integer.parseInt(bankRuptcies)  );
+        String currency = getLine();
+    
+        writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(extremeRounds),
+        		Integer.parseInt(fNRounds), Integer.parseInt(nBJRounds), Integer.parseInt(fFRounds), Integer.parseInt(bJCount), 
+        		Integer.parseInt(creditsEarned), Integer.parseInt(creditsLost), Integer.parseInt(highestCredits), 
+        		Integer.parseInt(bankRuptcies), currency);
     }
     
     //ADJUST AS NECESSARY!
-    private static void writeNewPlayer(String name, String password, int highScore, int numberOfTimesPlayed){
-        Player playerNew = new Player(name, password, highScore, numberOfTimesPlayed);
+    private static void writeNewPlayer(String name, String password, int wins, int extremeRounds, int fnRounds, 
+    		int nBjROunds, int ffRounds, int bjCount, int creditsPlus, int creditsMinus, int peakCredit, int bankruptcies, 
+    		String currency) {
+        
+    	Player playerNew = new Player(name, password, wins, extremeRounds, fnRounds, nBjROunds, ffRounds, bjCount, 
+        		creditsPlus, creditsMinus, peakCredit, bankruptcies, currency);
+    	
         playerArrayList.add(playerNew);
     }
     
@@ -186,7 +190,7 @@ public class ProjectFileIO_v2 {
     //ADJUST AS NECESSARY!
     private static void writeHeaderLines(){
         pw.println("***********************************");
-        pw.println("* My Game " + getVersionNumber());
+        pw.println("* Blackjack Extreme " + getVersionNumber());
         pw.println("* Authors: Luis Gascon & Austin Connick");
         pw.println("***********************************");
         pw.flush();
@@ -196,8 +200,8 @@ public class ProjectFileIO_v2 {
     private static void writeGlobalSettingsLines(){
         String settingsMarker = GLOBAL_SETTINGS_MARKER + GLOBAL_SETTINGS_MARKER + GLOBAL_SETTINGS_MARKER;
         pw.println(settingsMarker + " Global Settings " + settingsMarker);
-        pw.println("The 1st setting would go here...");
-        pw.println("The 2nd setting would go here...");
+        pw.println("There are no global settings ");
+        //pw.println("The 2nd setting would go here...");
         pw.println(settingsMarker + " End of Global Settings " + settingsMarker);
         pw.flush();
     }
@@ -271,7 +275,7 @@ public class ProjectFileIO_v2 {
            if (playerArrayList.get(i).getName().equals(newPlayer.getName())
             && playerArrayList.get(i).getPassword().equals(newPlayer.getPassword()))
            {
-               return false;  //indicates the player could not be added due to a duplcate player name and password. 
+               return false;  //indicates the player could not be added due to a duplicate player name and password. 
            }
        }
         playerArrayList.add(newPlayer); 

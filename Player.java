@@ -4,28 +4,28 @@ public class Player {
     private String name;
     private String password; 
     private int wins; 
-    private int classicRounds;
+    private int extremeRounds;
     private int fnRounds;
     private int nBJRounds;
     private int ffRounds;
     private int bJCount;
-    private int creditsEarned;
+	private int creditsEarned;
     private int creditsLost;
     private int highestCredits;
     private int bankRuptcies;
     private String currency; 
-    private char[] suiteIcons;
+   
     
     public Player() { 
         //no-arg constructor        
     }
    
-    public Player(String name, String password, int wins, int classicRounds, int fnRounds,
+    public Player(String name, String password, int wins, int extremeRounds, int fnRounds,
 			int nBJRounds, int ffRounds, int bJCount, int creditsEarned, int creditsLost, int highestCredits,
-			int bankRuptcies) {
-		super();
+			int bankRuptcies, String currency) {
+		
 		this.name = name;
-		this.classicRounds = classicRounds;
+		this.extremeRounds = extremeRounds;
 		this.fnRounds = fnRounds;
 		this.nBJRounds = nBJRounds;
 		this.ffRounds = ffRounds;
@@ -34,6 +34,7 @@ public class Player {
 		this.creditsLost = creditsLost;
 		this.highestCredits = highestCredits;
 		this.bankRuptcies = bankRuptcies;
+		this.currency = "credits";
 	}
 
 	public String getPassword() {
@@ -44,8 +45,8 @@ public class Player {
        		 return name;
    	 }
 
-	public int getClassicRounds() {
-		return classicRounds;
+	public int getExtremeRounds() {
+		return extremeRounds;
 	}
 
 	public int getFnRounds() {
@@ -78,5 +79,13 @@ public class Player {
 
 	public int getBankRuptcies() {
 		return bankRuptcies;
+	}
+	
+	public int getWins() {
+		return wins;
+	}
+
+	public String getCurrency() {
+		return currency;
 	}
 }
