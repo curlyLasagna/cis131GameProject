@@ -75,10 +75,12 @@ public class Driver {
 		case 1:
 			//Play menu
 			displayPlay();
+			quit = true;
 			break;
 		case 2:
 			//Settings menu
 			displaySetting();
+			quit = true;
 			break;
 		case 6:
 			//Quits the game
@@ -119,8 +121,10 @@ public class Driver {
 		double bet;
 		boolean run = true;
 		int move;
-		int compHit = 36;
-		int CARDGAMENUM = 41;
+		int numberDraws = 2;
+		int numberDrawscom = 1;
+		int compHit = 16;
+		int CARDGAMENUM = 21;
 		while(score >= 0) {
 			Deck playingDeck = new Deck();
 			Deck PlayerHand = new Deck();
@@ -129,9 +133,14 @@ public class Driver {
 			playingDeck.shuffle();
 			System.out.println("Money = "+score);
 			bet = placeBets(score);
+			for(int i = 1; i<= numberDraws; i++) {
+				PlayerHand.draw(playingDeck);
+			}
+			for(int i = 1; i< numberDrawscom; i++) {
+				CompHand.draw(playingDeck);
+			}
 
-			PlayerHand.draw(playingDeck);
-			PlayerHand.draw(playingDeck);
+			
 			CompHand.draw(playingDeck);
 			//CompHand.draw(playingDeck);
 			run = true;
@@ -157,7 +166,7 @@ public class Driver {
 
 				if(move == 1) {
 					PlayerHand.draw(playingDeck);
-					if(PlayerHand.cardValue() >= CARDGAMENUM) {
+					if(PlayerHand.cardValue() > CARDGAMENUM) {
 						System.out.println("*******************************");
 						System.out.println("Hand- "+PlayerName);
 						System.out.println(PlayerHand.toString());
