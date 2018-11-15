@@ -123,6 +123,7 @@ public class Driver {
 		int move;
 		int numberDraws = 2;
 		int numberDrawscom = 1;
+		int drawFactor = 8; 
 		int compHit = 16;
 		int CARDGAMENUM = 21;
 		while(score >= 0) {
@@ -131,12 +132,18 @@ public class Driver {
 			Deck CompHand = new Deck();
 			playingDeck.createDeck();
 			playingDeck.shuffle();
+			CARDGAMENUM = IR4.getRandomNumber(21, 61);
+			compHit = CARDGAMENUM - 4 ;
 			System.out.println("Money = "+score);
+			System.out.println("Winnig Number: "+ CARDGAMENUM);
+			
 			bet = placeBets(score);
+			numberDraws = CARDGAMENUM /drawFactor;
+			//System.out.println(numberDraws+ "-----------------------------");
 			for(int i = 1; i<= numberDraws; i++) {
 				PlayerHand.draw(playingDeck);
 			}
-			for(int i = 1; i< numberDrawscom; i++) {
+			for(int i = 2; i< numberDraws; i++) {
 				CompHand.draw(playingDeck);
 			}
 
