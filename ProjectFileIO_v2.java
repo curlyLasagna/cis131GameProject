@@ -218,6 +218,17 @@ public class ProjectFileIO_v2 {
             pw.println(playerMarker + " Player#" + i + " " + playerMarker);
             pw.println(playerArrayList.get(i).getName());
             pw.println(playerArrayList.get(i).getPassword());
+            pw.println(playerArrayList.get(i).getWins());
+            pw.println(playerArrayList.get(i).getExtremeRounds());
+            pw.println(playerArrayList.get(i).getFnRounds());
+            pw.println(playerArrayList.get(i).getnBJRounds());
+            pw.println(playerArrayList.get(i).getFfRounds());
+            pw.println(playerArrayList.get(i).getbJCount());
+            pw.println(playerArrayList.get(i).getCreditsEarned());
+            pw.println(playerArrayList.get(i).getCreditsLost());
+            pw.println(playerArrayList.get(i).getHighestCredits());
+            pw.println(playerArrayList.get(i).getBankRuptcies());
+            pw.println(playerArrayList.get(i).getCurrency());
             pw.flush();
         }
     }    
@@ -242,6 +253,7 @@ public class ProjectFileIO_v2 {
     
     //Returns a Player object
     public static Player getPlayer(String name, String password){
+    	//Use this method for log in authentication? 
        for (int i = 0; i < playerArrayList.size(); i++){
            if (playerArrayList.get(i).getName().equals(name)
             && playerArrayList.get(i).getPassword().equals(password))

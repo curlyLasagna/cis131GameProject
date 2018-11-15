@@ -1,5 +1,7 @@
 package blackJackExtreme;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -16,32 +18,41 @@ public class Main {
 	private static int bankRuptcies;
 	private static String currency;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		//ProjectFileIO_v2.main(args);
+		ProjectFileIO_v2.readFile();
+		//System.out.println("Number of players: " + ProjectFileIO_v2.getPlayerArrayList().size());
 		logIn();
 		while(!displayMenu());
 	}
 	
-	static void logIn() {
+	static void logIn() throws IOException {
 		String userName = "";
-		String passwd = "";
 		System.out.print("Alias: ");
-		userName = input.next();
+		userName = input.nextLine();
 		System.out.print("Password: ");
-		passwd = input.next();
+		String passwd = input.next();
 		Player currentPlayer = new Player(userName, passwd, wins, extremeWins,
 										fNRounds, nBJROunds, fFRounds, bJCount,
 										creditsEarned, creditsLost, highestCredits,
-										bankRuptcies, "credits");
-	
+										bankRuptcies, currency);
+		
+		//ProjectFileIO_v2.updatePlayer(currentPlayer);
 		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
 			//ProjectFileIO_v2.updatePlayer(currentPlayer);
-			System.out.println("Welcome " + userName);
+			System.out.println("Welcome " + currentPlayer.getName());
+			System.out.println("Your password: " + currentPlayer.getPassword());
+			ProjectFileIO_v2.writeFile();
 		}
-		
+		else {
+			System.out.println("Welcome back " + ProjectFileIO_v2.getPlayer(userName,
+			passwd).getName());
+			
+		}
 	}
 	
 	
-	static boolean displayMenu() {		
+	static boolean displayMenu() throws IOException {		
 		boolean quit = false;
 		System.out.println(" +----------------------------------------------------------------------------------+\n" +
 				" |                                                                                  |\n" +
@@ -74,16 +85,28 @@ public class Main {
 		case 1:
 			//Play menu
 			displayPlay();
+			quit = true;
 			break;
 		case 2:
 			//Settings menu
 			displaySetting();
+			quit = true;
+			break;
+		case 3:
+			displayStats();
+			quit = true;
 			break;
 		case 6:
 			//Quits the game
 			displayThanks();
 			quit = true;
-			break;			
+			break;
+		default:
+			System.out.printf("Enter 1 - 6 and try again\n");
+			displayMenu();
+			quit = true;
+			break;
+			//Create a method checkInput(int selection, int range) i.e 1 - 6, or 1 - 4
 		}
 		return quit;
 	}
@@ -92,7 +115,7 @@ public class Main {
 		
 	}
 	
-	static void displayPlay() {
+	static void displayPlay() throws IOException {
 		System.out.printf("%35s\n","Play");
 		System.out.println("1. Extreme Blackjack!\n" +
 						   "2. Extras\n" +
@@ -109,7 +132,7 @@ public class Main {
 		}
 	}
 	
-	static void displayExtreme() {
+	static void displayExtreme() throws IOException {
 		System.out.printf("%25s\n", "Extras");
 		System.out.println("1. Fight Night\n" +
 						   "2. Not BlackJack\n" +
@@ -133,7 +156,7 @@ public class Main {
 		}
 	}
 	//Enter number for prompt to the user
-	static void displayExtraRules() {
+	static void displayExtraRules() throws IOException {
 		System.out.println("Fight Night\n" +
 						   ">Betting is set to your max credits\n" + 
 						   ">Minimum of 5 rounds\n" +
@@ -156,11 +179,11 @@ public class Main {
 	}
 	
 	
-	static void displaySetting() {
+	static void displaySetting() throws IOException {
 		System.out.printf("%35s\n", "Settings" );
 		System.out.println("1. Change currency (default: credits)\n" +	   
-						   "2. Save settings\n" +
-						   "3. Load settings\n" +
+	                       "2. Change Alias\n" +
+						   "3. Save settings\n" +
 						   "4. Back");
 		
 		switch(getChoice()) {
@@ -168,7 +191,11 @@ public class Main {
 			changeCurrency();
 			break;
 		case 2:
-			
+			ProjectFileIO_v2.updatePlayer(); //Find a way to make currentPlayer a global
+			break;
+		case 3:
+			ProjectFileIO_v2.writeFile();
+			break;
 		case 4:
 			displayMenu();
 			break;
@@ -176,7 +203,7 @@ public class Main {
 		
 	}
 	
-	static String changeCurrency() {
+	static String changeCurrency() throws IOException {
 		String newCurrency = "";
 		System.out.printf("%31s\n", "Change currency");
 		System.out.println("Enter new currency name or enter 'q' to go back");
@@ -193,7 +220,7 @@ public class Main {
 	
 	static void displayStats() {
 		System.out.printf("%20s", "Statistics");
-		System.out.println("Wins: " + "\n" +
+		System.out.println("Wins: " + "\n" + 
 							"Loses: " + "\n" +
 							"Extreme rounds: " + "\n" +
 							"Fight Night rounds: " + "\n" +
@@ -215,7 +242,7 @@ public class Main {
 	
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
-		System.out.println();
+		System.out.println("Thank you for playing :)");
 	}
 	
 	static int getChoice() {

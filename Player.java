@@ -25,6 +25,7 @@ public class Player {
 			int bankRuptcies, String currency) {
 		
 		this.name = name;
+		this.password = password;
 		this.extremeRounds = extremeRounds;
 		this.fnRounds = fnRounds;
 		this.nBJRounds = nBJRounds;
