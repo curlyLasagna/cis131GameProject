@@ -7,7 +7,7 @@ public class Player {
     private int extremeRounds;
     private int fnRounds;
     private int nBJRounds;
-    private int ffRounds;
+	private int ffRounds;
     private int bJCount;
 	private int creditsEarned;
     private int creditsLost;
@@ -26,6 +26,7 @@ public class Player {
 		
 		this.name = name;
 		this.password = password;
+		this.wins = wins; 
 		this.extremeRounds = extremeRounds;
 		this.fnRounds = fnRounds;
 		this.nBJRounds = nBJRounds;
@@ -35,7 +36,7 @@ public class Player {
 		this.creditsLost = creditsLost;
 		this.highestCredits = highestCredits;
 		this.bankRuptcies = bankRuptcies;
-		this.currency = "credits";
+		this.currency = currency;
 	}
 
 	public String getPassword() {
@@ -44,7 +45,7 @@ public class Player {
 
 	public String getName(){
        		 return name;
-   	 }
+   	}
 
 	public int getExtremeRounds() {
 		return extremeRounds;
@@ -88,5 +89,57 @@ public class Player {
 
 	public String getCurrency() {
 		return currency;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+
+	public void setExtremeRounds(int extremeRounds) {
+		this.extremeRounds = extremeRounds;
+	}
+
+	public void setFnRounds(int fnRounds) {
+		this.fnRounds = fnRounds;
+	}
+
+	public void setnBJRounds(int nBJRounds) {
+		this.nBJRounds = nBJRounds;
+	}
+
+	public void setFfRounds(int ffRounds) {
+		this.ffRounds = ffRounds;
+	}
+
+	public void setbJCount(int bJCount) {
+		this.bJCount = bJCount;
+	}
+
+	public void setCreditsEarned(int creditsEarned) {
+		this.creditsEarned = creditsEarned;
+	}
+
+	public void setCreditsLost(int creditsLost) {
+		this.creditsLost = creditsLost;
+	}
+
+	public void setHighestCredits(int highestCredits) {
+		this.highestCredits = highestCredits;
+	}
+
+	public void setBankRuptcies(int bankRuptcies) {
+		this.bankRuptcies = bankRuptcies;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 }

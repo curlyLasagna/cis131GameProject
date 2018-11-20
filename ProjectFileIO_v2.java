@@ -84,8 +84,8 @@ public class ProjectFileIO_v2 {
             br.close();       
         }
         catch (FileNotFoundException e) {
-            System.out.println(FILE_NAME + " not found. Creating new file with sample player data.");
-            writeNewPlayer("Guest", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "credits");
+            System.out.println(FILE_NAME + " not found. Creating a new one");
+            //writeNewPlayer("Guest", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "credits");
                 
             writeFile();
             //readFile();
@@ -173,7 +173,7 @@ public class ProjectFileIO_v2 {
     //================================================================================================================
     
     public static void writeFile() throws IOException {
-        System.out.println("\nWriting File...");
+        System.out.println("\nSaving...");
         
         fw = new FileWriter(FILE_NAME);
         pw = new PrintWriter(fw);
@@ -184,7 +184,7 @@ public class ProjectFileIO_v2 {
         writeEOFline();
         
         pw.close();
-        System.out.println("File written successfully.");
+        System.out.println("Save successful");
     }
     
     //ADJUST AS NECESSARY!

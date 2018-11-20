@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Main {
 	private static Scanner input = new Scanner(System.in);
+	private static String username;
+	private static String passwd;
 	private static int wins;
 	private static int extremeWins;
 	private static int fNRounds;
@@ -27,27 +29,24 @@ public class Main {
 	}
 	
 	static void logIn() throws IOException {
-		String userName = "";
+		//String userName = "";
 		System.out.print("Alias: ");
-		userName = input.nextLine();
+		username = input.nextLine();
 		System.out.print("Password: ");
-		String passwd = input.next();
-		Player currentPlayer = new Player(userName, passwd, wins, extremeWins,
+		passwd = input.next();
+		Player currentPlayer = new Player(username, passwd, wins, extremeWins,
 										fNRounds, nBJROunds, fFRounds, bJCount,
 										creditsEarned, creditsLost, highestCredits,
 										bankRuptcies, currency);
 		
-		//ProjectFileIO_v2.updatePlayer(currentPlayer);
 		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
-			//ProjectFileIO_v2.updatePlayer(currentPlayer);
 			System.out.println("Welcome " + currentPlayer.getName());
 			System.out.println("Your password: " + currentPlayer.getPassword());
 			ProjectFileIO_v2.writeFile();
 		}
 		else {
-			System.out.println("Welcome back " + ProjectFileIO_v2.getPlayer(userName,
+			System.out.println("Welcome back " + ProjectFileIO_v2.getPlayer(username,
 			passwd).getName());
-			
 		}
 	}
 	
@@ -93,8 +92,11 @@ public class Main {
 			quit = true;
 			break;
 		case 3:
+			//Player statistics 
 			displayStats();
 			quit = true;
+			break;
+		case 4:
 			break;
 		case 6:
 			//Quits the game
@@ -106,7 +108,7 @@ public class Main {
 			displayMenu();
 			quit = true;
 			break;
-			//Create a method checkInput(int selection, int range) i.e 1 - 6, or 1 - 4
+			
 		}
 		return quit;
 	}
@@ -173,65 +175,72 @@ public class Main {
 						   "If you lose 4 rounds in a row, you're total credits are\n" +
 						   "reduced twice the amount of your total bets in those 4 rounds\n");
 		System.out.println("press q to go back");
-		String q = input.next();
-		if(q.startsWith("q"))
+		
+		if(pressQ().equals("q"))
 			displayExtreme();		
 	}
 	
 	
 	static void displaySetting() throws IOException {
 		System.out.printf("%35s\n", "Settings" );
-		System.out.println("1. Change currency (default: credits)\n" +	   
-	                       "2. Change Alias\n" +
-						   "3. Save settings\n" +
-						   "4. Back");
+		System.out.println("1. Change currency \n"+ 							 
+	                       "2. Change Alias \n" +
+						   "3. Back");
 		
 		switch(getChoice()) {
 		case 1:
 			changeCurrency();
 			break;
 		case 2:
-			ProjectFileIO_v2.updatePlayer(); //Find a way to make currentPlayer a global
+			changeAlias();
 			break;
 		case 3:
-			ProjectFileIO_v2.writeFile();
-			break;
-		case 4:
 			displayMenu();
 			break;
 		}
 		
 	}
 	
-	static String changeCurrency() throws IOException {
+	static void changeCurrency() throws IOException {
 		String newCurrency = "";
 		System.out.printf("%31s\n", "Change currency");
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		System.out.println();
 		newCurrency = input.next();
-		if(newCurrency.startsWith("q"))
-			displaySetting();
-		while(newCurrency.isEmpty()) {
-			System.out.println("Changes not saved");
-			System.out.println("Enter 'q' if you'd like to go back");
+		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
+		ProjectFileIO_v2.writeFile();
+		displaySetting();
 		}
-		return newCurrency;
+	
+	
+	static void changeAlias() throws IOException {
+		System.out.printf("%31s\n", "Change alias");
+		System.out.println("Enter new name");
+		String newAlias = input.next();
+		ProjectFileIO_v2.getPlayer(username, passwd).setName(newAlias);
+		System.out.println("Alias successfully changed");
+		ProjectFileIO_v2.writeFile();
+		displaySetting();
 	}
 	
-	static void displayStats() {
-		System.out.printf("%20s", "Statistics");
-		System.out.println("Wins: " + "\n" + 
-							"Loses: " + "\n" +
-							"Extreme rounds: " + "\n" +
-							"Fight Night rounds: " + "\n" +
-							"Not BlackJack rounds: " + "\n" +
-							"For Fire rounds: " + "\n" +
-							"Blackjacks: " + "\n" +
-							"Credits earned: " + "\n" +
-							"Credits lost: " + "\n" +
-							"Credits lost: " + "\n" +
-							"Highest credit : " + "\n" +
-							"Bankruptcies: ");
+	static void displayStats() throws IOException {
+		System.out.printf("%20s", "Statistics\n");
+		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
+							"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
+							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
+							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
+							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
+							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
+							"Blackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
+							"Credits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
+							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
+							"Press q to go back");
+		if(pressQ().equals("q"))
+			displayMenu();
+							
 	}
 	
 	static void displayHOF() {
@@ -250,11 +259,12 @@ public class Main {
 		return choice;
 	}
 	
-	static char pressQ() {
-		char q = input.next().charAt(0);
-		while(q != 'q')
+	static String pressQ() {
+		String q = input.next();
+		while(!q.equals("q")) {
 			System.out.println("Enter q to quit");
-			q = input.next().charAt(0);
+			q = input.next();
+		}
 		return q;
 	}
 	
