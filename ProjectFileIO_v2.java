@@ -14,7 +14,7 @@ public class ProjectFileIO_v2 {
     private static String GLOBAL_SETTINGS_MARKER = ">";
     private static String COMMENT_MARKER         = "*";
     
-    private static String VERSION_NUMBER = "1.0.0.1";
+    private static String VERSION_NUMBER = ".69";
     
     //Global Variables related to file IO 
     private static FileReader fr;

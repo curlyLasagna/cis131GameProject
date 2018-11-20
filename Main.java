@@ -20,16 +20,21 @@ public class Main {
 	private static int bankRuptcies;
 	private static String currency;
 	
-	public static void main(String[] args) throws IOException {
-		//ProjectFileIO_v2.main(args);
+	public static void main(String[] args) throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
-		//System.out.println("Number of players: " + ProjectFileIO_v2.getPlayerArrayList().size());
 		logIn();
 		while(!displayMenu());
 	}
 	
 	static void logIn() throws IOException {
-		//String userName = "";
+		/*************************
+		Things to add:
+		If(objName = inputName)
+			if(objPassWord != inputPass)
+			while(inputPass != objPassWord)
+			print "password incorrect" 
+		*************************/
+		System.out.println("");
 		System.out.print("Alias: ");
 		username = input.nextLine();
 		System.out.print("Password: ");
@@ -51,7 +56,7 @@ public class Main {
 	}
 	
 	
-	static boolean displayMenu() throws IOException {		
+	static boolean displayMenu() throws IOException, InterruptedException {		
 		boolean quit = false;
 		System.out.println(" +----------------------------------------------------------------------------------+\n" +
 				" |                                                                                  |\n" +
@@ -98,6 +103,10 @@ public class Main {
 			break;
 		case 4:
 			break;
+		case 5:
+			displayCredits();
+			quit = true;
+			break;
 		case 6:
 			//Quits the game
 			displayThanks();
@@ -117,7 +126,7 @@ public class Main {
 		
 	}
 	
-	static void displayPlay() throws IOException {
+	static void displayPlay() throws IOException, InterruptedException {
 		System.out.printf("%35s\n","Play");
 		System.out.println("1. Extreme Blackjack!\n" +
 						   "2. Extras\n" +
@@ -134,7 +143,7 @@ public class Main {
 		}
 	}
 	
-	static void displayExtreme() throws IOException {
+	static void displayExtreme() throws IOException, InterruptedException {
 		System.out.printf("%25s\n", "Extras");
 		System.out.println("1. Fight Night\n" +
 						   "2. Not BlackJack\n" +
@@ -158,7 +167,7 @@ public class Main {
 		}
 	}
 	//Enter number for prompt to the user
-	static void displayExtraRules() throws IOException {
+	static void displayExtraRules() throws IOException, InterruptedException {
 		System.out.println("Fight Night\n" +
 						   ">Betting is set to your max credits\n" + 
 						   ">Minimum of 5 rounds\n" +
@@ -181,7 +190,7 @@ public class Main {
 	}
 	
 	
-	static void displaySetting() throws IOException {
+	static void displaySetting() throws IOException, InterruptedException {
 		System.out.printf("%35s\n", "Settings" );
 		System.out.println("1. Change currency \n"+ 							 
 	                       "2. Change Alias \n" +
@@ -201,21 +210,19 @@ public class Main {
 		
 	}
 	
-	static void changeCurrency() throws IOException {
+	static void changeCurrency() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
 		System.out.println(ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
 		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
-		//NullPointerException here because Alias was changed 
 		System.out.println("Currency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
 		}
 	
-	
-	static void changeAlias() throws IOException {
+	static void changeAlias() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change alias");
 		System.out.println("Enter new name");
@@ -226,7 +233,7 @@ public class Main {
 		displaySetting();
 	}
 	
-	static void displayStats() throws IOException {
+	static void displayStats() throws IOException, InterruptedException {
 		System.out.printf("%20s", "Statistics\n");
 		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
 							"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
@@ -241,15 +248,31 @@ public class Main {
 							"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
 							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
 							"Press q to go back");
-		if(pressQ().equals("q"))
-			displayMenu();
-							
+							if(pressQ().equals("q"))
+								displayMenu();
 	}
 	
 	static void displayHOF() {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
-		System.out.printf("%-20s%5s", "Hustler:", "Credits:");
+		System.out.printf("%-20s%5s", "Hustler:", "Wins:");
+		/*************************
+		Things to add:
+		Create a player arraylist
+		Call GetArrayList();
+		Highest to lowest insertion sort
+		Player.getWins();
+		*************************/
 		
+	}
+	
+	static void displayCredits() throws InterruptedException, IOException {
+		
+		System.out.println("***********************************");
+	    System.out.println("Blackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
+	    System.out.println("Authors: Luis Gascon & Austin Connick");
+	    System.out.println("***********************************");
+	    Thread.sleep(6000); 
+	    displayMenu();
 	}
 	
 	static void displayThanks() {
