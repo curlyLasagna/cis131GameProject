@@ -36,7 +36,7 @@ public class ProjectFileIO_v2 {
     //================================================================================================================
     
     public static void readFile() throws IOException {
-        System.out.println("Reading File...\n");
+        //System.out.println("Reading File...\n");
         playerArrayList.clear();
         try {
             boolean keepGoing = true;
@@ -156,7 +156,7 @@ public class ProjectFileIO_v2 {
         String entireLine = "";
         try {
             entireLine = br.readLine();
-            System.out.println(entireLine);  
+            //System.out.println(entireLine);  
         }
         catch (FileNotFoundException e) {
             System.out.println(FILE_NAME + " not found. Creating new file.");

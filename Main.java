@@ -202,18 +202,21 @@ public class Main {
 	}
 	
 	static void changeCurrency() throws IOException {
-		String newCurrency = "";
+		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
+		System.out.println(ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
-		System.out.println();
-		newCurrency = input.next();
+		String newCurrency = input.next();
 		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
+		//NullPointerException here because Alias was changed 
+		System.out.println("Currency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
 		}
 	
 	
 	static void changeAlias() throws IOException {
+		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change alias");
 		System.out.println("Enter new name");
 		String newAlias = input.next();
