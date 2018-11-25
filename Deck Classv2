@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Deck{
 	private List<Card>cards = new ArrayList<Card>();
-	private String[] Suits = {"Hearts","Diamonds","Clubs","Spades"};
-	private String[] Value = {"Two","Three","Four","Five","Six","Seven","Eight","Nine", "Ten" ,"Ace","King", "Queen","Jack"};
+	private String[] Suits = {"<3","<>","**","$$"};
+	private String[] Value = {"2 ","3 ","4 ","5 ","6 ","7 ","8 ","9 ", "10" ,"A ","K ", "Q ","J "};
 	public void createDeck() {
 		
 		for(int i=0;i<(Suits.length);i++){
@@ -52,19 +52,19 @@ public class Deck{
 
 		for(Card aCard : this.cards) {
 			switch(aCard.getValue()) {
-			case "Two" : totalValue += 2;break;
-			case "Three" : totalValue += 3;break;
-			case "Four" : totalValue += 4;break;
-			case "Five" : totalValue += 5;break;
-			case "Six" : totalValue += 6;break;
-			case "Seven" : totalValue += 7;break;
-			case "Eight" : totalValue += 8;break;
-			case "Nine" : totalValue += 9;break;
-			case "Ten" : totalValue += 10;break;
-			case "King" : totalValue += 10;break;
-			case "Queen" : totalValue += 10;break;
-			case "Jack" : totalValue += 10;break;
-			case "Ace" : totalValue += 1;break;
+			case "2 " : totalValue += 2;break;
+			case "3 " : totalValue += 3;break;
+			case "4 " : totalValue += 4;break;
+			case "5 " : totalValue += 5;break;
+			case "6 " : totalValue += 6;break;
+			case "7 " : totalValue += 7;break;
+			case "8 " : totalValue += 8;break;
+			case "9 " : totalValue += 9;break;
+			case "10" : totalValue += 10;break;
+			case "K " : totalValue += 10;break;
+			case "Q " : totalValue += 10;break;
+			case "J " : totalValue += 10;break;
+			case "A " : totalValue += 1;break;
 
 			}
 		}
