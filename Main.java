@@ -2,9 +2,20 @@ package blackJackExtreme;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
+
+/****
+ * <3 = hearts
+ * <> = diamond
+ * $$ = Spade
+ * ** = Club 
+ */
+
 public class Main {
+
 	private static Scanner input = new Scanner(System.in);
 	private static String username;
 	private static String passwd;
@@ -19,42 +30,64 @@ public class Main {
 	private static int highestCredits;
 	private static int bankRuptcies;
 	private static String currency;
+	private static Player currentPlayer = new Player
+	(username, passwd, wins, extremeWins,
+	fNRounds, nBJROunds, fFRounds, bJCount,
+	creditsEarned, creditsLost, highestCredits,
+	bankRuptcies, currency);
+	private static ArrayList<Integer> scores = new ArrayList<>(10);
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) 
+	throws IOException, InterruptedException {
+		
 		ProjectFileIO_v2.readFile();
 		logIn();
 		while(!displayMenu());
+		
 	}
 	
 	static void logIn() throws IOException {
-		/*************************
-		Things to add:
-		If(objName = inputName)
-			if(objPassWord != inputPass)
-			while(inputPass != objPassWord)
-			print "password incorrect" 
-		*************************/
-		System.out.println("");
+
 		System.out.print("Alias: ");
-		username = input.nextLine();
+		username = input.next();
+		currentPlayer.setName(username);
 		System.out.print("Password: ");
 		passwd = input.next();
-		Player currentPlayer = new Player(username, passwd, wins, extremeWins,
-										fNRounds, nBJROunds, fFRounds, bJCount,
-										creditsEarned, creditsLost, highestCredits,
-										bankRuptcies, currency);
-		
+		checkPassword(username, passwd);
+		currentPlayer.setPassword(passwd);
+		isNewPlayer(username);
+
+	}
+	
+	static void checkPassword(String user, String pass) throws IOException {
+
+		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
+			if(username.equals(x.getName()))
+				while(!passwd.equals(x.getPassword())) {
+					System.err.println("Wrong password, try again, or press 'q' to change alias");
+					if(passwd.equals(pressQ()))
+						logIn();
+					System.out.print("Password: ");
+					passwd = input.next();		
+
+			}
+		}
+	}
+	
+	static void isNewPlayer(String user) throws IOException {
+
 		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
 			System.out.println("Welcome " + currentPlayer.getName());
 			System.out.println("Your password: " + currentPlayer.getPassword());
 			ProjectFileIO_v2.writeFile();
+
 		}
+		
 		else {
-			System.out.println("Welcome back " + ProjectFileIO_v2.getPlayer(username,
-			passwd).getName());
+			System.out.println("Welcome back " + 
+		ProjectFileIO_v2.getPlayer(username, passwd).getName() + "!");
 		}
 	}
-	
 	
 	static boolean displayMenu() throws IOException, InterruptedException {		
 		boolean quit = false;
@@ -102,6 +135,8 @@ public class Main {
 			quit = true;
 			break;
 		case 4:
+			displayHOF();
+			quit = true;
 			break;
 		case 5:
 			displayCredits();
@@ -152,6 +187,7 @@ public class Main {
 				 		   "5. Back");
 		
 		switch(getChoice()) {
+		
 		case 1:
 			break;
 		case 2:
@@ -197,6 +233,7 @@ public class Main {
 						   "3. Back");
 		
 		switch(getChoice()) {
+		
 		case 1:
 			changeCurrency();
 			break;
@@ -213,20 +250,23 @@ public class Main {
 	static void changeCurrency() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
-		System.out.println(ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
+		System.out.println("Current currency: " + 
+		ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
+		System.out.println();
 		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
 		System.out.println("Currency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
-		}
+	}
 	
 	static void changeAlias() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
+		String newAlias = "";
 		System.out.printf("%31s\n", "Change alias");
 		System.out.println("Enter new name");
-		String newAlias = input.next();
+		newAlias = input.next();
 		ProjectFileIO_v2.getPlayer(username, passwd).setName(newAlias);
 		System.out.println("Alias successfully changed");
 		ProjectFileIO_v2.writeFile();
@@ -254,14 +294,34 @@ public class Main {
 	
 	static void displayHOF() {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
-		System.out.printf("%-20s%5s", "Hustler:", "Wins:");
+		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
+		System.out.printf("%-20s%27c%3s\n\n", "--------", ' ', "------");
 		/*************************
 		Things to add:
-		Create a player arraylist
+		Create a player int array[10]
 		Call GetArrayList();
 		Highest to lowest insertion sort
 		Player.getWins();
 		*************************/
+		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
+		 scores.add(x.getWins());
+		 System.out.println(x.getName() + x.getWins());
+		}
+		
+	}
+	
+//	static Integer[] returnWins(ArrayList<Player> arr) {
+//		//Return an Integer Arraylist of scores
+//		Integer [] wins = new Integer[10];
+//		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
+//			//wins[] = 
+//			System.out.printf("%-50s%-5d\n", x.getName(), x.getWins());
+//		}
+//		return wins;
+//	}
+	
+	public static void sortHighScores(Integer [] arr) {
+		Arrays.sort(arr, Collections.reverseOrder());
 		
 	}
 	
@@ -269,16 +329,21 @@ public class Main {
 		
 		System.out.println("***********************************");
 	    System.out.println("Blackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
-	    System.out.println("Authors: Luis Gascon & Austin Connick");
+	    System.out.println("Authors:");
+	    System.out.println("Luis Gascon"); 
+	    System.out.println("Austin Connick");
 	    System.out.println("***********************************");
 	    Thread.sleep(6000); 
 	    displayMenu();
+
 	}
 	
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
+		//Create an ASCII art 
 		System.out.println("Thank you for playing :)");
 	}
+	
 	
 	static int getChoice() {
 		int choice = input.nextInt();

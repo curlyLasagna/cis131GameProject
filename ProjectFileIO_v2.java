@@ -107,30 +107,18 @@ public class ProjectFileIO_v2 {
     
     //ADJUST AS NECESSARY!
     private static void readPlayerData(String entireLine){
-        String name = getLine();
-        
+        String name = getLine();  
         String password = getLine();
-        
         String wins = getLine();
-        
         String extremeRounds = getLine();
-
         String fNRounds = getLine();
-
         String nBJRounds = getLine();
-
         String fFRounds = getLine();
-
         String bJCount = getLine();
-
         String creditsEarned = getLine();
-
         String creditsLost = getLine();
-
         String highestCredits = getLine();
-
         String bankRuptcies = getLine();
-        
         String currency = getLine();
     
         writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(extremeRounds),
@@ -243,7 +231,7 @@ public class ProjectFileIO_v2 {
         return VERSION_NUMBER;
     }    
     
-    public static ArrayList getPlayerArrayList(){
+    public static ArrayList<Player> getPlayerArrayList(){
         return playerArrayList;
     }
     
