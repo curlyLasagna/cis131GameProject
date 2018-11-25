@@ -1,9 +1,28 @@
+//Austin 
+//Luis
 package blackjackbuildone;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Driver {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+
+/****
+ * <3 = hearts
+ * <> = diamond
+ * $$ = Spade
+ * ** = Club 
+ */
+
+public class Main {
+
 	private static Scanner input = new Scanner(System.in);
+	private static String username;
+	private static String passwd;
 	private static int wins;
 	private static int extremeWins;
 	private static int fNRounds;
@@ -15,62 +34,94 @@ public class Driver {
 	private static int highestCredits;
 	private static int bankRuptcies;
 	private static String currency;
-
-	public static void main(String[] args) throws IOException {
+	private static Player currentPlayer = new Player
+	(username, passwd, wins, extremeWins,
+	fNRounds, nBJROunds, fFRounds, bJCount,
+	creditsEarned, creditsLost, highestCredits,
+	bankRuptcies, currency);
+	private static ArrayList<Integer> scores = new ArrayList<>(10);
+	
+	public static void main(String[] args) 
+	throws IOException, InterruptedException {
+		
+		ProjectFileIO_v2.readFile();
 		logIn();
 		while(!displayMenu());
+		
 	}
-
+	
 	static void logIn() throws IOException {
-		String userName = "";
-		String passwd = "";
+
 		System.out.print("Alias: ");
-		userName = input.next();
+		username = input.next();
+		currentPlayer.setName(username);
 		System.out.print("Password: ");
 		passwd = input.next();
-		Player currentPlayer = new Player(userName, passwd, wins, extremeWins,
-				fNRounds, nBJROunds, fFRounds, bJCount,
-				creditsEarned, creditsLost, highestCredits,
-				bankRuptcies, "credits");
-
-		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
-			//ProjectFileIO_v2.updatePlayer(currentPlayer);
-			System.out.println("Welcome " + userName);
-			ProjectFileIO_v2.writeFile();
-		}
+		checkPassword(username, passwd);
+		currentPlayer.setPassword(passwd);
+		isNewPlayer(username);
 
 	}
+	
+	static void checkPassword(String user, String pass) throws IOException {
 
+		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
+			if(username.equals(x.getName()))
+				while(!passwd.equals(x.getPassword())) {
+					System.err.println("Wrong password, try again, or press 'q' to change alias");
+					if(passwd.equals(pressQ()))
+						logIn();
+					System.out.print("Password: ");
+					passwd = input.next();		
 
-	static boolean displayMenu() {		
+			}
+		}
+	}
+	
+	static void isNewPlayer(String user) throws IOException {
+
+		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
+			System.out.println("Welcome " + currentPlayer.getName());
+			System.out.println("Your password: " + currentPlayer.getPassword());
+			ProjectFileIO_v2.writeFile();
+
+		}
+		
+		else {
+			System.out.println("Welcome back " + 
+		ProjectFileIO_v2.getPlayer(username, passwd).getName() + "!");
+		}
+	}
+	
+	static boolean displayMenu() throws IOException, InterruptedException {		
 		boolean quit = false;
 		System.out.println(" +----------------------------------------------------------------------------------+\n" +
 				" |                                                                                  |\n" +
-				" |        __       __                __       __                 __         	    |\n" + 
-				" |       |  |     |  |              |  |     (__)               |  |                |\n" +
-				" |       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __   	    |\n" +
-				" |       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
-				" |       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
-				" |       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
-				" |                                        __/   |                                   |\n" +
-				" |                                       |_____/   	                            |\n" +
-				" |                  _______   _____________ ________  ________                      | \n" + 
-				" |	           |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                     | \n" + 
-				" |                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
-				" |                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
-				" |                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
-				" |                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
-				" +==================================================================================+\n" +
+			    " |        __       __                __       __                 __         	    |\n" + 
+			    " |       |  |     |  |              |  |     (__)               |  |                |\n" +
+			    " |       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __   	    |\n" +
+			    " |       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
+			    " |       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
+			    " |       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
+			    " |                                        __/   |                                   |\n" +
+			    " |                                       |_____/   	                            |\n" +
+			    " |                  _______   _____________ ________  ________                      | \n" + 
+			    " |	           |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                     | \n" + 
+			    " |                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
+			    " |                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
+			    " |                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
+			    " |                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
+			    " +==================================================================================+\n" +
 				" |                                                                                  |\n" + 
-				" |                                1. Play                                           |\n" +
+			    " |                                1. Play                                           |\n" +
 				" |                                2. Settings                                       |\n" +
-				" |                                3. Statistics                                     |\n" +
+			    " |                                3. Statistics                                     |\n" +
 				" |                                4. Hall of Fame                                   |\n" +
-				" |                                5. Credits                                        |\n" +
+			    " |                                5. Credits                                        |\n" +
 				" |                                6. Exit                                           |\n" +
-				" | Enter 1 - 6 for selection                                                        |\n" +
+			    " | Enter 1 - 6 for selection                                                        |\n" +
 				" +==================================================================================+");
-
+		
 		switch(getChoice()) {
 		case 1:
 			//Play menu
@@ -82,27 +133,46 @@ public class Driver {
 			displaySetting();
 			quit = true;
 			break;
+		case 3:
+			//Player statistics 
+			displayStats();
+			quit = true;
+			break;
+		case 4:
+			displayHOF();
+			quit = true;
+			break;
+		case 5:
+			displayCredits();
+			quit = true;
+			break;
 		case 6:
 			//Quits the game
 			displayThanks();
 			quit = true;
-			break;			
+			break;
+		default:
+			System.out.printf("Enter 1 - 6 and try again\n");
+			displayMenu();
+			quit = true;
+			break;
+			
 		}
 		return quit;
 	}
-
+	
 	static void displayGame() {
-
 	}
-
-	static void displayPlay() {
+		
+	
+	static void displayPlay() throws IOException, InterruptedException {
 		System.out.printf("%35s\n","Play");
 		System.out.println("1. Extreme Blackjack!\n" +
-				"2. Extras\n" +
-				"3. Back");
+						   "2. Extras\n" +
+						   "3. Back");
 		switch(getChoice()) {
 		case 1:
-			ExtremeGame();
+			mainGame();
 			break;
 		case 2:
 			displayExtreme();
@@ -112,17 +182,39 @@ public class Driver {
 			break;
 		}
 	}
-
-	private static void ExtremeGame() {
+	
+	static void displayExtreme() throws IOException, InterruptedException {
+		System.out.printf("%25s\n", "Extras");
+		System.out.println("1. Fight Night\n" +
+						   "2. Not BlackJack\n" +
+				 		   "3. Fire\n" + 
+						   "4. Rules\n" +
+				 		   "5. Back");
+		
+		switch(getChoice()) {
+		
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			displayExtraRules();
+			break;
+		case 5:
+			displayPlay();
+		
+			break;
+		}
+	}
+	private static void mainGame() {
 		double score = 1500;
-		String PlayerName = "Luis";
-		int Wins =0;
 		int lost = 0;
 		double bet;
 		boolean run = true;
 		int move;
 		int numberDraws = 2;
-		int numberDrawscom = 1;
 		int drawFactor = 8; 
 		int compHit = 16;
 		int CARDGAMENUM = 21;
@@ -136,26 +228,23 @@ public class Driver {
 			compHit = CARDGAMENUM - 4 ;
 			System.out.println("Money = "+score);
 			System.out.println("Winnig Number: "+ CARDGAMENUM);
-			
+
 			bet = placeBets(score);
 			numberDraws = CARDGAMENUM /drawFactor;
-			//System.out.println(numberDraws+ "-----------------------------");
 			for(int i = 1; i<= numberDraws; i++) {
 				PlayerHand.draw(playingDeck);
 			}
 			for(int i = 2; i< numberDraws; i++) {
 				CompHand.draw(playingDeck);
 			}
-
-			
 			CompHand.draw(playingDeck);
 			//CompHand.draw(playingDeck);
 			run = true;
 			while(run) {
 				System.out.println("*******************************");
-				System.out.println("Win- "+Wins+"  Lost- "+lost);
+				System.out.println("Win- "+ wins+"  Lost- "+lost);
 				System.out.println("*******************************");
-				System.out.println("Hand- "+PlayerName);
+				System.out.println("Hand- "+username);
 				System.out.println(PlayerHand.toString());
 				System.out.println("Sum ");
 				System.out.println(PlayerHand.cardValue());
@@ -175,7 +264,7 @@ public class Driver {
 					PlayerHand.draw(playingDeck);
 					if(PlayerHand.cardValue() > CARDGAMENUM) {
 						System.out.println("*******************************");
-						System.out.println("Hand- "+PlayerName);
+						System.out.println("Hand- "+username);
 						System.out.println(PlayerHand.toString());
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
@@ -193,7 +282,26 @@ public class Driver {
 					}
 					if(PlayerHand.cardValue() == CARDGAMENUM) {
 						System.out.println(CARDGAMENUM);
-						System.out.println("Win");
+						WinningPrints();
+						run = false;
+					}
+					if(CompHand.cardValue() > CARDGAMENUM) {
+						System.out.println("*******************************");
+						System.out.println("Hand- "+username);
+						System.out.println(PlayerHand.toString());
+						System.out.println("Sum ");
+						System.out.println(PlayerHand.cardValue());
+						System.out.println("*******************************");
+						System.out.println("Dealer hand ");
+						System.out.println(CompHand.toString());
+						System.out.println("Sum ");
+						System.out.println(CompHand.cardValue());
+						System.out.println("*******************************");
+						System.out.println("Dealer Bust!!!!!!");
+						WinningPrints();
+						 wins =  wins + 1;
+						score = score + bet;
+						//System.out.println(score);
 						run = false;
 					}
 
@@ -204,7 +312,7 @@ public class Driver {
 
 					if(CompHand.cardValue() <= PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
 						System.out.println("*******************************");
-						System.out.println("Hand- "+PlayerName);
+						System.out.println("Hand- "+username);
 						System.out.println(PlayerHand.toString());
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
@@ -214,15 +322,15 @@ public class Driver {
 						System.out.println("Sum ");
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Win");
-						Wins = Wins +1;
+						WinningPrints();
+						 wins =  wins +1;
 						score =score  + bet;
 						System.out.println(score);
 
 					}
 					if(CompHand.cardValue() >= PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
 						System.out.println("*******************************");
-						System.out.println("Hand- "+PlayerName);
+						System.out.println("Hand- "+username);
 						System.out.println(PlayerHand.toString());
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
@@ -239,7 +347,7 @@ public class Driver {
 					}
 					if(CompHand.cardValue() >  CARDGAMENUM) {
 						System.out.println("*******************************");
-						System.out.println("Hand- "+PlayerName);
+						System.out.println("Hand- "+username);
 						System.out.println(PlayerHand.toString());
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
@@ -249,9 +357,11 @@ public class Driver {
 						System.out.println("Sum ");
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Dealer bust - Win");
-						Wins = Wins +1;
+						System.out.println("Dealer bust");
+						WinningPrints();
+						 wins =  wins +1;
 						run = false;
+						
 
 					}
 				}			
@@ -262,20 +372,56 @@ public class Driver {
 
 	}
 
-
-
+	private static void WinningPrints() {
+		int i = 1;
+		i = IR4.getRandomNumber(1, 3);
+		if (i == 1) {
+			System.out.printf("         _________ _        _        _______  _______ \n|\\     /|\\__   __/( (    /|( (    /|(  ____ \\(  ____ )\n"
+					+ "| )   ( |   ) (   |  \\  ( ||  \\  ( || (    \\/| (    )|\n| | _ | |   | |   |   \\ | ||   \\ | || (__    | (____)|\n"
+					+ "| |( )| |   | |   | (\\ \\) || (\\ \\) ||  __)   |     __)\n"
+					+ "| || || |   | |   | | \\   || | \\   || (      | (\\ (   \n"
+					+ "| () () |___) (___| )  \\  || )  \\  || (____/\\| ) \\ \\__\n"
+					+ "(_______)\\_______/|/    )_)|/    )_)(_______/|/   \\__/\n");
+		}
+		if (i == 2) {
+			System.out.printf("      ___                       ___           ___           ___           ___     \n"
+					+ "     /\\__\\          ___        /\\__\\         /\\__\\         /\\  \\         /\\  \\    \n"
+					+ "    /:/ _/_        /\\  \\      /::|  |       /::|  |       /::\\  \\       /::\\  \\   \n"
+					+ "   /:/ /\\__\\       \\:\\  \\    /:|:|  |      /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\  \n"
+					+ "  /:/ /:/ _/_      /::\\__\\  /:/|:|  |__   /:/|:|  |__   /::\\~\\:\\  \\   /::\\~\\:\\  \\ \n"
+					+ " /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\ /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\\n"
+					+ " \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  / \\/__|:|/:/  / \\:\\~\\:\\ \\/__/ \\/_|::\\/:/  /\n"
+					+ "  \\::/_/:/  /  \\::/__/         |:/:/  /      |:/:/  /   \\:\\ \\:\\__\\      |:|::/  / \n"
+					+ "   \\:\\/:/  /    \\:\\__\\         |::/  /       |::/  /     \\:\\ \\/__/      |:|\\/__/  \n"
+					+ "    \\::/  /      \\/__/         /:/  /        /:/  /       \\:\\__\\        |:|  |    \n"
+					+ "     \\/__/                     \\/__/         \\/__/         \\/__/         \\|__|    \n");
+			
+		}
+		if (i == 3) {
+			System.out.printf(".------..------..------..------..------..------.\n"
+					+ "|W.--. ||I.--. ||N.--. ||N.--. ||E.--. ||R.--. |\n"
+					+ "| :/\\: || (\\/) || :(): || :(): || (\\/) || :(): \n"
+					+ "| :\\/: || :\\/: || ()() || ()() || :\\/: || ()() |\n"
+					+ "| '--'W|| '--'I|| '--'N|| '--'N|| '--'E|| '--'R|\n"
+					+ "`------'`------'`------'`------'`------'`------'\n");
+	
+}
+/////////////////////////////////////////		
+		
+	}
 
 	private static int getMove() {
 		int move;
 		boolean run = true;
 		do{
-		System.out.println("1. Hit");
+			System.out.println("1. Hit");
 
-		move = IR4.getInteger("2. Stand");
-		if(move != 1 || move != 2) {
-			System.out.println("Invald input");
-			run = true;
-		}
+			move = IR4.getInteger("2. Stand");
+			if(move != 1 && move != 2) {
+				System.out.println("Invald input");
+				run = true;
+			}
+
 		}while(!run);
 		return move;
 	}
@@ -285,7 +431,7 @@ public class Driver {
 
 		double temp = IR4.getDouble("Places Bets");
 		boolean run = true;
-		while(run == true) {
+		while(run) {
 			if(temp <= score && temp > 0) {
 				run = false;
 				return temp;
@@ -298,127 +444,164 @@ public class Driver {
 		}
 		return temp;
 	}
+		
+	
 
-	static void displayExtreme() {
-		System.out.printf("%25s\n", "Extras");
-		System.out.println("1. Fight Night\n" +
-				"2. Not BlackJack\n" +
-				"3. Fire\n" + 
-				"4. Rules\n" +
-				"5. Back");
-
-		switch(getChoice()) {
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			displayExtraRules();
-			break;
-		case 5:
-			displayPlay();
-			break;
-		}
-	}
 	//Enter number for prompt to the user
-	static void displayExtraRules() {
+	static void displayExtraRules() throws IOException, InterruptedException {
 		System.out.println("Fight Night\n" +
-				">Betting is set to your max credits\n" + 
-				">Minimum of 5 rounds\n" +
-				">After 5 rounds, you may quit\n" +
-				">0 credits will cause to lose\n");
+						   ">Betting is set to your max credits\n" + 
+						   ">Minimum of 5 rounds\n" +
+						   ">After 5 rounds, you may quit\n" +
+						   ">0 credits will cause to lose\n");
 		System.out.println("Not BlackJack\n" +
-				">If either dealer or user hits a blackjack, they lose\n" + 
-				">If dealer wins, your bet is tripled and you\n" +
-				"lost that amount from your stack\n" +
-				"If you win, your bet is tripled and you're awarded the amount\n");
+						   ">If either dealer or user hits a blackjack, they lose\n" + 
+						   ">If dealer wins, your bet is tripled and you\n" +
+						   "lost that amount from your stack\n" +
+						   "If you win, your bet is tripled and you're awarded the amount\n");
 		System.out.println("For Fire\n" +
-				">If you win 4 rounds in a row, you're awarded twice the\n" +
-				"amount of your total bets in those 4 rounds\n" +
-				"If you lose 4 rounds in a row, you're total credits are\n" +
-				"reduced twice the amount of your total bets in those 4 rounds\n");
+						   ">If you win 4 rounds in a row, you're awarded twice the\n" +
+						   "amount of your total bets in those 4 rounds\n" +
+						   "If you lose 4 rounds in a row, you're total credits are\n" +
+						   "reduced twice the amount of your total bets in those 4 rounds\n");
 		System.out.println("press q to go back");
-		String q = input.next();
-		if(q.startsWith("q"))
+		
+		if(pressQ().equals("q"))
 			displayExtreme();		
 	}
-
-
-	static void displaySetting() {
+	
+	
+	static void displaySetting() throws IOException, InterruptedException {
 		System.out.printf("%35s\n", "Settings" );
-		System.out.println("1. Change currency (default: credits)\n" +	   
-				"2. Save settings\n" +
-				"3. Load settings\n" +
-				"4. Back");
-
+		System.out.println("1. Change currency \n"+ 							 
+	                       "2. Change Alias \n" +
+						   "3. Back");
+		
 		switch(getChoice()) {
+		
 		case 1:
 			changeCurrency();
 			break;
 		case 2:
-
-		case 4:
+			changeAlias();
+			break;
+		case 3:
 			displayMenu();
 			break;
 		}
-
+		
 	}
-
-	static String changeCurrency() {
-		String newCurrency = "";
+	
+	static void changeCurrency() throws IOException, InterruptedException {
+		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
+		System.out.println("Current currency: " + 
+		ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
+		String newCurrency = input.next();
 		System.out.println();
-		newCurrency = input.next();
-		if(newCurrency.startsWith("q"))
-			displaySetting();
-		while(newCurrency.isEmpty()) {
-			System.out.println("Changes not saved");
-			System.out.println("Enter 'q' if you'd like to go back");
-		}
-		return newCurrency;
+		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
+		System.out.println("Currency successfully changed");
+		ProjectFileIO_v2.writeFile();
+		displaySetting();
 	}
-
-	static void displayStats() {
-		System.out.printf("%20s", "Statistics");
-		System.out.println("Wins: " + "\n" +
-				"Loses: " + "\n" +
-				"Extreme rounds: " + "\n" +
-				"Fight Night rounds: " + "\n" +
-				"Not BlackJack rounds: " + "\n" +
-				"For Fire rounds: " + "\n" +
-				"Blackjacks: " + "\n" +
-				"Credits earned: " + "\n" +
-				"Credits lost: " + "\n" +
-				"Credits lost: " + "\n" +
-				"Highest credit : " + "\n" +
-				"Bankruptcies: ");
+	
+	static void changeAlias() throws IOException, InterruptedException {
+		ProjectFileIO_v2.readFile();
+		String newAlias = "";
+		System.out.printf("%31s\n", "Change alias");
+		System.out.println("Enter new name");
+		newAlias = input.next();
+		ProjectFileIO_v2.getPlayer(username, passwd).setName(newAlias);
+		System.out.println("Alias successfully changed");
+		ProjectFileIO_v2.writeFile();
+		displaySetting();
 	}
-
+	
+	static void displayStats() throws IOException, InterruptedException {
+		System.out.printf("%20s", "Statistics\n");
+		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
+							"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
+							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
+							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
+							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
+							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
+							"Blackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
+							"Credits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
+							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
+							"Press q to go back");
+							if(pressQ().equals("q"))
+								displayMenu();
+	}
+	
 	static void displayHOF() {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
-		System.out.printf("%-20s%5s", "Hustler:", "Credits:");
+		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
+		System.out.printf("%-20s%27c%3s\n\n", "--------", ' ', "------");
+		/*************************
+		Things to add:
+		Create a player int array[10]
+		Call GetArrayList();
+		Highest to lowest insertion sort
+		Player.getWins();
+		*************************/
+		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
+		 scores.add(x.getWins());
+		 System.out.println(x.getName() + x.getWins());
+		}
+		
+	}
+	
+//	static Integer[] returnWins(ArrayList<Player> arr) {
+//		//Return an Integer Arraylist of scores
+//		Integer [] wins = new Integer[10];
+//		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
+//			//wins[] = 
+//			System.out.printf("%-50s%-5d\n", x.getName(), x.getWins());
+//		}
+//		return wins;
+//	}
+	
+	public static void sortHighScores(Integer [] arr) {
+		Arrays.sort(arr, Collections.reverseOrder());
+		
+	}
+	
+	static void displayCredits() throws InterruptedException, IOException {
+		
+		System.out.println("***********************************");
+	    System.out.println("Blackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
+	    System.out.println("Authors:");
+	    System.out.println("Luis Gascon"); 
+	    System.out.println("Austin Connick");
+	    System.out.println("***********************************");
+	    Thread.sleep(6000); 
+	    displayMenu();
 
 	}
-
+	
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
-		System.out.println();
+		//Create an ASCII art 
+		System.out.println("Thank you for playing :)");
 	}
-
+	
+	
 	static int getChoice() {
 		int choice = input.nextInt();
 		return choice;
 	}
-
-	static char pressQ() {
-		char q = input.next().charAt(0);
-		while(q != 'q')
+	
+	static String pressQ() {
+		String q = input.next();
+		while(!q.equals("q")) {
 			System.out.println("Enter q to quit");
-		q = input.next().charAt(0);
+			q = input.next();
+		}
 		return q;
 	}
-
+	
 }
