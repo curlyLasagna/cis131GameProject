@@ -10,7 +10,7 @@ public class Deck{
 	private String[] Suits = {"<3","<>","**","$$"};
 	private String[] Value = {"2 ","3 ","4 ","5 ","6 ","7 ","8 ","9 ", "10" ,"A ","K ", "Q ","J "};
 	public void createDeck() {
-		
+
 		for(int i=0;i<(Suits.length);i++){
 			for(int j=0;j<(Value.length);j++){
 				this.cards.add(new Card(Suits[i],Value[j])) ;
@@ -32,7 +32,7 @@ public class Deck{
 
 	}
 
-	
+
 	public void removecard(int i) {
 		this.cards.remove(i);
 	}
@@ -80,12 +80,55 @@ public class Deck{
 	}
 
 
-@Override
+	@Override
 	public String toString() {
-		String CardDisplay = "t1";
+		String CardDisplay = "";
+		int counter = 0;
+		String top1 = " .-------.";
+		String top2 = " |       |";
+		String top3 = " |       |";
+		String top4 = " |       |";
+		String top5 = " |       |";
+		String top6 = " ._______.";
+
 		for(Card aCard : this.cards) {
-			CardDisplay += "t2" +aCard.toString()+"t3";
+			counter = counter +1;	
 		}
-		return CardDisplay;	
+		
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(""+top1+"\t");
+
+		}
+		System.out.println("");
+		for(Card aCard : this.cards) {
+			System.out.printf(aCard.toString()+"\t");
+		}
+		System.out.println("");
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(top2+"\t");
+
+		}
+		System.out.println("");
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(top3+"\t");
+
+		}
+		System.out.println("");
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(top4+"\t");
+
+		}
+		System.out.println("");
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(top5+"\t");
+
+		}
+		System.out.println("");
+		for(int i = 1; i <= counter; i++) {
+			System.out.printf(top6+"\t");
+
+		}
+		System.out.println("");
+		return " ";	
 	}
 }

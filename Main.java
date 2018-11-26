@@ -52,10 +52,10 @@ public class Main {
 	
 	static void logIn() throws IOException {
 
-		System.out.print("Alias: ");
+		System.out.print("\t\t\t\t\t\t\t\tAlias: ");
 		username = input.next();
 		currentPlayer.setName(username);
-		System.out.print("Password: ");
+		System.out.print("\t\t\t\t\t\t\t\tPassword: ");
 		passwd = input.next();
 		checkPassword(username, passwd);
 		currentPlayer.setPassword(passwd);
@@ -88,39 +88,39 @@ public class Main {
 		}
 		
 		else {
-			System.out.println("Welcome back " + 
+			System.out.println("\t\t\t\t\t\t\t\tWelcome back " + 
 		ProjectFileIO_v2.getPlayer(username, passwd).getName() + "!");
 		}
 	}
 	
 	static boolean displayMenu() throws IOException, InterruptedException {		
 		boolean quit = false;
-		System.out.println(" +----------------------------------------------------------------------------------+\n" +
-				" |                                                                                  |\n" +
-			    " |        __       __                __       __                 __         	    |\n" + 
-			    " |       |  |     |  |              |  |     (__)               |  |                |\n" +
-			    " |       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __   	    |\n" +
-			    " |       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
-			    " |       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
-			    " |       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
-			    " |                                        __/   |                                   |\n" +
-			    " |                                       |_____/   	                            |\n" +
-			    " |                  _______   _____________ ________  ________                      | \n" + 
-			    " |	           |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                     | \n" + 
-			    " |                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
-			    " |                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
-			    " |                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
-			    " |                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
-			    " +==================================================================================+\n" +
-				" |                                                                                  |\n" + 
-			    " |                                1. Play                                           |\n" +
-				" |                                2. Settings                                       |\n" +
-			    " |                                3. Statistics                                     |\n" +
-				" |                                4. Hall of Fame                                   |\n" +
-			    " |                                5. Credits                                        |\n" +
-				" |                                6. Exit                                           |\n" +
-			    " | Enter 1 - 6 for selection                                                        |\n" +
-				" +==================================================================================+");
+		System.out.printf("\t\t\t\t\t\t\t\t +----------------------------------------------------------------------------------+\n" +
+				" \t\t\t\t\t\t\t\t|                                                                                  |\n" +
+			    " \t\t\t\t\t\t\t\t|        __       __                __       __                 __                 |\n" + 
+			    " \t\t\t\t\t\t\t\t|       |  |     |  |              |  |     (__)               |  |                |\n" +
+			    " \t\t\t\t\t\t\t\t|       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __   	   |\n" +
+			    " \t\t\t\t\t\t\t\t|       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
+			    " \t\t\t\t\t\t\t\t|       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
+			    " \t\t\t\t\t\t\t\t|       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
+			    " \t\t\t\t\t\t\t\t|                                        __/   |                                   |\n" +
+			    " \t\t\t\t\t\t\t\t|                                       |_____/   	                           |\n" +
+			    " \t\t\t\t\t\t\t\t|                  _______   _____________ ________  ________                      | \n" + 
+			    " \t\t\t\t\t\t\t\t|	           |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                    | \n" + 
+			    " \t\t\t\t\t\t\t\t|                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
+			    " \t\t\t\t\t\t\t\t|                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
+			    " \t\t\t\t\t\t\t\t|                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
+			    " \t\t\t\t\t\t\t\t|                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
+			    " \t\t\t\t\t\t\t\t+==================================================================================+\n" +
+				" \t\t\t\t\t\t\t\t|                                                                                  |\n" + 
+			    " \t\t\t\t\t\t\t\t|                                1. Play                                           |\n" +
+				" \t\t\t\t\t\t\t\t|                                2. Settings                                       |\n" +
+			    " \t\t\t\t\t\t\t\t|                                3. Statistics                                     |\n" +
+				" \t\t\t\t\t\t\t\t|                                4. Hall of Fame                                   |\n" +
+			    " \t\t\t\t\t\t\t\t|                                5. Credits                                        |\n" +
+				" \t\t\t\t\t\t\t\t|                                6. Exit                                           |\n" +
+			    " \t\t\t\t\t\t\t\t| Enter 1 - 6 for selection                                                        |\n" +
+				" \t\t\t\t\t\t\t\t+==================================================================================+");
 		
 		switch(getChoice()) {
 		case 1:
@@ -166,10 +166,10 @@ public class Main {
 		
 	
 	static void displayPlay() throws IOException, InterruptedException {
-		System.out.printf("%35s\n","Play");
-		System.out.println("1. Extreme Blackjack!\n" +
-						   "2. Extras\n" +
-						   "3. Back");
+		System.out.printf("\t\t\t\t\t\t\t\t\t%35s\n","Play");
+		System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\t1. Extreme Blackjack!\n" +
+						   "\t\t\t\t\t\t\t\t\t\t\t\t2. Extras\n" +
+						   "\t\t\t\t\t\t\t\t\t\t\t\t3. Back");
 		switch(getChoice()) {
 		case 1:
 			mainGame();
@@ -226,8 +226,8 @@ public class Main {
 			playingDeck.shuffle();
 			CARDGAMENUM = IR4.getRandomNumber(21, 61);
 			compHit = CARDGAMENUM - 4 ;
-			System.out.println("Money = "+score);
-			System.out.println("Winnig Number: "+ CARDGAMENUM);
+			System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\tMoney = "+score+"\n");
+			System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\tWinnig Number: "+ CARDGAMENUM+"\n");
 			printWiningscore(CARDGAMENUM);
 
 			bet = placeBets(score);
@@ -242,18 +242,18 @@ public class Main {
 			
 			run = true;
 			while(run) {
-				System.out.println("*******************************");
-				System.out.println("Win- "+ wins+"  Lost- "+lost);
-				System.out.println("*******************************");
-				System.out.println("Hand- "+username);
-				System.out.println(PlayerHand.toString());
-				System.out.println("Sum ");
-				System.out.println(PlayerHand.cardValue());
-				System.out.println("*******************************");
-				System.out.println("Dealer hand ");
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\t*******************************\n");
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\tWin- "+ wins+"  Lost- "+lost+"\n");
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\t*******************************\n");
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\tHand- "+username+"\n");
+				System.out.printf(PlayerHand.toString());
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\t*******************************\n");
+				printdealerHand();
+				System.out.println("\t\t\t\t\t\t\t\t\t\t\t*******************************\n");
 				System.out.println(CompHand.toString());
-				System.out.println("Sum ");
-				System.out.println(CompHand.cardValue());
+				printSum();
+				System.out.printf("\t\t\t\t\t\t\t\t\t\t\t*******************************\n");
+				System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\n");
 				System.out.println("*******************************");
 				while(CompHand.cardValue() <= compHit) {
 					CompHand.draw(playingDeck);
@@ -270,12 +270,12 @@ public class Main {
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
+						printdealerHand();
 						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
+						printSum();
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Bust!!!!!!");
+						dealerBust();
 						lost = lost - 1;
 						score = score - bet;
 						//System.out.println(score);
@@ -293,9 +293,9 @@ public class Main {
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
+						printdealerHand();
 						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
+						printSum();
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
 						dealerBust();
@@ -320,7 +320,7 @@ public class Main {
 						System.out.println("*******************************");
 						System.out.println("Dealer hand ");
 						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
+						printSum();
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
 						WinningPrints();
@@ -336,9 +336,9 @@ public class Main {
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
+						printdealerHand();
 						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
+						printSum();
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
 						printDealerwin();
@@ -353,9 +353,9 @@ public class Main {
 						System.out.println("Sum ");
 						System.out.println(PlayerHand.cardValue());
 						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
+						printdealerHand();
 						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
+						printSum();
 						System.out.println(CompHand.cardValue());
 						System.out.println("*******************************");
 						dealerBust();
@@ -373,15 +373,35 @@ public class Main {
 
 	}
 
+	private static void printSum() {
+		System.out.printf(" _____                 \n"
+				+ "/  ___|                \n"
+				+ "\\ `--. _   _ _ __ ___  \n"
+				+ " `--. \\ | | | '_ ` _ \\ \n"
+				+ "/\\__/ / |_| | | | | | |\n"
+				+ "\\____/ \\__,_|_| |_| |_|\n");
+		
+	}
+
+	private static void printdealerHand() {
+		System.out.printf("______           _             _   _                 _ \n"
+				+ "|  _  \\         | |           | | | |               | |\n"
+				+ "| | | |___  __ _| | ___ _ __  | |_| | __ _ _ __   __| |\n"
+				+ "| | | / _ \\/ _` | |/ _ \\ '__| |  _  |/ _` | '_ \\ / _` |\n"
+				+ "| |/ /  __/ (_| | |  __/ |    | | | | (_| | | | | (_| |\n"
+				+ "|___/ \\___|\\__,_|_|\\___|_|    \\_| |_/\\__,_|_| |_|\\__,_|\n");
+		
+	}
+
 	private static void printWiningscore(int cARDGAMENUM) {
-		System.out.printf(" _    _ _             _               _   _                 _ \n"
-				+ "| |  | (_)           (_)             | | | |               | |\n"
-				+ "| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
-				+ "| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
-				+ "\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
-				+ " \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
-				+ "                               __/ |                          \n"
-				+ "                              |___/                           \n");
+		System.out.printf("\t\t\t\t\t\t\t\t\t\t _    _ _             _               _   _                 _ \n"
+				+ "\t\t\t\t\t\t\t\t\t\t| |  | (_)           (_)             | | | |               | |\n"
+				+ "\t\t\t\t\t\t\t\t\t\t| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
+				+ "\t\t\t\t\t\t\t\t\t\t| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
+				+ "\t\t\t\t\t\t\t\t\t\t\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
+				+ "\t\t\t\t\t\t\t\t\t\t \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
+				+ "\t\t\t\t\t\t\t\t\t\t                               __/ |                          \n"
+				+ "\t\t\t\t\t\t\t\t\t\t                              |___/                           \n");
 	NumberPrinter(cARDGAMENUM);	
 	}
 
