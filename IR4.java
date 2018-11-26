@@ -1,4 +1,4 @@
-package blackJackExtreme;
+package blackjackbuildone;
 /*******************************************************************************************************************
   * InputRoutinesWithScannerV4.java
   * Author: David A. Freitag
@@ -59,7 +59,7 @@ public class IR4 {
      * Rejects null entries, any number of spaces, and non-numbers.
      * @param msg is the text that will be displayed the user to ask them to enter a value.
      * @param low is the lowest acceptable input value.
-     * @param high is the highest acceptable input value.
+     * @param high is the highestt acceptable input value.
      * @return Returns an int from the keyboard. 
      */
    public static int getIntegerBetweenLowAndHigh(String msg, int low, int high, String errorMsg) {
