@@ -208,7 +208,7 @@ public class Main {
 			break;
 		}
 	}
-	private static void mainGame() {
+	private static void mainGame() throws IOException {
 		double score = 1500;
 		int lost = 0;
 		double bet;
@@ -257,12 +257,37 @@ public class Main {
 				dividers();
 				System.out.print("\t\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\n");
 				dividers();
+				////////////////////////////////21/insta win////////////////////////////////////////////////
+				if(PlayerHand.cardValue() == CARDGAMENUM) {
+					System.out.println(CARDGAMENUM);
+					dividers();
+					printdealerHand();
+					dividers();
+					System.out.println(CompHand.toString());
+					dividers();
+
+					printHand();
+					System.out.printf(PlayerHand.toString());
+					dividers();
+					printSum();
+					dividers();
+					System.out.print("\t\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\n");
+					dividers();
+					WinningPrints();
+					run = false;
+				}
 
 				move = getMove();
 				////////////////////Quit Add Save Stuff Here?/////////////////////////////////////////////////////////
 				if(move == 3) {
 					run = false;
 					runTwo = false;
+					ProjectFileIO_v2.writeFile();
+					ProjectFileIO_v2.getPlayer(username, passwd).setWins(wins);
+					ProjectFileIO_v2.getPlayer(username, passwd).setCreditsEarned(creditsEarned);
+					ProjectFileIO_v2.getPlayer(username, passwd).setCreditsLost(creditsLost);
+					
+					
 				}
 
 				////////////////////////////Hit/////////////////////////////////////////////////////////////////
@@ -284,8 +309,9 @@ public class Main {
 						dividers();
 						bustprint();
 						dividers();
-						lost = lost - 1;
+						lost = lost + 1;
 						score = score - bet;
+						creditsLost = (int) (creditsLost + bet);
 						//System.out.println(score);
 						run = false;
 					}
@@ -328,6 +354,7 @@ public class Main {
 						dividers();
 						wins =  wins + 1;
 						score = score + bet;
+						creditsEarned = (int) (creditsEarned + bet);
 						//System.out.println(score);
 						run = false;
 					}
@@ -375,8 +402,9 @@ public class Main {
 						dividers();
 						WinningPrints();
 						dividers();
-						wins =  wins +1;
+						wins =  wins + 1;
 						score =score  + bet;
+						 creditsEarned = (int) (creditsEarned + bet);
 						System.out.println(score);
 
 					}
@@ -397,7 +425,7 @@ public class Main {
 						dividers();
 						printDealerwin();
 						dividers();
-						lost = lost - 1;
+						lost = lost + 1;
 						score =score  - bet;
 						System.out.println(score);
 					}
@@ -1115,7 +1143,7 @@ public class Main {
 		 *************************/
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
 			scores.add(x.getWins());
-			System.out.println(x.getName() + x.getWins());
+			System.out.printf("\t\t\t\t\t\t\t\t"+x.getName() +"\t\t\t\t\t\t"+ x.getWins()+"\n");
 		}
 
 	}
