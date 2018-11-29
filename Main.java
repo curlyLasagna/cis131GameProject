@@ -33,7 +33,7 @@ public class Main {
 	private static int creditsLost; 
 	private static int highestCredits;
 	private static int bankRuptcies;
-	private static String currency;
+	private static String currency = "credits";
 	private static Player currentPlayer = new Player
 	(username, passwd, wins, extremeWins,
 	fNRounds, nBJROunds, fFRounds, bJCount,
@@ -45,13 +45,13 @@ public class Main {
 	throws IOException, InterruptedException {
 		
 		ProjectFileIO_v2.readFile();
+		System.out.println("Welcome to BlackJack Extreme\nPlease log in :)\n");
 		logIn();
 		while(!displayMenu());
 		
 	}
 	
 	static void logIn() throws IOException {
-
 		System.out.print("Alias: ");
 		username = input.next();
 		currentPlayer.setName(username);
@@ -64,16 +64,16 @@ public class Main {
 	}
 	
 	static void checkPassword(String user, String pass) throws IOException {
-
+		
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
 			if(username.equals(x.getName()))
 				while(!passwd.equals(x.getPassword())) {
 					System.err.println("Wrong password, try again, or press 'q' to change alias");
-					if(passwd.equals("q"))
-						logIn();
 					System.out.print("Password: ");
 					passwd = input.next();		
-
+					if(passwd.equals("q"))
+						logIn();
+						break;
 			}
 		}
 	}
@@ -84,7 +84,6 @@ public class Main {
 			System.out.println("Welcome " + currentPlayer.getName());
 			System.out.println("Your password: " + currentPlayer.getPassword());
 			ProjectFileIO_v2.writeFile();
-
 		}
 		
 		else {
@@ -180,6 +179,8 @@ public class Main {
 		case 3:
 			displayMenu();
 			break;
+		default:
+			
 		}
 	}
 	
@@ -204,7 +205,10 @@ public class Main {
 			break;
 		case 5:
 			displayPlay();
-		
+			break;
+		default:
+			System.err.println("Enter 1 - 5 and try again");
+			displayExtreme();
 			break;
 		}
 	}
@@ -489,7 +493,7 @@ public class Main {
 	private static int getMove() {
 		int move;
 		boolean run = true;
-		do{
+		do {
 			System.out.println("1. Hit");
 
 			move = IR4.getInteger("2. Stand");
@@ -498,8 +502,8 @@ public class Main {
 				run = true;
 			}
 
-		}while(!run);
-		return move;
+		} while(!run);
+			return move;
 	}
 
 	private static double placeBets(double score) {
@@ -551,10 +555,28 @@ public class Main {
 	
 	
 	static void displaySetting() throws IOException, InterruptedException {
-		System.out.printf("%35s\n", "Settings" );
-		System.out.println("1. Change currency \n"+ 							 
-	                       "2. Change Alias \n" +
-						   "3. Back");
+//		System.out.printf("%35s\n", "Settings" );
+//		System.out.println("1. Change currency \n"+ 							 
+//	                       "2. Change Alias \n" +
+//						   "3. Back");
+		System.out.printf("%25s\n", "Settings");
+		System.out.println("1. Change currency \n" +
+						   "2. Back");
+		
+//		switch(getChoice()) {
+//		
+//		case 1:
+//			changeCurrency();
+//			break;
+//		case 2:
+//			changeAlias();
+//			break;
+//		case 3:
+//			displayMenu();
+//			break;
+//		default:
+//			System.err.println("Enter 1 - 3 and try again");	
+//		}
 		
 		switch(getChoice()) {
 		
@@ -562,13 +584,11 @@ public class Main {
 			changeCurrency();
 			break;
 		case 2:
-			changeAlias();
-			break;
-		case 3:
 			displayMenu();
 			break;
+		default:
+			System.err.println("Enter 1 - 2 and try again");	
 		}
-		
 	}
 	
 	static void changeCurrency() throws IOException, InterruptedException {
@@ -582,28 +602,40 @@ public class Main {
 			displaySetting();
 		else
 		System.out.println();
-		//NullPointerException on getPlayer method since username has been changed
+		//NullPointerException on getPlayer method if alias has been changed
 		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setCurrency(newCurrency);
 		System.out.println("Currency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
 	}
 	
-	static void changeAlias() throws IOException, InterruptedException {
-		ProjectFileIO_v2.readFile();
-		String newAlias = "";
-		System.out.printf("%31s\n", "Change alias");
-		System.out.println("Enter new name");
-		newAlias = input.next();
-		if(newAlias.equals("q"))
-			displaySetting();
-		else
-		currentPlayer.setName(newAlias);
-		ProjectFileIO_v2.getPlayer(username, passwd).setName(newAlias);
-		System.out.println("Alias successfully changed");
-		ProjectFileIO_v2.writeFile();
-		displaySetting();
-	}
+//	static void changeAlias() throws IOException, InterruptedException {
+//		/*
+//		 * TODO: Prevent users from changing to the same username 
+//		 */
+//		ProjectFileIO_v2.readFile();
+//		String newAlias = "";
+//		System.out.printf("%31s\n", "Change alias");
+//		System.out.println("Enter new name");
+//		newAlias = input.next();
+//		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
+//			//Causes a NullPointer Exception, just needs a little fixing
+//			while(newAlias.equals(x.getName())) {
+//				System.err.println("Alias already taken, choose another one");
+//				System.out.println("Enter new name");
+//				newAlias = input.next();
+//			}
+//		}
+//		if(newAlias.equals("q"))
+//			displaySetting();
+//		else 
+//		currentPlayer.setName(newAlias);	
+//		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setName(newAlias);
+//		System.out.println("Alias successfully changed");
+//		ProjectFileIO_v2.writeFile();
+//		displaySetting();
+//		}
+	
 	
 	static void displayStats() throws IOException, InterruptedException {
 		System.out.printf("%20s", "Statistics\n");
@@ -641,19 +673,8 @@ public class Main {
 		}
 	}
 	
-//	static Integer[] returnWins(ArrayList<Player> arr) {
-//		//Return an Integer Arraylist of scores
-//		Integer [] wins = new Integer[10];
-//		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
-//			//wins[] = 
-//			System.out.printf("%-50s%-5d\n", x.getName(), x.getWins());
-//		}
-//		return wins;
-//	}
-	
 	public static void sortHighScores(Integer [] arr) {
 		Arrays.sort(arr, Collections.reverseOrder());
-		
 	}
 	
 	static void displayCredits() throws InterruptedException, IOException {
@@ -676,9 +697,18 @@ public class Main {
 	}
 	
 	
-	static int getChoice() {
-		int choice = input.nextInt();
-		return choice;
+	static Integer getChoice() {
+		/*
+		 * TODO: Input validation. Integers only 
+		 */
+		String choice = "";
+		choice = input.next();
+		while(!choice.matches("\\d{1}")) {
+		System.err.println("Invalid input, try again");
+		choice = input.next();
+		}
+		Integer selection = Integer.valueOf(choice);
+		return selection;
 	}
 	
 	static String pressQ() {
