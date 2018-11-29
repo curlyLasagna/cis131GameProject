@@ -211,7 +211,7 @@ public class Main {
 	private static void mainGame() throws IOException {
 		double score = 1500;
 		int lost = 0;
-		double bet;
+		double bet = 0;
 		boolean run = true;
 		int move;
 		int numberDraws = 2;
@@ -229,8 +229,16 @@ public class Main {
 			compHit = CARDGAMENUM - 6 ;
 			System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\tMoney = "+score+"\n");
 			printWiningscore(CARDGAMENUM);
-
+			if(score <= 0) {
+				runTwo = false;
+				run = false;
+				 bankRuptcies++;
+				 ProjectFileIO_v2.writeFile();
+				ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
+			}
+			if(score > 0) {
 			bet = placeBets(score);
+			}
 			numberDraws = CARDGAMENUM /drawFactor;
 			for(int i = 1; i<= numberDraws; i++) {
 				PlayerHand.draw(playingDeck);
@@ -239,6 +247,13 @@ public class Main {
 				CompHand.draw(playingDeck);
 			}
 			CompHand.draw(playingDeck);
+			if(score <= 0) {
+				runTwo = false;
+				run = false;
+				 bankRuptcies++;
+				 ProjectFileIO_v2.writeFile();
+				ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
+			}
 
 			run = true;
 			while(run) {
@@ -332,6 +347,7 @@ public class Main {
 						System.out.print("\t\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\n");
 						dividers();
 						WinningPrints();
+						score = score + bet;
 						run = false;
 					}
 					if(CompHand.cardValue() > CARDGAMENUM) {
@@ -449,6 +465,7 @@ public class Main {
 						WinningPrints();
 						dividers();
 						wins =  wins +1;
+						score = score + bet;
 						run = false;
 
 
