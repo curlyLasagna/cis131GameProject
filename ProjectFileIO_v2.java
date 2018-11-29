@@ -201,7 +201,9 @@ public class ProjectFileIO_v2 {
         for (int i = 0; i < playerArrayList.size(); i++){
             String playerMarker = PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER;
             pw.println(playerMarker + " Player#" + i + " " + playerMarker);
+
             //Unexpected Exception occurs when appending prefixes
+
             pw.println(playerArrayList.get(i).getName());
             pw.println(playerArrayList.get(i).getPassword());
             pw.println(playerArrayList.get(i).getWins());
