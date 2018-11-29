@@ -68,10 +68,10 @@ public class Main {
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
 			if(username.equals(x.getName()))
 				while(!passwd.equals(x.getPassword())) {
-					System.err.println("Wrong password, try again, or press 'q' to change alias");
+					System.err.println("\t\t\t\t\t\t\t\tWrong password, try again, or press 'q' to change alias");
 					if(passwd.equals(pressQ()))
 						logIn();
-					System.out.print("Password: ");
+					System.out.print("\t\t\t\t\t\t\t\tPassword: ");
 					passwd = input.next();		
 
 				}
@@ -81,8 +81,8 @@ public class Main {
 	static void isNewPlayer(String user) throws IOException {
 
 		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
-			System.out.println("Welcome " + currentPlayer.getName());
-			System.out.println("Your password: " + currentPlayer.getPassword());
+			System.out.println("\t\t\t\t\t\t\t\tWelcome " + currentPlayer.getName());
+			System.out.println("\t\t\t\t\t\t\t\tYour password: " + currentPlayer.getPassword());
 			ProjectFileIO_v2.writeFile();
 
 		}
@@ -152,7 +152,7 @@ public class Main {
 			quit = true;
 			break;
 		default:
-			System.out.printf("Enter 1 - 6 and try again\n");
+			System.out.printf("\t\t\t\t\t\t\t\tEnter 1 - 6 and try again\n");
 			displayMenu();
 			quit = true;
 			break;
@@ -1037,10 +1037,10 @@ public class Main {
 
 
 	static void displaySetting() throws IOException, InterruptedException {
-		System.out.printf("%35s\n", "Settings" );
-		System.out.println("1. Change currency \n"+ 							 
-				"2. Change Alias \n" +
-				"3. Back");
+		System.out.printf("\t\t\t\t\t\t\t\t%35s\n", "Settings" );
+		System.out.println("\t\t\t\t\t\t\t\t1. Change currency \n"+ 							 
+				"\t\t\t\t\t\t\t\t2. Change Alias \n" +
+				"\t\t\t\t\t\t\t\t3. Back");
 
 		switch(getChoice()) {
 
@@ -1059,14 +1059,14 @@ public class Main {
 
 	static void changeCurrency() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
-		System.out.printf("%31s\n", "Change currency");
-		System.out.println("Current currency: " + 
+		System.out.printf("\t\t\t\t\t\t\t\t%31s\n", "Change currency");
+		System.out.println("\t\t\t\t\t\t\t\tCurrent currency: " + 
 				ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
-		System.out.println("Enter new currency name or enter 'q' to go back");
+		System.out.println("\t\t\t\t\t\t\t\tEnter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
 		System.out.println();
 		ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
-		System.out.println("Currency successfully changed");
+		System.out.println("\t\t\t\t\t\t\t\tCurrency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
 	}
@@ -1084,28 +1084,28 @@ public class Main {
 	}
 
 	static void displayStats() throws IOException, InterruptedException {
-		System.out.printf("%20s", "Statistics\n");
-		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
-				"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
-				"Extreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
-				"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
-				"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
-				"For Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
-				"Blackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
-				"Credits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
-				"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-				"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-				"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
-				"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
-				"Press q to go back");
+		System.out.printf("\t\t\t\t\t\t\t\t%20s", "Statistics\n");
+		System.out.println("\t\t\t\t\t\t\t\tWins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
+				"\t\t\t\t\t\t\t\tLoses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
+				"\t\t\t\t\t\t\t\tExtreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
+				"\t\t\t\t\t\t\t\tFight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
+				"\t\t\t\t\t\t\t\tNot BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
+				"\t\t\t\t\t\t\t\tFor Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
+				"\t\t\t\t\t\t\t\tBlackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
+				"\t\t\t\t\t\t\t\tCredits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
+				"\t\t\t\t\t\t\t\tCredits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+				"\t\t\t\t\t\t\t\tCredits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+				"\t\t\t\t\t\t\t\tHighest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
+				"\t\t\t\t\t\t\t\tBankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
+				"\t\t\t\t\t\t\t\tPress q to go back");
 		if(pressQ().equals("q"))
 			displayMenu();
 	}
 
 	static void displayHOF() {
-		System.out.println("<=================== HALL OF FAME ===================>\n");
-		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
-		System.out.printf("%-20s%27c%3s\n\n", "--------", ' ', "------");
+		System.out.println("\t\t\t\t\t\t\t\t<=================== HALL OF FAME ===================>\n");
+		System.out.printf("\t\t\t\t\t\t\t\t%-20s%33s\n", "Hustler:", "Wins:");
+		System.out.printf("\t\t\t\t\t\t\t\t%-20s%27c%3s\n\n", "--------", ' ', "------");
 		/*************************
 		Things to add:
 		Create a player int array[10]
@@ -1137,12 +1137,12 @@ public class Main {
 
 	static void displayCredits() throws InterruptedException, IOException {
 
-		System.out.println("***********************************");
-		System.out.println("Blackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
-		System.out.println("Authors:");
-		System.out.println("Luis Gascon"); 
-		System.out.println("Austin Connick");
-		System.out.println("***********************************");
+		System.out.println("\t\t\t\t\t\t\t\t***********************************");
+		System.out.println("\t\t\t\t\t\t\t\tBlackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
+		System.out.println("\t\t\t\t\t\t\t\tAuthors:");
+		System.out.println("\t\t\t\t\t\t\t\tLuis Gascon"); 
+		System.out.println("\t\t\t\t\t\t\t\tAustin Connick");
+		System.out.println("\t\t\t\t\t\t\t\t***********************************");
 		Thread.sleep(6000); 
 		displayMenu();
 
@@ -1151,7 +1151,7 @@ public class Main {
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
 		//Create an ASCII art 
-		System.out.println("Thank you for playing :)");
+		System.out.println("\t\t\t\t\t\t\t\tThank you for playing :)");
 	}
 
 
@@ -1163,7 +1163,7 @@ public class Main {
 	static String pressQ() {
 		String q = input.next();
 		while(!q.equals("q")) {
-			System.out.println("Enter q to quit");
+			System.out.println("\t\t\t\t\t\t\t\tEnter q to quit");
 			q = input.next();
 		}
 		return q;
