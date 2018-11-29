@@ -595,7 +595,7 @@ public class Main {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
 		System.out.println("Current currency: " + 
-		currentPlayer.getCurrency());
+		ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
 		if(newCurrency.equals("q"))
@@ -609,6 +609,7 @@ public class Main {
 		displaySetting();
 	}
 	
+//	Under construction
 //	static void changeAlias() throws IOException, InterruptedException {
 //		/*
 //		 * TODO: Prevent users from changing to the same username 
@@ -656,10 +657,10 @@ public class Main {
 								displayMenu();
 	}
 	
-	static void displayHOF() {
+	static void displayHOF() throws IOException, InterruptedException {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
 		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
-		System.out.printf("%-20s%27c%3s\n\n", "--------", ' ', "------");
+		System.out.printf("%-20s%27c%3s\n", "--------", ' ', "------");
 		/*************************
 		Things to add:
 		Create a player int array[10]
@@ -668,9 +669,12 @@ public class Main {
 		Player.getWins();
 		*************************/
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
-		 scores.add(x.getWins());
-		 System.out.println(x.getName() + x.getWins());
-		}
+		 //scores.add(x.getWins());
+		 System.out.printf("%-20s%30d\n" , x.getName(), x.getWins());
+			}
+		 System.out.println("Press q to go back");
+		 if(pressQ().equals("q"))
+			 displayMenu();
 	}
 	
 	public static void sortHighScores(Integer [] arr) {
