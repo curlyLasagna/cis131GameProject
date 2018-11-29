@@ -259,6 +259,7 @@ public class Main {
 				dividers();
 
 				move = getMove();
+				////////////////////Quit Add Save Stuff Here?/////////////////////////////////////////////////////////
 				if(move == 3) {
 					run = false;
 					runTwo = false;
@@ -428,7 +429,15 @@ public class Main {
 			}
 
 		}
-
+		try {
+			displayMenu();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
