@@ -13,10 +13,7 @@ public class Player {
     private int creditsLost;
     private int highestCredits;
     private int bankRuptcies;
-
-    private String currency = "credits"; 
-   
-
+    private String currency; 
    
     public Player() { 
         //no-arg constructor        
@@ -38,9 +35,7 @@ public class Player {
 		this.creditsLost = creditsLost;
 		this.highestCredits = highestCredits;
 		this.bankRuptcies = bankRuptcies;
-
 		this.currency = currency; 
-
 	}
 
 	public String getPassword() {
