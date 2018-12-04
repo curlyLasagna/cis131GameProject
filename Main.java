@@ -184,31 +184,28 @@ public class Main {
   }
  }
 
- static void displayExtreme() throws IOException, InterruptedException {
-  System.out.printf("%25s\n", "Extras");
-  System.out.println("1. Fight Night\n" +
-    "2. Not BlackJack\n" +
-    "3. Fire\n" + 
-    "4. Rules\n" +
-    "5. Back");
+ static void displayExtraRules() throws IOException, InterruptedException {
+		System.out.println("Fight Night\n" +
+						   ">Betting is set to your max credits\n" + 
+						   ">Minimum of 5 rounds\n" +
+						   ">After 5 rounds, you may quit\n" +
+						   ">0 credits will cause to lose\n");
+		System.out.println("Not BlackJack\n" +
+						   ">If either dealer or user hits a blackjack, they lose\n" + 
+						   ">If dealer wins, your bet is tripled and you\n" +
+						   "lost that amount from your stack\n" +
+						   "If you win, your bet is tripled and you're awarded the amount\n");
+		System.out.println("For Fire\n" +
+						   ">If you win 4 rounds in a row, you're awarded twice the\n" +
+						   "amount of your total bets in those 4 rounds\n" +
+						   "If you lose 4 rounds in a row, you're total credits are\n" +
+						   "reduced twice the amount of your total bets in those 4 rounds\n");
+		System.out.println("press q to go back");
+		
+		if(pressQ().equals("q"))
+			displayExtreme();		
+	}
 
-  switch(getChoice()) {
-
-  case 1:
-   break;
-  case 2:
-   break;
-  case 3:
-   break;
-  case 4:
-   displayExtraRules();
-   break;
-  case 5:
-   displayPlay();
-
-   break;
-  }
- }
  private static void mainGame() throws IOException {
   double score = 1500;
   int lost = 0;
@@ -1069,112 +1066,160 @@ public class Main {
 
 
  //Enter number for prompt to the user
- static void displayExtraRules() throws IOException, InterruptedException {
-  System.out.println("Fight Night\n" +
-    ">Betting is set to your max credits\n" + 
-    ">Minimum of 5 rounds\n" +
-    ">After 5 rounds, you may quit\n" +
-    ">0 credits will cause to lose\n");
-  System.out.println("Not BlackJack\n" +
-    ">If either dealer or user hits a blackjack, they lose\n" + 
-    ">If dealer wins, your bet is tripled and you\n" +
-    "lost that amount from your stack\n" +
-    "If you win, your bet is tripled and you're awarded the amount\n");
-  System.out.println("For Fire\n" +
-    ">If you win 4 rounds in a row, you're awarded twice the\n" +
-    "amount of your total bets in those 4 rounds\n" +
-    "If you lose 4 rounds in a row, you're total credits are\n" +
-    "reduced twice the amount of your total bets in those 4 rounds\n");
-  System.out.println("press q to go back");
-
-  if(pressQ().equals("q"))
-   displayExtreme();  
- }
-
+ 
 
  static void displaySetting() throws IOException, InterruptedException {
-  System.out.printf("\t\t\t\t\t\t\t\t%35s\n", "Settings" );
-  System.out.println("\t\t\t\t\t\t\t\t1. Change currency \n"+         
-    "\t\t\t\t\t\t\t\t2. Change Alias \n" +
-    "\t\t\t\t\t\t\t\t3. Back");
-
-  switch(getChoice()) {
-
-  case 1:
-   changeCurrency();
-   break;
-  case 2:
-   changeAlias();
-   break;
-  case 3:
-   displayMenu();
-   break;
+//  System.out.printf("\t\t\t\t\t\t\t\t%35s\n", "Settings" );
+//  System.out.println("\t\t\t\t\t\t\t\t1. Change currency \n"+         
+//    "\t\t\t\t\t\t\t\t2. Change Alias \n" +
+//    "\t\t\t\t\t\t\t\t3. Back");
+//
+//  switch(getChoice()) {
+//
+//  case 1:
+//   changeCurrency();
+//   break;
+//  case 2:
+//   changeAlias();
+//   break;
+//  case 3:
+//   displayMenu();
+//   break;
   }
 
- }
 
  static void changeCurrency() throws IOException, InterruptedException {
-  ProjectFileIO_v2.readFile();
-  System.out.printf("\t\t\t\t\t\t\t\t%31s\n", "Change currency");
-  System.out.println("\t\t\t\t\t\t\t\tCurrent currency: " + 
-    ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
-  System.out.println("\t\t\t\t\t\t\t\tEnter new currency name or enter 'q' to go back");
-  String newCurrency = input.next();
-  System.out.println();
-  ProjectFileIO_v2.getPlayer(username, passwd).setCurrency(newCurrency);
-  System.out.println("\t\t\t\t\t\t\t\tCurrency successfully changed");
-  ProjectFileIO_v2.writeFile();
-  displaySetting();
- }
+		ProjectFileIO_v2.readFile();
+		System.out.printf("%31s\n", "Change currency");
+		System.out.println("Current currency: " + 
+		ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
+		System.out.println("Enter new currency name or enter 'q' to go back");
+		String newCurrency = input.next();
+		if(newCurrency.equals("q"))
+			displaySetting();
+		else
+		System.out.println();
+		//NullPointerException on getPlayer method if alias has been changed
+		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setCurrency(newCurrency);
+		System.out.println("Currency successfully changed");
+		ProjectFileIO_v2.writeFile();
+		displaySetting();
+	}
 
- static void changeAlias() throws IOException, InterruptedException {
-  ProjectFileIO_v2.readFile();
-  String newAlias = "";
-  System.out.printf("%31s\n", "Change alias");
-  System.out.println("Enter new name");
-  newAlias = input.next();
-  ProjectFileIO_v2.getPlayer(username, passwd).setName(newAlias);
-  System.out.println("Alias successfully changed");
-  ProjectFileIO_v2.writeFile();
-  displaySetting();
- }
+//	Under construction
+//	static void changeAlias() throws IOException, InterruptedException {
+//		/*
+//		 * TODO: Prevent users from changing to the same username 
+//		 */
+//		ProjectFileIO_v2.readFile();
+//		String newAlias = "";
+//		System.out.printf("%31s\n", "Change alias");
+//		System.out.println("Enter new name");
+//		newAlias = input.next();
+//		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
+//			//Causes a NullPointer Exception, just needs a little fixing
+//			while(newAlias.equals(x.getName())) {
+//				System.err.println("Alias already taken, choose another one");
+//				System.out.println("Enter new name");
+//				newAlias = input.next();
+//			}
+//		}
+//		if(newAlias.equals("q"))
+//			displaySetting();
+//		else 
+//		currentPlayer.setName(newAlias);	
+//		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setName(newAlias);
+//		System.out.println("Alias successfully changed");
+//		ProjectFileIO_v2.writeFile();
+//		displaySetting();
+//		}
 
  static void displayStats() throws IOException, InterruptedException {
-  System.out.printf("\t\t\t\t\t\t\t\t%20s", "Statistics\n");
-  System.out.println("\t\t\t\t\t\t\t\tWins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
-    "\t\t\t\t\t\t\t\tLoses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
-    "\t\t\t\t\t\t\t\tExtreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
-    "\t\t\t\t\t\t\t\tFight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
-    "\t\t\t\t\t\t\t\tNot BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
-    "\t\t\t\t\t\t\t\tFor Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
-    "\t\t\t\t\t\t\t\tBlackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
-    "\t\t\t\t\t\t\t\tCredits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
-    "\t\t\t\t\t\t\t\tCredits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-    "\t\t\t\t\t\t\t\tCredits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-    "\t\t\t\t\t\t\t\tHighest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
-    "\t\t\t\t\t\t\t\tBankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
-    "\t\t\t\t\t\t\t\tPress q to go back");
-  if(pressQ().equals("q"))
-   displayMenu();
- }
+		System.out.printf("%20s", "Statistics\n");
+		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
+							"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
+							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
+							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
+							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
+							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
+							"Blackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
+							"Credits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
+							"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
+							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
+							"Press q to go back");
+							if(pressQ().equals("q"))
+								displayMenu();
+	}
 
- static void displayHOF() {
-  System.out.println("\t\t\t\t\t\t\t\t<=================== HALL OF FAME ===================>\n");
-  System.out.printf("\t\t\t\t\t\t\t\t%-20s%33s\n", "Hustler:", "Wins:");
-  System.out.printf("\t\t\t\t\t\t\t\t%-20s%27c%3s\n\n", "--------", ' ', "------");
-  /*************************
-  Things to add:
-  Create a player int array[10]
-  Call GetArrayList();
-  Highest to lowest insertion sort
-  Player.getWins();
-   *************************/
-  for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
-   scores.add(x.getWins());
-   System.out.printf("\t\t\t\t\t\t\t\t"+x.getName() +"\t\t\t\t\t\t"+ x.getWins()+"\n");
-  }
+ static void displayHOF() throws IOException, InterruptedException {
+		System.out.println("<=================== HALL OF FAME ===================>\n");
+		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
+		System.out.printf("%-20s%27c%3s\n", "--------", ' ', "------");
+		/*************************
+		Things to add:
+		Create a player int array[10]
+		Call GetArrayList();
+		Highest to lowest insertion sort
+		Player.getWins();
+		*************************/
+		//Use parallel arrays for scores 
+		//2 separate for loops 
+		
+		int playerSize = ProjectFileIO_v2.getPlayerArrayList().size();
+		Integer[] scores = new Integer[playerSize];
+		String[] user = new String[playerSize];
+		int count = 0;
+		int userCount = 0;
+		for(Player player: ProjectFileIO_v2.getPlayerArrayList()) {
+			//Each entry duplicates
+				scores[count] = player.getWins();
+				count++;
+			}	
+		for(Player player: ProjectFileIO_v2.getPlayerArrayList()) {
+			user[userCount] = player.getName();
+			userCount++;
+		}
+		
+		sortHighScores(scores);
+		for(int x=0;x<count;x++) {
+			System.out.println(user[x] + scores[x]);
+		}
+		//if score index is moved, move the user index user[2] = score[2] | score[2] -> 3 user[2] -> 3  
+		 System.out.println("Press q to go back");
+		 if(pressQ().equals("q"))
+			 displayMenu();
+		}
 
- }
+ static void displayExtreme() throws IOException, InterruptedException {
+		System.out.printf("%25s\n", "Extras");
+		System.out.println("1. Fight Night\n" +
+						   "2. Not BlackJack\n" +
+				 		   "3. Fire\n" + 
+						   "4. Rules\n" +
+				 		   "5. Back");
+		
+		switch(getChoice(1, 5)) {
+		
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			displayExtraRules();
+			break;
+		case 5:
+			displayPlay();
+			break;
+		default:
+			System.err.println("Enter 1 - 5 and try again");
+			displayExtreme();
+			break;
+		}
+	}
 
  // static Integer[] returnWins(ArrayList<Player> arr) {
  //  //Return an Integer Arraylist of scores
@@ -1187,9 +1232,8 @@ public class Main {
  // }
 
  public static void sortHighScores(Integer [] arr) {
-  Arrays.sort(arr, Collections.reverseOrder());
-
- }
+		Arrays.sort(arr, Collections.reverseOrder());
+	}
 
  static void displayCredits() throws InterruptedException, IOException {
 
@@ -1211,11 +1255,28 @@ public class Main {
  }
 
 
+ static Integer getChoice(int low, int high) {
+		/*
+		 * TODO: Input validation. Integers only 
+		 */
+		String choice = "";
+		choice = input.next();
+		while(!choice.matches("\\d{1}")) {
+		System.err.println("Invalid input, try again");
+		choice = input.next();
+		}
+		Integer selection = Integer.valueOf(choice);
+		while(selection > high || selection < 0) {
+			System.err.println("Enter " + low + "-" + high + " and try again");
+		choice = input.next();
+		selection = Integer.valueOf(choice);
+		}
+		return selection;
+	}
  static int getChoice() {
-  int choice = input.nextInt();
-  return choice;
- }
-
+	  int choice = input.nextInt();
+	  return choice;
+	 }
  static String pressQ() {
   String q = input.next();
   while(!q.equals("q")) {
