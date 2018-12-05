@@ -107,6 +107,7 @@ public class ProjectFileIO_v2 {
         String name = getLine();  
         String password = getLine();
         String wins = getLine();
+        String loses = getLine();
         String extremeRounds = getLine();
         String fNRounds = getLine();
         String nBJRounds = getLine();
@@ -118,18 +119,18 @@ public class ProjectFileIO_v2 {
         String bankRuptcies = getLine();
         String currency = getLine();
     
-        writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(extremeRounds),
+        writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(loses), Integer.parseInt(extremeRounds),
         		Integer.parseInt(fNRounds), Integer.parseInt(nBJRounds), Integer.parseInt(fFRounds), Integer.parseInt(bJCount), 
         		Integer.parseInt(creditsEarned), Integer.parseInt(creditsLost), Integer.parseInt(highestCredits), 
         		Integer.parseInt(bankRuptcies), currency);
     }
     
     //ADJUST AS NECESSARY!
-    private static void writeNewPlayer(String name, String password, int wins, int extremeRounds, int fnRounds, 
+    private static void writeNewPlayer(String name, String password, int wins, int loses, int extremeRounds, int fnRounds, 
     		int nBjROunds, int ffRounds, int bjCount, int creditsPlus, int creditsMinus, int peakCredit, int bankruptcies, 
     		String currency) {
         
-    	Player playerNew = new Player(name, password, wins, extremeRounds, fnRounds, nBjROunds, ffRounds, bjCount, 
+    	Player playerNew = new Player(name, password, wins, loses, extremeRounds, fnRounds, nBjROunds, ffRounds, bjCount, 
         		creditsPlus, creditsMinus, peakCredit, bankruptcies, currency);
     	
         playerArrayList.add(playerNew);

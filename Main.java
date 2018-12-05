@@ -24,6 +24,7 @@ public class Main {
 	private static String username;
 	private static String passwd;
 	private static int wins;
+	private static int loses;
 	private static int extremeWins;
 	private static int fNRounds;
 	private static int nBJROunds;
@@ -35,7 +36,7 @@ public class Main {
 	private static int bankRuptcies;
 	private static String currency = "credits";
 	private static Player currentPlayer = new Player
-	(username, passwd, wins, extremeWins,
+	(username, passwd, wins, loses, extremeWins,
 	fNRounds, nBJROunds, fFRounds, bJCount,
 	creditsEarned, creditsLost, highestCredits,
 	bankRuptcies, currency);
@@ -575,7 +576,7 @@ public class Main {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
 		System.out.println("Current currency: " + 
-		ProjectFileIO_v2.getPlayer(username, passwd).getCurrency());
+		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
 		if(newCurrency.equals("q"))
@@ -591,16 +592,12 @@ public class Main {
 	
 //	Under construction
 	static void changeAlias() throws IOException, InterruptedException {
-		/*
-		 * TODO: Prevent users from changing to the same username 
-		 */
 		ProjectFileIO_v2.readFile();
 		String newAlias = "";
 		System.out.printf("%31s\n", "Change alias");
 		System.out.println("Enter new name");
 		newAlias = input.next();
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) {
-			//Causes a NullPointer Exception, just needs a little fixing
 			while(newAlias.equals(x.getName())) {
 				System.err.println("Alias already taken, choose another one");
 				System.out.println("Enter new name");
@@ -621,18 +618,18 @@ public class Main {
 	
 	static void displayStats() throws IOException, InterruptedException {
 		System.out.printf("%20s", "Statistics\n");
-		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() +"\n" + 
-							"Loses: " + ProjectFileIO_v2.getPlayer(username, passwd).getWins() + "\n" +
-							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getExtremeRounds() + "\n" +
-							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFnRounds() + "\n" +
-							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getnBJRounds() + "\n" +
-							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(username, passwd).getFfRounds() + "\n" +
-							"Blackjacks: " + ProjectFileIO_v2.getPlayer(username, passwd).getbJCount() + "\n" +
-							"Credits earned: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned() + "\n" +
-							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-							"Credits lost: " + ProjectFileIO_v2.getPlayer(username, passwd).getCreditsLost() + "\n" +
-							"Highest credit : " + ProjectFileIO_v2.getPlayer(username, passwd).getHighestCredits() + "\n" +
-							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(username, passwd).getBankRuptcies() + "\n" +
+		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getWins() +"\n" + 
+							"Loses: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getLoses() + "\n" +
+							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getExtremeRounds() + "\n" +
+							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getFnRounds() + "\n" +
+							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getnBJRounds() + "\n" +
+							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getFfRounds() + "\n" +
+							"Blackjacks: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getbJCount() + "\n" +
+							"Credits earned: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsEarned() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsLost() + "\n" +
+							"Credits lost: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsLost() + "\n" +
+							"Highest credit : " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getHighestCredits() + "\n" +
+							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getBankRuptcies() + "\n" +
 							"Press q to go back");
 							if(pressQ().equals("q"))
 								displayMenu();
