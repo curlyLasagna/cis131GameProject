@@ -1,4 +1,4 @@
-package blackjackbuildone;
+
 public class Player {
     
     private String name;
@@ -7,9 +7,9 @@ public class Player {
     private int extremeRounds;
     private int fnRounds;
     private int nBJRounds;
-	private int ffRounds;
+ private int ffRounds;
     private int bJCount;
-	private int creditsEarned;
+ private int creditsEarned;
     private int creditsLost;
     private int highestCredits;
     private int bankRuptcies;
@@ -20,125 +20,125 @@ public class Player {
     }
    
     public Player(String name, String password, int wins, int extremeRounds, int fnRounds,
-			int nBJRounds, int ffRounds, int bJCount, int creditsEarned, int creditsLost, int highestCredits,
-			int bankRuptcies, String currency) {
-		
-		this.name = name;
-		this.password = password;
-		this.wins = wins; 
-		this.extremeRounds = extremeRounds;
-		this.fnRounds = fnRounds;
-		this.nBJRounds = nBJRounds;
-		this.ffRounds = ffRounds;
-		this.bJCount = bJCount;
-		this.creditsEarned = creditsEarned;
-		this.creditsLost = creditsLost;
-		this.highestCredits = highestCredits;
-		this.bankRuptcies = bankRuptcies;
-		this.currency = currency; 
-	}
+   int nBJRounds, int ffRounds, int bJCount, int creditsEarned, int creditsLost, int highestCredits,
+   int bankRuptcies, String currency) {
+  
+  this.name = name;
+  this.password = password;
+  this.wins = wins; 
+  this.extremeRounds = extremeRounds;
+  this.fnRounds = fnRounds;
+  this.nBJRounds = nBJRounds;
+  this.ffRounds = ffRounds;
+  this.bJCount = bJCount;
+  this.creditsEarned = creditsEarned;
+  this.creditsLost = creditsLost;
+  this.highestCredits = highestCredits;
+  this.bankRuptcies = bankRuptcies;
+  this.currency = currency; 
+ }
 
-	public String getPassword() {
-		return password;
-	}
+ public String getPassword() {
+  return password;
+ }
 
-	public String getName(){
-       		 return name;
-   	}
+ public String getName(){
+          return name;
+    }
 
-	public int getExtremeRounds() {
-		return extremeRounds;
-	}
+ public int getExtremeRounds() {
+  return extremeRounds;
+ }
 
-	public int getFnRounds() {
-		return fnRounds;
-	}
+ public int getFnRounds() {
+  return fnRounds;
+ }
 
-	public int getnBJRounds() {
-		return nBJRounds;
-	}
+ public int getnBJRounds() {
+  return nBJRounds;
+ }
 
-	public int getFfRounds() {
-		return ffRounds;
-	}
+ public int getFfRounds() {
+  return ffRounds;
+ }
 
-	public int getbJCount() {
-		return bJCount;
-	}
+ public int getbJCount() {
+  return bJCount;
+ }
 
-	public int getCreditsEarned() {
-		return creditsEarned;
-	}
+ public int getCreditsEarned() {
+  return creditsEarned;
+ }
 
-	public int getCreditsLost() {
-		return creditsLost;
-	}
+ public int getCreditsLost() {
+  return creditsLost;
+ }
 
-	public int getHighestCredits() {
-		return highestCredits;
-	}
+ public int getHighestCredits() {
+  return highestCredits;
+ }
 
-	public int getBankRuptcies() {
-		return bankRuptcies;
-	}
-	
-	public int getWins() {
-		return wins;
-	}
+ public int getBankRuptcies() {
+  return bankRuptcies;
+ }
+ 
+ public int getWins() {
+  return wins;
+ }
 
-	public String getCurrency() {
-		return currency;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+ public String getCurrency() {
+  return currency;
+ }
+ 
+ public void setName(String name) {
+  this.name = name;
+ }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+ public void setPassword(String password) {
+  this.password = password;
+ }
 
-	public void setWins(int wins) {
-		this.wins = wins;
-	}
+ public void setWins(int wins) {
+  this.wins = wins;
+ }
 
-	public void setExtremeRounds(int extremeRounds) {
-		this.extremeRounds = extremeRounds;
-	}
+ public void setExtremeRounds(int extremeRounds) {
+  this.extremeRounds = extremeRounds;
+ }
 
-	public void setFnRounds(int fnRounds) {
-		this.fnRounds = fnRounds;
-	}
+ public void setFnRounds(int fnRounds) {
+  this.fnRounds = fnRounds;
+ }
 
-	public void setnBJRounds(int nBJRounds) {
-		this.nBJRounds = nBJRounds;
-	}
+ public void setnBJRounds(int nBJRounds) {
+  this.nBJRounds = nBJRounds;
+ }
 
-	public void setFfRounds(int ffRounds) {
-		this.ffRounds = ffRounds;
-	}
+ public void setFfRounds(int ffRounds) {
+  this.ffRounds = ffRounds;
+ }
 
-	public void setbJCount(int bJCount) {
-		this.bJCount = bJCount;
-	}
+ public void setbJCount(int bJCount) {
+  this.bJCount = bJCount;
+ }
 
-	public void setCreditsEarned(int creditsEarned) {
-		this.creditsEarned = creditsEarned;
-	}
+ public void setCreditsEarned(int creditsEarned) {
+  this.creditsEarned = creditsEarned;
+ }
 
-	public void setCreditsLost(int creditsLost) {
-		this.creditsLost = creditsLost;
-	}
+ public void setCreditsLost(int creditsLost) {
+  this.creditsLost = creditsLost;
+ }
 
-	public void setHighestCredits(int highestCredits) {
-		this.highestCredits = highestCredits;
-	}
+ public void setHighestCredits(int highestCredits) {
+  this.highestCredits = highestCredits;
+ }
 
-	public void setBankRuptcies(int bankRuptcies) {
-		this.bankRuptcies = bankRuptcies;
-	}
+ public void setBankRuptcies(int bankRuptcies) {
+  this.bankRuptcies = bankRuptcies;
+ }
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
+ public void setCurrency(String currency) {
+  this.currency = currency;
+ }
 }
