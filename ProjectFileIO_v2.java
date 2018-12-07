@@ -98,8 +98,6 @@ public class ProjectFileIO_v2 {
     //ADJUST AS NECESSARY!
     private static void readAllGlobalSettings(String entireLine) {
         //Add a file IO read of all the global settings for the game. 1 for each line        
-        String setting1 = getLine();
-        String setting2 = getLine();     
     }
     
     //ADJUST AS NECESSARY!
@@ -156,7 +154,7 @@ public class ProjectFileIO_v2 {
         return entireLine;        
     }
     
-    //================================================================================================================
+    //====================================WRITING FILE====================================================================
     
     public static void writeFile() throws IOException {
         System.out.println("\nSaving...");
@@ -206,6 +204,7 @@ public class ProjectFileIO_v2 {
             pw.println(playerArrayList.get(i).getName());
             pw.println(playerArrayList.get(i).getPassword());
             pw.println(playerArrayList.get(i).getWins());
+            pw.println(playerArrayList.get(i).getLoses());
             pw.println(playerArrayList.get(i).getExtremeRounds());
             pw.println(playerArrayList.get(i).getFnRounds());
             pw.println(playerArrayList.get(i).getnBJRounds());
@@ -224,7 +223,7 @@ public class ProjectFileIO_v2 {
         pw.println(EOF_MARKER + EOF_MARKER + EOF_MARKER + " End of File " + EOF_MARKER + EOF_MARKER + EOF_MARKER);
     }
     
-    //================================================================================================================
+    //==========================================ADDING/MODIFYING THE PLAYER CLASS==============================================================
     
     public static String getVersionNumber() {
         return VERSION_NUMBER;
@@ -260,8 +259,6 @@ public class ProjectFileIO_v2 {
                playerArrayList.remove(i);
                playerArrayList.add(newPlayer); 
                return;
-	//Create a delete person method when choosing person, and 
-	//ask for password 
            }
        }
         System.out.println("Error in updatePlayer. Player not found.");

@@ -52,11 +52,10 @@ public class Main {
 	}
 	
 	static void logIn() throws IOException {
-		System.out.print("Alias: ");
-		username = input.next();
+
+		username = IR4.getString("Alias: ");
 		currentPlayer.setName(username);
-		System.out.print("Password: ");
-		passwd = input.next();
+		passwd = IR4.getString("Password: ");
 		checkPassword(username, passwd);
 		currentPlayer.setPassword(passwd);
 		isNewPlayer(username);
@@ -65,30 +64,33 @@ public class Main {
 	
 	static void checkPassword(String user, String pass) throws IOException {
 		
+		//Surprised this mess works
 		for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
-			if(username.equals(x.getName()))
+			if(username.equals(x.getName())) {
 				while(!passwd.equals(x.getPassword())) {
 					System.err.println("Wrong password, try again, or press 'q' to change alias");
 					System.out.print("Password: ");
 					passwd = input.next();		
-					if(passwd.equals("q"))
+					if(passwd.equals("q")) {
 						logIn();
 						break;
+					}
+				}
 			}
 		}
 	}
 	
+	
 	static void isNewPlayer(String user) throws IOException {
 
 		if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
-			System.out.println("Welcome " + currentPlayer.getName());
-			System.out.println("Your password: " + currentPlayer.getPassword());
+			System.out.println("Welcome to the club " + currentPlayer.getName());
 			ProjectFileIO_v2.writeFile();
 		}
 		
 		else {
 			System.out.println("Welcome back " + 
-		ProjectFileIO_v2.getPlayer(username, passwd).getName() + "!");
+		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getName() + "!");
 		}
 	}
 	
@@ -121,7 +123,7 @@ public class Main {
 			    " | Enter 1 - 6 for selection                                                        |\n" +
 				" +==================================================================================+");
 		
-		switch(getChoice(1, 6)) {
+		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 6, "Invalid input, try again")) {
 		case 1:
 			//Play menu
 			displayPlay();
@@ -169,7 +171,7 @@ public class Main {
 		System.out.println("1. Extreme Blackjack!\n" +
 						   "2. Extras\n" +
 						   "3. Back");
-		switch(getChoice(1, 3)) {
+		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 3, "Invalid input, try again")) {
 		case 1:
 			mainGame();
 			break;
@@ -192,7 +194,7 @@ public class Main {
 						   "4. Rules\n" +
 				 		   "5. Back");
 		
-		switch(getChoice(1, 5)) {
+		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 5, "Invalid input, try again")) {
 		
 		case 1:
 			break;
@@ -372,7 +374,6 @@ public class Main {
 						WinningPrints();
 						 wins =  wins +1;
 						run = false;
-						
 
 					}
 				}			
@@ -551,12 +552,12 @@ public class Main {
 	
 	
 	static void displaySetting() throws IOException, InterruptedException {
-		System.out.printf("%35s\n", "Settings" );
+		System.out.printf("%42s\n", "Settings" );
 		System.out.println("1. Change currency \n"+ 							 
 	                       "2. Change Alias \n" +
 						   "3. Back");
 		
-		switch(getChoice(1, 3)) {
+		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 3, "Invalid input, try again")) {
 		
 		case 1:
 			changeCurrency();
@@ -639,44 +640,42 @@ public class Main {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
 		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
 		System.out.printf("%-20s%27c%3s\n", "--------", ' ', "------");
-		/*************************
-		Things to add:
-		Create a player int array[10]
-		Call GetArrayList();
-		Highest to lowest insertion sort
-		Player.getWins();
-		*************************/
-		//Use parallel arrays for scores 
-		//2 separate for loops 
 		
 		int playerSize = ProjectFileIO_v2.getPlayerArrayList().size();
-		Integer[] scores = new Integer[playerSize];
-		String[] user = new String[playerSize];
+		int[] scores = new int[playerSize];
+		String [] users = new String[playerSize];
 		int count = 0;
-		int userCount = 0;
 		for(Player player: ProjectFileIO_v2.getPlayerArrayList()) {
-			//Each entry duplicates
 				scores[count] = player.getWins();
+				users[count] = player.getName();
 				count++;
 			}	
-		for(Player player: ProjectFileIO_v2.getPlayerArrayList()) {
-			user[userCount] = player.getName();
-			userCount++;
+		
+		sortHighScores(scores, users);
+		
+		for(int x=0;x<playerSize;x++) {
+			System.out.printf("%-25s%25d\n",users[x] , scores[x]);
 		}
 		
-		sortHighScores(scores);
-		for(int x=0;x<count;x++) {
-			System.out.println(user[x] + scores[x]);
-		}
-		//if score index is moved, move the user index user[2] = score[2] | score[2] -> 3 user[2] -> 3  
 		 System.out.println("Press q to go back");
 		 if(pressQ().equals("q"))
 			 displayMenu();
 		}
 
 	
-	public static void sortHighScores(Integer [] arr) {
-		Arrays.sort(arr, Collections.reverseOrder());
+	public static void sortHighScores(int [] arr, String [] arra) {
+		int n = arr.length; 
+        for (int i = 0; i < n-1; i++) 
+            for (int j = 0; j < n-i-1; j++) 
+                if (arr[j] < arr[j+1]) 
+                { 
+                    int temp = arr[j]; 
+                    String tempura = arra[j];
+                    arr[j] = arr[j+1]; 
+                    arr[j+1] = temp; 
+                    arra[j] = arra[j+1];
+                    arra[j+1] = tempura;
+                } 
 	}
 	
 	static void displayCredits() throws InterruptedException, IOException {
@@ -687,7 +686,7 @@ public class Main {
 	    System.out.println("Luis Gascon"); 
 	    System.out.println("Austin Connick");
 	    System.out.println("***********************************");
-	    Thread.sleep(6000); 
+	    Thread.sleep(3000); 
 	    displayMenu();
 
 	}
@@ -695,28 +694,34 @@ public class Main {
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
 		//Create an ASCII art 
+		System.out.println(" _______ _                 _                          _ \n" +
+						  "|__   __| |               | |                        | |\n" +
+						  "  |  | |__   __ _ _ __ | | __  _   _  ___  _   _  | |\n" +
+						  "  |  | '_ \\ / _` | '_ \\| |/ / | | | |/ _ \\| | | | | |\n" +
+						  "  |  | | | | (_| | | | |   <  | |_| | (_) | |_| | |_|\n" +
+						  "  |  |_| |_|\\__,_|_| |_|_|\\_\\  \\__, |\\___/ \\__,_| (_)\n" +
+						  "                                __/ |                \n" +
+                          "								___/                 ");
 		System.out.println("Thank you for playing :)");
 	}
 	
 	
-	static Integer getChoice(int low, int high) {
-		/*
-		 * TODO: Input validation. Integers only 
-		 */
-		String choice = "";
-		choice = input.next();
-		while(!choice.matches("\\d{1}")) {
-		System.err.println("Invalid input, try again");
-		choice = input.next();
-		}
-		Integer selection = Integer.valueOf(choice);
-		while(selection > high || selection < 0) {
-			System.err.println("Enter " + low + "-" + high + " and try again");
-		choice = input.next();
-		selection = Integer.valueOf(choice);
-		}
-		return selection;
-	}
+//	static Integer getChoice(int low, int high) {
+//		String choice = input.next();
+//		Integer selection = 0;
+//		while(!choice.matches("\\d{1}")) {
+//			System.err.println("Invalid input, try again");
+//			choice = input.next();
+//			selection = Integer.valueOf(choice);
+//
+//		while(selection > high || selection < low) {
+//			System.err.println("Enter " + low + "-" + high + " and try again");
+//			choice = input.next();
+//			selection = Integer.valueOf(choice);
+//			}
+//		}
+//		return selection;
+//	}
 	
 	static String pressQ() {
 		String q = input.next();
@@ -726,5 +731,4 @@ public class Main {
 		}
 		return q;
 	}
-	
 }

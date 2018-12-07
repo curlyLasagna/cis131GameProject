@@ -110,7 +110,7 @@ public class IR4 {
      */ 
    public static String getString(String msg) {
       String answer = "";
-      System.out.println(msg);
+      System.out.print(msg);
       try {
          answer = keyboard.nextLine(); 
       }
