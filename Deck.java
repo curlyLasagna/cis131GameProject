@@ -94,7 +94,7 @@ public class Deck{
   for(Card aCard : this.cards) {
    counter = counter +1; 
   }
-  System.out.printf("\t\t\t\t\t\t\t\t");
+  System.out.printf("");
   if(counter < 5) {
    for(int i = 1; i <= counter; i++) {
     System.out.printf(""+top1+"\t");
@@ -102,38 +102,38 @@ public class Deck{
    }
 
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    ///////////////////problem one
    for(int i = 0; i < counter; i++) {
     System.out.printf(cards.get(i)+"\t");
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= counter; i++) {
     System.out.printf(top2+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= counter; i++) {
     System.out.printf(top3+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= counter; i++) {
     System.out.printf(top4+"\t");
 
    }
 
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= counter; i++) {
     System.out.printf(top5+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= counter; i++) {
     System.out.printf(top6+"\t");
 
@@ -147,45 +147,45 @@ public class Deck{
    int rows = 5;
    System.out.println("");
 
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(""+top1+"\t");
 
    }
    System.out.println("");
 
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    /////////////////////////////problem
    for(int i = 0; i < rows; i++) {
     System.out.printf(cards.get(i)+"\t");
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(top2+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(top3+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(top4+"\t");
 
    }
 
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(top5+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= rows; i++) {
     System.out.printf(top6+"\t");
 
@@ -195,7 +195,7 @@ public class Deck{
    
    System.out.println("");
 
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(""+top1+"\t");
 
@@ -204,38 +204,38 @@ public class Deck{
    
    System.out.println("");
 
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    /////////////////////problem two
    for(int i = 0; i < countertwo; i++) {
     System.out.printf(cards.get(i+5)+"\t");
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(top2+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(top3+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(top4+"\t");
 
    }
 
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(top5+"\t");
 
    }
    System.out.println("");
-   System.out.printf("\t\t\t\t\t\t\t\t");
+   System.out.printf("");
    for(int i = 1; i <= countertwo; i++) {
     System.out.printf(top6+"\t");
 
@@ -250,45 +250,45 @@ public class Deck{
     int rows = 5;
     System.out.println("");
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(""+top1+"\t");
 
     }
     System.out.println("");
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     /////////////////////////////problem
     for(int i = 0; i < rows; i++) {
      System.out.printf(cards.get(i)+"\t");
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top2+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top3+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top4+"\t");
 
     }
 
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top5+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top6+"\t");
 
@@ -298,7 +298,7 @@ public class Deck{
     
     System.out.println("");
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(""+top1+"\t");
 
@@ -307,38 +307,38 @@ public class Deck{
     
     System.out.println("");
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     /////////////////////problem two
     for(int i = 0; i < rows; i++) {
      System.out.printf(cards.get(i+5)+"\t");
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top2+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top3+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top4+"\t");
 
     }
 
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top5+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= rows; i++) {
      System.out.printf(top6+"\t");
 
@@ -346,7 +346,7 @@ public class Deck{
     System.out.println("");
     
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(""+top1+"\t");
 
@@ -355,38 +355,38 @@ public class Deck{
     
     System.out.println("");
 
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     /////////////////////problem two
     for(int i = 0; i < counterthree; i++) {
      System.out.printf(cards.get(i+10)+"\t");
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(top2+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(top3+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(top4+"\t");
 
     }
 
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(top5+"\t");
 
     }
     System.out.println("");
-    System.out.printf("\t\t\t\t\t\t\t\t");
+    System.out.printf("");
     for(int i = 1; i <= counterthree; i++) {
      System.out.printf(top6+"\t");
 

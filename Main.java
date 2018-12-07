@@ -53,10 +53,10 @@ public class Main {
 
  static void logIn() throws IOException {
 
-  System.out.print("\t\t\t\t\t\t\t\tAlias: ");
+  System.out.print("Alias: ");
   username = input.next();
   currentPlayer.setName(username);
-  System.out.print("\t\t\t\t\t\t\t\tPassword: ");
+  System.out.print("Password: ");
   passwd = input.next();
   checkPassword(username, passwd);
   currentPlayer.setPassword(passwd);
@@ -69,10 +69,10 @@ public class Main {
   for(Player x: ProjectFileIO_v2.getPlayerArrayList()) { 
    if(username.equals(x.getName()))
     while(!passwd.equals(x.getPassword())) {
-     System.err.println("\t\t\t\t\t\t\t\tWrong password, try again, or press 'q' to change alias");
+     System.err.println("Wrong password, try again, or press 'q' to change alias");
      if(passwd.equals(pressQ()))
       logIn();
-     System.out.print("\t\t\t\t\t\t\t\tPassword: ");
+     System.out.print("Password: ");
      passwd = input.next();  
 
     }
@@ -82,8 +82,8 @@ public class Main {
  static void isNewPlayer(String user) throws IOException {
 
   if(ProjectFileIO_v2.addNewPlayer(currentPlayer)) {
-   System.out.println("\t\t\t\t\t\t\t\tWelcome " + currentPlayer.getName());
-   System.out.println("\t\t\t\t\t\t\t\tYour password: " + currentPlayer.getPassword());
+   System.out.println("Welcome " + currentPlayer.getName());
+   System.out.println("Your password: " + currentPlayer.getPassword());
    ProjectFileIO_v2.writeFile();
 
   }
@@ -96,32 +96,32 @@ public class Main {
 
  static boolean displayMenu() throws IOException, InterruptedException {  
   boolean quit = false;
-  System.out.printf("\t\t\t\t\t\t\t\t+----------------------------------------------------------------------------------+\n" +
-    " \t\t\t\t\t\t\t\t|                                                                                  |\n" +
-    " \t\t\t\t\t\t\t\t|        __       __                __       __                 __                 |\n" + 
-    " \t\t\t\t\t\t\t\t|       |  |     |  |              |  |     (__)               |  |                |\n" +
-    " \t\t\t\t\t\t\t\t|       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __             |\n" +
-    " \t\t\t\t\t\t\t\t|       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
-    " \t\t\t\t\t\t\t\t|       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
-    " \t\t\t\t\t\t\t\t|       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
-    " \t\t\t\t\t\t\t\t|                                        __/   |                                   |\n" +
-    " \t\t\t\t\t\t\t\t|                                       |_____/                                    |\n" +
-    " \t\t\t\t\t\t\t\t|                  _______   _____________ ________  ________                      | \n" + 
-    " \t\t\t\t\t\t\t\t|                 |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                     | \n" + 
-    " \t\t\t\t\t\t\t\t|                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
-    " \t\t\t\t\t\t\t\t|                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
-    " \t\t\t\t\t\t\t\t|                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
-    " \t\t\t\t\t\t\t\t|                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
-    " \t\t\t\t\t\t\t\t+==================================================================================+\n" +
-    " \t\t\t\t\t\t\t\t|                                                                                  |\n" + 
-    " \t\t\t\t\t\t\t\t|                                1. Play                                           |\n" +
-    " \t\t\t\t\t\t\t\t|                                2. Settings                                       |\n" +
-    " \t\t\t\t\t\t\t\t|                                3. Statistics                                     |\n" +
-    " \t\t\t\t\t\t\t\t|                                4. Hall of Fame                                   |\n" +
-    " \t\t\t\t\t\t\t\t|                                5. Credits                                        |\n" +
-    " \t\t\t\t\t\t\t\t|                                6. Exit                                           |\n" +
-    " \t\t\t\t\t\t\t\t| Enter 1 - 6 for selection                                                        |\n" +
-    " \t\t\t\t\t\t\t\t+==================================================================================+\n");
+  System.out.printf("+----------------------------------------------------------------------------------+\n" +
+    " |                                                                                  |\n" +
+    " |        __       __                __       __                 __                 |\n" + 
+    " |       |  |     |  |              |  |     (__)               |  |                |\n" +
+    " |       |  |__   |  |  __ _    ___ |  | __   __   __  _    ___ |  | __             |\n" +
+    " |       |  *   \\ |  |/  _` | /  __||  |/ /  |  |/  _ ` | /  __||  |/ /             |\n" +
+    " |       |   |_) ||  |  (_| ||  (__ |    <   |  |  (_|  ||  (__ |    <              |\n" +
+    " |       |__*__ / |__|\\ __'_| \\ ___||__|\\__\\ |  |\\ __ '_| \\ ___||__|\\__\\            |\n" +
+    " |                                        __/   |                                   |\n" +
+    " |                                       |_____/                                    |\n" +
+    " |                  _______   _____________ ________  ________                      | \n" + 
+    " |                 |  ___\\ \\ / /_   _| ___ \\  ___|  \\/  |  ___|                     | \n" + 
+    " |                 | |__  \\ V /  | | | |_/ / |__ | .  . | |__                       | \n" + 
+    " |                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
+    " |                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
+    " |                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
+    " +==================================================================================+\n" +
+    " |                                                                                  |\n" + 
+    " |                                1. Play                                           |\n" +
+    " |                                2. Settings                                       |\n" +
+    " |                                3. Statistics                                     |\n" +
+    " |                                4. Hall of Fame                                   |\n" +
+    " |                                5. Credits                                        |\n" +
+    " |                                6. Exit                                           |\n" +
+    " | Enter 1 - 6 for selection                                                        |\n" +
+    " +==================================================================================+\n");
 
   switch(getChoice(1, 6)) {
   case 1:
@@ -153,7 +153,7 @@ public class Main {
    quit = true;
    break;
   default:
-   System.out.printf("\t\t\t\t\t\t\t\tEnter 1 - 6 and try again\n");
+   System.out.printf("Enter 1 - 6 and try again\n");
    displayMenu();
    quit = true;
    break;
@@ -167,10 +167,10 @@ public class Main {
 
 
  static void displayPlay() throws IOException, InterruptedException {
-  System.out.printf("\t\t\t\t\t\t\t\t\t%35s\n","Play");
-  System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\t1. Extreme Blackjack!\n" +
-    "\t\t\t\t\t\t\t\t\t\t\t\t2. Extras\n" +
-    "\t\t\t\t\t\t\t\t\t\t\t\t3. Back\n");
+  System.out.printf("%35s","Play");
+  System.out.printf("1. Extreme Blackjack!\n" +
+    "2. Extras\n" +
+    "3. Back\n");
   switch(getChoice(1,3)) {
   case 1:
    mainGame();
@@ -225,7 +225,7 @@ public class Main {
    playingDeck.shuffle();
    CARDGAMENUM = IR4.getRandomNumber(21, 61);
    compHit = CARDGAMENUM - 6 ;
-   System.out.printf("\t\t\t\t\t\t\t\t\t\t\t\tMoney = "+score+"\n");
+   System.out.printf("Money = "+score+"\n");
    printWiningscore(CARDGAMENUM);
    if(score <= 0) {
     runTwo = false;
@@ -256,7 +256,7 @@ public class Main {
    run = true;
    while(run) {
     dividers();
-    System.out.printf("\t\t\t\t\t\t\t\t\t\t\tWin- "+ wins+"  Lost- "+lost+"\n");
+    System.out.printf("Win- "+ wins+"  Lost- "+lost+"\n");
     dividers();
     printdealerHand();
     dividers();
@@ -268,7 +268,7 @@ public class Main {
     dividers();
     printSum();
     dividers();
-    System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+    System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
     dividers();
     if(PlayerHand.cardValue() > CARDGAMENUM) {
      dividers();
@@ -294,7 +294,7 @@ public class Main {
      dividers();
      printSum();
      dividers();
-     System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+     System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
      dividers();
      WinningPrints();
      run = false;
@@ -328,7 +328,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       bustprint();
       dividers();
@@ -352,7 +352,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       WinningPrints();
       score = score + bet;
@@ -371,7 +371,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       dealerBust();
       dividers();
@@ -405,7 +405,7 @@ public class Main {
      dividers();
      printSum();
      dividers();
-     System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+     System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
      dividers();
      WinningPrints();
      dividers();
@@ -423,7 +423,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       WinningPrints();
       dividers();
@@ -446,7 +446,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       printDealerwin();
       dividers();
@@ -467,7 +467,7 @@ public class Main {
       dividers();
       printSum();
       dividers();
-      System.out.print("\t\t\t\t\t\t\t\t\t\tComputer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
       dividers();
       dealerBust();
       dividers();
@@ -496,60 +496,60 @@ public class Main {
  }
 
  private static void printHand() {
-   System.err.printf("\t\t\t\t\t\t\t\t\t\t\t _   _                 _ \n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| | | |               | |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| |_| | __ _ _ __   __| |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t|  _  |/ _` | '_ \\ / _` |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| | | | (_| | | | | (_| |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t\\_| |_/\\__,_|_| |_|\\__,_|\n");
+   System.err.printf(" _   _                 _ \n"
+    + "| | | |               | |\n"
+    + "| |_| | __ _ _ __   __| |\n"
+    + "|  _  |/ _` | '_ \\ / _` |\n"
+    + "| | | | (_| | | | | (_| |\n"
+    + "\\_| |_/\\__,_|_| |_|\\__,_|\n");
 
 
  }
 
  private static void bustprint() {
-  System.err.printf("\t\t\t\t\t\t\t\t\t\t\t______           _   _ _ _ _ \n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| ___ \\         | | | | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| |_/ /_   _ ___| |_| | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| ___ \\ | | / __| __| | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t| |_/ / |_| \\__ \\ |_|_|_|_|_|\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t\\____/ \\__,_|___/\\__(_|_|_|_)\n");
+  System.err.printf("______           _   _ _ _ _ \n"
+    + "| ___ \\         | | | | | | |\n"
+    + "| |_/ /_   _ ___| |_| | | | |\n"
+    + "| ___ \\ | | / __| __| | | | |\n"
+    + "| |_/ / |_| \\__ \\ |_|_|_|_|_|\n"
+    + "\\____/ \\__,_|___/\\__(_|_|_|_)\n");
 
  }
 
  private static void dividers() {
-  System.out.printf("\t\t\t\t\t\t\t\t***********************************************************************************\n");
+  System.out.printf("***********************************************************************************\n");
 
  }
 
  private static void printSum() {
-   System.err.printf("\t\t\t\t\t\t\t\t\t\t\t _____                 \n"
-    + "\t\t\t\t\t\t\t\t\t\t\t/  ___|                \n"
-    +"\t\t\t\t\t\t\t\t\t\t\t\\ `--. _   _ _ __ ___  \n"
-    + "\t\t\t\t\t\t\t\t\t\t\t `--. \\ | | | '_ ` _ \\ \n"
-    + "\t\t\t\t\t\t\t\t\t\t\t/\\__/ / |_| | | | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t\t\t\\____/ \\__,_|_| |_| |_|\n");
+   System.err.printf(" _____                 \n"
+    + "/  ___|                \n"
+    +"\\ `--. _   _ _ __ ___  \n"
+    + " `--. \\ | | | '_ ` _ \\ \n"
+    + "/\\__/ / |_| | | | | | |\n"
+    + "\\____/ \\__,_|_| |_| |_|\n");
 
  }
 
  private static void printdealerHand() {
-  System.err.printf("\t\t\t\t\t\t\t\t\t______           _             _   _                 _ \n"
-    + "\t\t\t\t\t\t\t\t\t|  _  \\         | |           | | | |               | |\n"
-    + "\t\t\t\t\t\t\t\t\t| | | |___  __ _| | ___ _ __  | |_| | __ _ _ __   __| |\n"
-    + "\t\t\t\t\t\t\t\t\t| | | / _ \\/ _` | |/ _ \\ '__| |  _  |/ _` | '_ \\ / _` |\n"
-    + "\t\t\t\t\t\t\t\t\t| |/ /  __/ (_| | |  __/ |    | | | | (_| | | | | (_| |\n"
-    + "\t\t\t\t\t\t\t\t\t|___/ \\___|\\__,_|_|\\___|_|    \\_| |_/\\__,_|_| |_|\\__,_|\n");
+  System.err.printf("______           _             _   _                 _ \n"
+    + "|  _  \\         | |           | | | |               | |\n"
+    + "| | | |___  __ _| | ___ _ __  | |_| | __ _ _ __   __| |\n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| |  _  |/ _` | '_ \\ / _` |\n"
+    + "| |/ /  __/ (_| | |  __/ |    | | | | (_| | | | | (_| |\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|    \\_| |_/\\__,_|_| |_|\\__,_|\n");
 
  }
 
  private static void printWiningscore(int cARDGAMENUM) {
-  System.out.printf("\t\t\t\t\t\t\t\t\t _    _ _             _               _   _                 _ \n"
-    + "\t\t\t\t\t\t\t\t\t| |  | (_)           (_)             | | | |               | |\n"
-    + "\t\t\t\t\t\t\t\t\t| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
-    + "\t\t\t\t\t\t\t\t\t| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
-    + "\t\t\t\t\t\t\t\t\t\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
-    + "\t\t\t\t\t\t\t\t\t \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
-    + "\t\t\t\t\t\t\t\t\t                               __/ |                          \n"
-    + "\t\t\t\t\t\t\t\t\t                              |___/                           \n");
+  System.out.printf(" _    _ _             _               _   _                 _ \n"
+    + "| |  | (_)           (_)             | | | |               | |\n"
+    + "| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
+    + "| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
+    + "\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
+    + " \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
+    + "                               __/ |                          \n"
+    + "                              |___/                           \n");
   dividers();
   NumberPrinter(cARDGAMENUM);
   dividers();
@@ -560,7 +560,7 @@ public class Main {
   int countStart = 1;
   int lines = 6;
   for(int i = 0; i < lines; i++) {
-   System.out.printf("\t\t\t\t\t\t\t\t\t\t\t1");
+   System.out.printf("");
    if(String.valueOf(cARDGAMENUM).startsWith("1")) {
     if(countStart == 1) {
      System.out.printf("  __ ");
@@ -970,23 +970,23 @@ public class Main {
 
 
  private static void dealerBust() {
-  System.out.printf("\t\t\t\t\t\t\t\t\t______           _            ______           _   _ _ _ _ _ _ \n"
-    + "\t\t\t\t\t\t\t\t\t|  _  \\         | |           | ___ \\         | | | | | | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t| | | |___  __ _| | ___ _ __  | |_/ /_   _ ___| |_| | | | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t| | | / _ \\/ _` | |/ _ \\ '__| | ___ \\ | | / __| __| | | | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t| |/ /  __/ (_| | |  __/ |    | |_/ / |_| \\__ \\ |_|_|_|_|_|_|_|\n"
-    + "\t\t\t\t\t\t\t\t\t|___/ \\___|\\__,_|_|\\___|_|    \\____/ \\__,_|___/\\__(_|_|_|_|_|_)\n"
+  System.out.printf("______           _            ______           _   _ _ _ _ _ _ \n"
+    + "|  _  \\         | |           | ___ \\         | | | | | | | | |\n"
+    + "| | | |___  __ _| | ___ _ __  | |_/ /_   _ ___| |_| | | | | | |\n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| | ___ \\ | | / __| __| | | | | | |\n"
+    + "| |/ /  __/ (_| | |  __/ |    | |_/ / |_| \\__ \\ |_|_|_|_|_|_|_|\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|    \\____/ \\__,_|___/\\__(_|_|_|_|_|_)\n"
     + "");
 
  }
 
  private static void printDealerwin() {
-  System.out.printf("\t\t\t\t\t\t\t\t\t______           _             _    _             \n"
-    + "\t\t\t\t\t\t\t\t\t|  _  \\         | |           | |  | |            \n"
-    + "\t\t\t\t\t\t\t\t\t| | | |___  __ _| | ___ _ __  | |  | | ___  _ __  \n"
-    + "\t\t\t\t\t\t\t\t\t| | | / _ \\/ _` | |/ _ \\ '__| | |/\\| |/ _ \\| '_ \\ \n"
-    + "\t\t\t\t\t\t\t\t\t| |/ /  __/ (_| | |  __/ |    \\  /\\  / (_) | | | |\n"
-    + "\t\t\t\t\t\t\t\t\t|___/ \\___|\\__,_|_|\\___|_|     \\/  \\/ \\___/|_| |_|\n");
+  System.out.printf("______           _             _    _             \n"
+    + "|  _  \\         | |           | |  | |            \n"
+    + "| | | |___  __ _| | ___ _ __  | |  | | ___  _ __  \n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| | |/\\| |/ _ \\| '_ \\ \n"
+    + "| |/ /  __/ (_| | |  __/ |    \\  /\\  / (_) | | | |\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|     \\/  \\/ \\___/|_| |_|\n");
 
  }
 
@@ -994,34 +994,34 @@ public class Main {
   int i = 1;
   i = IR4.getRandomNumber(1, 3);
   if (i == 1) {
-   System.out.printf("\t\t\t\t\t\t\t\t\t\t         _________ _        _        _______  _______ \n\t\t\t\t\t\t\t\t\t\t|\\     /|\\__   __/( (    /|( (    /|(  ____ \\(  ____ )\n"
-     + "\t\t\t\t\t\t\t\t\t\t| )   ( |   ) (   |  \\  ( ||  \\  ( || (    \\/| (    )|\n\t\t\t\t\t\t\t\t\t\t| | _ | |   | |   |   \\ | ||   \\ | || (__    | (____)|\n"
-     + "\t\t\t\t\t\t\t\t\t\t| |( )| |   | |   | (\\ \\) || (\\ \\) ||  __)   |     __)\n"
-     + "\t\t\t\t\t\t\t\t\t\t| || || |   | |   | | \\   || | \\   || (      | (\\ (   \n"
-     + "\t\t\t\t\t\t\t\t\t\t| () () |___) (___| )  \\  || )  \\  || (____/\\| ) \\ \\__\n"
-     + "\t\t\t\t\t\t\t\t\t\t(_______)\\_______/|/    )_)|/    )_)(_______/|/   \\__/\n");
+   System.out.printf("         _________ _        _        _______  _______ \n|\\     /|\\__   __/( (    /|( (    /|(  ____ \\(  ____ )\n"
+     + "| )   ( |   ) (   |  \\  ( ||  \\  ( || (    \\/| (    )|\n| | _ | |   | |   |   \\ | ||   \\ | || (__    | (____)|\n"
+     + "| |( )| |   | |   | (\\ \\) || (\\ \\) ||  __)   |     __)\n"
+     + "| || || |   | |   | | \\   || | \\   || (      | (\\ (   \n"
+     + "| () () |___) (___| )  \\  || )  \\  || (____/\\| ) \\ \\__\n"
+     + "(_______)\\_______/|/    )_)|/    )_)(_______/|/   \\__/\n");
   }
   if (i == 2) {
-   System.out.printf("\t\t\t\t\t\t\t\t\t      ___                       ___           ___           ___           ___     \n"
-     + "\t\t\t\t\t\t\t\t\t     /\\__\\          ___        /\\__\\         /\\__\\         /\\  \\         /\\  \\    \n"
-     + "\t\t\t\t\t\t\t\t\t    /:/ _/_        /\\  \\      /::|  |       /::|  |       /::\\  \\       /::\\  \\   \n"
-     + "\t\t\t\t\t\t\t\t\t   /:/ /\\__\\       \\:\\  \\    /:|:|  |      /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\  \n"
-     + "\t\t\t\t\t\t\t\t\t  /:/ /:/ _/_      /::\\__\\  /:/|:|  |__   /:/|:|  |__   /::\\~\\:\\  \\   /::\\~\\:\\  \\ \n"
-     + "\t\t\t\t\t\t\t\t\t /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\ /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\\n"
-     + "\t\t\t\t\t\t\t\t\t \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  / \\/__|:|/:/  / \\:\\~\\:\\ \\/__/ \\/_|::\\/:/  /\n"
-     + "\t\t\t\t\t\t\t\t\t  \\::/_/:/  /  \\::/__/         |:/:/  /      |:/:/  /   \\:\\ \\:\\__\\      |:|::/  / \n"
-     + "\t\t\t\t\t\t\t\t\t   \\:\\/:/  /    \\:\\__\\         |::/  /       |::/  /     \\:\\ \\/__/      |:|\\/__/  \n"
-     + "\t\t\t\t\t\t\t\t\t    \\::/  /      \\/__/         /:/  /        /:/  /       \\:\\__\\        |:|  |    \n"
-     + "\t\t\t\t\t\t\t\t\t     \\/__/                     \\/__/         \\/__/         \\/__/         \\|__|    \n");
+   System.out.printf("      ___                       ___           ___           ___           ___     \n"
+     + "     /\\__\\          ___        /\\__\\         /\\__\\         /\\  \\         /\\  \\    \n"
+     + "    /:/ _/_        /\\  \\      /::|  |       /::|  |       /::\\  \\       /::\\  \\   \n"
+     + "   /:/ /\\__\\       \\:\\  \\    /:|:|  |      /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\  \n"
+     + "  /:/ /:/ _/_      /::\\__\\  /:/|:|  |__   /:/|:|  |__   /::\\~\\:\\  \\   /::\\~\\:\\  \\ \n"
+     + " /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\ /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\\n"
+     + " \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  / \\/__|:|/:/  / \\:\\~\\:\\ \\/__/ \\/_|::\\/:/  /\n"
+     + "  \\::/_/:/  /  \\::/__/         |:/:/  /      |:/:/  /   \\:\\ \\:\\__\\      |:|::/  / \n"
+     + "   \\:\\/:/  /    \\:\\__\\         |::/  /       |::/  /     \\:\\ \\/__/      |:|\\/__/  \n"
+     + "    \\::/  /      \\/__/         /:/  /        /:/  /       \\:\\__\\        |:|  |    \n"
+     + "     \\/__/                     \\/__/         \\/__/         \\/__/         \\|__|    \n");
 
   }
   if (i == 3) {
-   System.out.printf("\t\t\t\t\t\t\t\t\t\t.------..------..------..------..------..------.\n"
-     + "\t\t\t\t\t\t\t\t\t\t|W.--. ||I.--. ||N.--. ||N.--. ||E.--. ||R.--. |\n"
-     + "\t\t\t\t\t\t\t\t\t\t| :/\\: || (\\/) || :(): || :(): || (\\/) || :(): \n"
-     + "\t\t\t\t\t\t\t\t\t\t| :\\/: || :\\/: || ()() || ()() || :\\/: || ()() |\n"
-     + "\t\t\t\t\t\t\t\t\t\t| '--'W|| '--'I|| '--'N|| '--'N|| '--'E|| '--'R|\n"
-     + "\t\t\t\t\t\t\t\t\t\t`------'`------'`------'`------'`------'`------'\n");
+   System.out.printf(".------..------..------..------..------..------.\n"
+     + "|W.--. ||I.--. ||N.--. ||N.--. ||E.--. ||R.--. |\n"
+     + "| :/\\: || (\\/) || :(): || :(): || (\\/) || :(): \n"
+     + "| :\\/: || :\\/: || ()() || ()() || :\\/: || ()() |\n"
+     + "| '--'W|| '--'I|| '--'N|| '--'N|| '--'E|| '--'R|\n"
+     + "`------'`------'`------'`------'`------'`------'\n");
 
   }
   /////////////////////////////////////////  
@@ -1032,12 +1032,12 @@ public class Main {
   int move;
   boolean run = true;
   do{
-   System.out.printf("\t\t\t\t\t\t\t\t1. Hit\n");
-   System.out.printf("\t\t\t\t\t\t\t\t2. Stand\n");
+   System.out.printf("1. Hit\n");
+   System.out.printf("2. Stand\n");
 
    move = IR4.getInteger("3. Quit");
    if(move != 1 && move != 2 && move != 3) {
-    System.out.printf("\t\t\t\t\t\t\t\tInvald input\n");
+    System.out.printf("Invald input\n");
     run = true;
    }
 
@@ -1056,7 +1056,7 @@ public class Main {
     return temp;
    }
    else {
-    System.out.printf("\t\t\t\t\t\t\t\tInvald input\n");
+    System.out.printf("Invald input\n");
     temp = IR4.getDouble("Places Bets");
     run = true;
    }
@@ -1070,10 +1070,10 @@ public class Main {
 
 
  static void displaySetting() throws IOException, InterruptedException {
-    System.out.printf("\t\t\t\t\t\t\t\t%35s\n", "Settings" );
-    System.out.println("\t\t\t\t\t\t\t\t1. Change currency \n"+         
-      "\t\t\t\t\t\t\t\t2. Change Alias \n" +
-      "\t\t\t\t\t\t\t\t3. Back");
+    System.out.printf("%35s\n", "Settings" );
+    System.out.println("1. Change currency \n"+         
+      "2. Change Alias \n" +
+      "3. Back");
   
     switch(getChoice(1,3)) {
   
@@ -1239,12 +1239,12 @@ public class Main {
 
  static void displayCredits() throws InterruptedException, IOException {
 
-  System.out.println("\t\t\t\t\t\t\t\t***********************************");
-  System.out.println("\t\t\t\t\t\t\t\tBlackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
-  System.out.println("\t\t\t\t\t\t\t\tAuthors:");
-  System.out.println("\t\t\t\t\t\t\t\tLuis Gascon"); 
-  System.out.println("\t\t\t\t\t\t\t\tAustin Connick");
-  System.out.println("\t\t\t\t\t\t\t\t***********************************");
+  System.out.println("***********************************");
+  System.out.println("Blackjack Extreme " + "v" +ProjectFileIO_v2.getVersionNumber());
+  System.out.println("Authors:");
+  System.out.println("Luis Gascon"); 
+  System.out.println("Austin Connick");
+  System.out.println("***********************************");
   Thread.sleep(6000); 
   displayMenu();
 
@@ -1253,7 +1253,7 @@ public class Main {
  static void displayThanks() {
   //Displays a thank you message when user quits 
   //Create an ASCII art 
-  System.out.println("\t\t\t\t\t\t\t\tThank you for playing :)");
+  System.out.println("Thank you for playing :)");
  }
 
 
@@ -1282,7 +1282,7 @@ public class Main {
  static String pressQ() {
   String q = input.next();
   while(!q.equals("q")) {
-   System.out.println("\t\t\t\t\t\t\t\tEnter q to quit");
+   System.out.println("Enter q to quit");
    q = input.next();
   }
   return q;

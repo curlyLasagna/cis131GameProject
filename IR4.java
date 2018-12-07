@@ -66,7 +66,7 @@ public class IR4 {
    public static int getIntegerBetweenLowAndHigh(String msg, int low, int high, String errorMsg) {
       int number = getInteger(msg);
       while (number < low || number > high) {
-         System.err.println("\t\t\t\t\t\t\t"+errorMsg);
+         System.err.println(errorMsg);
          number = getInteger(msg);
       }
       return number;
@@ -81,8 +81,8 @@ public class IR4 {
    public static int getIntegerGT(String msg, int low, String errorMsg) {
       int number = getInteger(msg);
       while (number <= low) {
-         System.err.println("\t\t\t\t\t\t\t"+errorMsg);
-         number = getInteger("\t\t\t\t\t\t\t"+msg);
+         System.err.println(errorMsg);
+         number = getInteger(msg);
       }
       return number;
    }
@@ -94,10 +94,10 @@ public class IR4 {
      * @return Returns an int from the keyboard. 
      */ 
    public static int getIntegerGTE(String msg, int low) {
-      int number = getInteger("\t\t\t\t\t\t\t"+msg);
+      int number = getInteger(msg);
       while (number < low) {
          System.err.println("Invalid input. Number is out of range.");
-         number = getInteger("\t\t\t\t\t\t\t"+msg);
+         number = getInteger(msg);
       }
       return number;
    }
@@ -114,22 +114,22 @@ public class IR4 {
       System.out.println(msg);
       
       try {
-        System.out.print("\t\t\t\t\t\t\t");
+        System.out.print("");
         answer = keyboard.nextLine(); 
       }
       catch (Exception e) {
-         System.err.println("\t\t\t\t\t\t\tError reading input from user. Ending program.");
+         System.err.println("Error reading input from user. Ending program.");
          System.exit(-1);
       } 
       
       while (answer.replace(" ", "").equals("")) {
-         System.err.println("\t\t\t\t\t\t\tError: Missing input.");
+         System.err.println("Error: Missing input.");
          try {
             System.out.println(msg);
             answer = keyboard.nextLine(); 
          }
          catch (Exception e) {
-            System.err.println("\t\t\t\t\t\t\tError reading input from user. Ending program.");
+            System.err.println("Error reading input from user. Ending program.");
             System.exit(-1);
          } 
       }
@@ -142,11 +142,11 @@ public class IR4 {
      * @return Returns an int from the keyboard. 
      */  
    public static int getInteger(String msg) {
-      System.out.println("\t\t\t\t\t\t\t\t"+msg);
-      System.out.print("\t\t\t\t\t\t\t\t");
+      System.out.println(msg);
+      System.out.print("");
       while (!keyboard.hasNextInt()) {
          keyboard.nextLine();
-         System.err.println("\t\t\t\t\t\t\tInvalid integer. Try again.");
+         System.err.println("Invalid integer. Try again.");
       }
       int number = keyboard.nextInt();
       keyboard.nextLine(); //flushes the buffer
@@ -159,11 +159,11 @@ public class IR4 {
      * @return Returns a double from the keyboard. 
      */ 
    public static double getDouble(String msg) {
-      System.out.println("\t\t\t\t\t\t\t\t"+msg);
-      System.out.print("\t\t\t\t\t\t\t\t");
+      System.out.println(msg);
+      System.out.print("");
       while (!keyboard.hasNextDouble()) {
          keyboard.nextLine();
-         System.err.println("\t\t\t\t\t\t\tInvalid number. Try again.");
+         System.err.println("Invalid number. Try again.");
       }
       double number = keyboard.nextDouble();
       keyboard.nextLine(); //flushes the buffer
@@ -176,7 +176,7 @@ public class IR4 {
      * @return Returns a boolean value. True = yes; False = no. 
      */ 
    public static boolean getYorN(String msg) {
-      String answer = getString("\t\t\t\t\t\t\t\t"+msg);
+      String answer = getString(msg);
       
       while (answer.compareToIgnoreCase("y")   != 0 
           && answer.compareToIgnoreCase("yes") != 0 
