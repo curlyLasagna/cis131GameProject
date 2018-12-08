@@ -324,9 +324,9 @@ public class Main {
 
   int bet = 0;
   boolean run = true;
-  int move;
+  int move = 0;
   int numberDraws = 2;
-  int drawFactor = 8; 
+  int drawFactor = 9; 
   int compHit = 16;
   int CARDGAMENUM = 21;
   boolean runTwo = true;
@@ -354,7 +354,7 @@ public class Main {
 
    playingDeck.createDeck();
    playingDeck.shuffle();
-   CARDGAMENUM = IR4.getRandomNumber(21, 61);
+   CARDGAMENUM = IR4.getRandomNumber(20, 45);
    compHit = CARDGAMENUM - 6 ;
    System.out.printf("Money = "+creditsEarned+"\n");
    Print.printWiningscore(CARDGAMENUM);
@@ -422,8 +422,9 @@ public class Main {
      bJCount++;
      ProjectFileIO_v2.getPlayer(username, passwd).setbJCount(bJCount);
     }
-
+if(run != false) {
     move = getMove();
+}
     ////////////////////Quit Add Save/////////////////////////////////////////////////////////
     if(move == 3) {
      run = false;
@@ -500,7 +501,7 @@ public class Main {
      //      
      //       Print.dividers();
      /////////////////////////////////////////////////Player wins//////////////////////////////////////////////////////////////////////////////////
-     if(CompHand.cardValue() <= PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
+     if(CompHand.cardValue() < PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
       Print.dividers();
       System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
 
@@ -518,16 +519,9 @@ public class Main {
       updateplayer();
 
      }
-     /////////////////////////////////////draw///////////////////////////////////////////////////////////////
-     if(CompHand.cardValue() == PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM && PlayerHand.cardValue() <= CARDGAMENUM) {
-    	 screenprint(CARDGAMENUM);
-    	 Print.Draw();
-    	 PlayerHand.reset(playingDeck);
-         CompHand.reset(playingDeck);
-
-     }
+   
      ////////////////////////////////////////////////////////AI wins////////////////////////////////////////////
-     else if(CompHand.cardValue() >= PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
+     else if(CompHand.cardValue() > PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
       Print.dividers();
       System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
 
@@ -559,6 +553,16 @@ public class Main {
       run = false;
       updateplayer();
 
+
+     }
+     /////////////////////////////////////draw///////////////////////////////////////////////////////////////
+     if(CompHand.cardValue() == PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM && PlayerHand.cardValue() <= CARDGAMENUM && run != false) {
+    	 screenprint(CARDGAMENUM);
+    	 Print.Draw();
+    	 Print.dividers();
+    	 PlayerHand.reset(playingDeck);
+         CompHand.reset(playingDeck);
+         run = false;
 
      }
     }   
