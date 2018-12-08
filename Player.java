@@ -1,4 +1,4 @@
-package blackjackbuildone;
+
 public class Player {
     
     private String name;
@@ -8,9 +8,9 @@ public class Player {
     private int extremeRounds;
     private int fnRounds;
     private int nBJRounds;
-	private int ffRounds;
+    private int ffRounds;
     private int bJCount;
-	private int creditsEarned;
+    private int creditsEarned;
     private int creditsLost;
     private int highestCredits;
     private int bankRuptcies;
@@ -20,6 +20,8 @@ public class Player {
         //no-arg constructor        
     }
    
+
+
     public Player(String name, String password, int wins, int loses, int extremeRounds, int fnRounds,
 			int nBJRounds, int ffRounds, int bJCount, int creditsEarned, int creditsLost, int highestCredits,
 			int bankRuptcies, String currency) {
@@ -151,4 +153,5 @@ public class Player {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+
 }

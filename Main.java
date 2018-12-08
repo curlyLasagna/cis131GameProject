@@ -1,6 +1,7 @@
+
 //Austin 
 //Luis
-package blackjackbuildone;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,6 +20,867 @@ import java.util.Scanner;
  */
 
 public class Main {
+
+
+
+ private static void mainGame() throws IOException {
+  double score = 1500;
+  int lost = 0;
+  double bet = 0;
+  boolean run = true;
+  int move;
+  int numberDraws = 2;
+  int drawFactor = 8; 
+  int compHit = 16;
+  int CARDGAMENUM = 21;
+  boolean runTwo = true;
+  while(runTwo) {
+   Deck playingDeck = new Deck();
+   Deck PlayerHand = new Deck();
+   Deck CompHand = new Deck();
+   playingDeck.createDeck();
+   playingDeck.shuffle();
+   CARDGAMENUM = IR4.getRandomNumber(21, 61);
+   compHit = CARDGAMENUM - 6 ;
+   System.out.printf("Money = "+score+"\n");
+   printWiningscore(CARDGAMENUM);
+   if(score <= 0) {
+    runTwo = false;
+    run = false;
+    bankRuptcies++;
+    ProjectFileIO_v2.writeFile();
+    ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
+   }
+   if(score > 0) {
+    bet = placeBets(score);
+   }
+   numberDraws = CARDGAMENUM /drawFactor;
+   for(int i = 1; i<= numberDraws; i++) {
+    PlayerHand.draw(playingDeck);
+   }
+   for(int i = 2; i< numberDraws; i++) {
+    CompHand.draw(playingDeck);
+   }
+   CompHand.draw(playingDeck);
+   if(score <= 0) {
+    runTwo = false;
+    run = false;
+    bankRuptcies++;
+    ProjectFileIO_v2.writeFile();
+    ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
+   }
+
+   run = true;
+   while(run) {
+    dividers();
+    System.out.printf("Win- "+ wins+"  Lost- "+lost+"\n");
+    dividers();
+    printdealerHand();
+    dividers();
+    System.out.println(CompHand.toString());
+    dividers();
+
+    printHand();
+    System.out.printf(PlayerHand.toString());
+    dividers();
+    printSum();
+    dividers();
+    System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+    dividers();
+    if(PlayerHand.cardValue() > CARDGAMENUM) {
+     dividers();
+     bustprint();
+     dividers();
+     lost = lost + 1;
+     score = score - bet;
+     creditsLost = (int) (creditsLost + bet);
+     run = false;
+
+    }
+    ////////////////////////////////21/insta win////////////////////////////////////////////////
+    if(PlayerHand.cardValue() == CARDGAMENUM) {
+     System.out.println(CARDGAMENUM);
+     dividers();
+     printdealerHand();
+     dividers();
+     System.out.println(CompHand.toString());
+     dividers();
+
+     printHand();
+     System.out.printf(PlayerHand.toString());
+     dividers();
+     printSum();
+     dividers();
+     System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+     dividers();
+     WinningPrints();
+     run = false;
+    }
+
+    move = getMove();
+    ////////////////////Quit Add Save Stuff Here?/////////////////////////////////////////////////////////
+    if(move == 3) {
+     run = false;
+     runTwo = false;
+     ProjectFileIO_v2.writeFile();
+     ProjectFileIO_v2.getPlayer(username, passwd).setWins(wins);
+     ProjectFileIO_v2.getPlayer(username, passwd).setCreditsEarned(creditsEarned);
+     ProjectFileIO_v2.getPlayer(username, passwd).setCreditsLost(creditsLost);
+
+
+    }
+
+    ////////////////////////////Hit/////////////////////////////////////////////////////////////////
+    if(move == 1) {
+     PlayerHand.draw(playingDeck);
+     if(PlayerHand.cardValue() > CARDGAMENUM) {
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      bustprint();
+      dividers();
+      lost = lost + 1;
+      score = score - bet;
+      creditsLost = (int) (creditsLost + bet);
+      //System.out.println(score);
+      run = false;
+     }
+     //////////////////////////////////////21////////////////////////////////////
+     if(PlayerHand.cardValue() == CARDGAMENUM) {
+      System.out.println(CARDGAMENUM);
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      WinningPrints();
+      score = score + bet;
+      run = false;
+     }
+     ////////////////////////////////comp Win///////////////////////////////
+     if(CompHand.cardValue() > CARDGAMENUM) {
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      dealerBust();
+      dividers();
+      WinningPrints();
+      dividers();
+      wins =  wins + 1;
+      score = score + bet;
+      creditsEarned = (int) (creditsEarned + bet);
+      //System.out.println(score);
+      run = false;
+     }
+
+
+    }
+    /////////////////////////////////////////////Stand//////////////////////////////////////////////
+    if(move == 2) {
+     run = false;
+     /////////////////////////////////////////////AI///////////////////////////////////////
+     while(CompHand.cardValue() <= compHit) {
+      CompHand.draw(playingDeck);
+     }
+     /////////////////////////////////////////Rest menu//////////////////
+     dividers();
+     printdealerHand();
+     dividers();
+     System.out.println(CompHand.toString());
+     dividers();
+
+     printHand();
+     System.out.printf(PlayerHand.toString());
+     dividers();
+     printSum();
+     dividers();
+     System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+     dividers();
+     WinningPrints();
+     dividers();
+     /////////////////////////////////////////////////Player wins//////////////////////////////////////////////////////////////////////////////////
+     if(CompHand.cardValue() <= PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
+
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      WinningPrints();
+      dividers();
+      wins =  wins + 1;
+      score =score  + bet;
+      creditsEarned = (int) (creditsEarned + bet);
+      System.out.println(score);
+
+     }
+     ////////////////////////////////////////////////////////AI wins////////////////////////////////////////////
+     if(CompHand.cardValue() >= PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      printDealerwin();
+      dividers();
+      lost = lost + 1;
+      score =score  - bet;
+      System.out.println(score);
+     }
+     ////////////////////////////AI Bust///////////////////////////////////
+     if(CompHand.cardValue() >  CARDGAMENUM) {
+      dividers();
+      printdealerHand();
+      dividers();
+      System.out.println(CompHand.toString());
+      dividers();
+
+      printHand();
+      System.out.printf(PlayerHand.toString());
+      dividers();
+      printSum();
+      dividers();
+      System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+      dividers();
+      dealerBust();
+      dividers();
+      WinningPrints();
+      dividers();
+      wins =  wins +1;
+      score = score + bet;
+      run = false;
+
+
+     }
+    }   
+   }
+
+  }
+  try {
+   displayMenu();
+  } catch (IOException e) {
+   // TODO Auto-generated catch block
+   e.printStackTrace();
+  } catch (InterruptedException e) {
+   // TODO Auto-generated catch block
+   e.printStackTrace();
+  }
+
+ }
+
+ private static void printHand() {
+   System.err.printf(" _   _                 _ \n"
+    + "| | | |               | |\n"
+    + "| |_| | __ _ _ __   __| |\n"
+    + "|  _  |/ _` | '_ \\ / _` |\n"
+    + "| | | | (_| | | | | (_| |\n"
+    + "\\_| |_/\\__,_|_| |_|\\__,_|\n");
+
+
+ }
+
+ private static void bustprint() {
+  System.err.printf("______           _   _ _ _ _ \n"
+    + "| ___ \\         | | | | | | |\n"
+    + "| |_/ /_   _ ___| |_| | | | |\n"
+    + "| ___ \\ | | / __| __| | | | |\n"
+    + "| |_/ / |_| \\__ \\ |_|_|_|_|_|\n"
+    + "\\____/ \\__,_|___/\\__(_|_|_|_)\n");
+
+ }
+
+ private static void dividers() {
+  System.out.printf("***********************************************************************************\n");
+
+ }
+
+ private static void printSum() {
+   System.err.printf(" _____                 \n"
+    + "/  ___|                \n"
+    +"\\ `--. _   _ _ __ ___  \n"
+    + " `--. \\ | | | '_ ` _ \\ \n"
+    + "/\\__/ / |_| | | | | | |\n"
+    + "\\____/ \\__,_|_| |_| |_|\n");
+
+ }
+
+ private static void printdealerHand() {
+  System.err.printf("______           _             _   _                 _ \n"
+    + "|  _  \\         | |           | | | |               | |\n"
+    + "| | | |___  __ _| | ___ _ __  | |_| | __ _ _ __   __| |\n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| |  _  |/ _` | '_ \\ / _` |\n"
+    + "| |/ /  __/ (_| | |  __/ |    | | | | (_| | | | | (_| |\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|    \\_| |_/\\__,_|_| |_|\\__,_|\n");
+
+ }
+
+ private static void printWiningscore(int cARDGAMENUM) {
+  System.out.printf(" _    _ _             _               _   _                 _ \n"
+    + "| |  | (_)           (_)             | | | |               | |\n"
+    + "| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
+    + "| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
+    + "\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
+    + " \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
+    + "                               __/ |                          \n"
+    + "                              |___/                           \n");
+  dividers();
+  NumberPrinter(cARDGAMENUM);
+  dividers();
+ }
+
+ private static void NumberPrinter(int cARDGAMENUM) {
+  /////////////////////////////////////////////////////////////////////////////
+  int countStart = 1;
+  int lines = 6;
+  for(int i = 0; i < lines; i++) {
+   System.out.printf("");
+   if(String.valueOf(cARDGAMENUM).startsWith("1")) {
+    if(countStart == 1) {
+     System.out.printf("  __ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" /_ |");
+    }
+    if(countStart == 3) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 5) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  |_|");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("2")) {
+    if(countStart == 1) {
+     System.out.printf("  ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |__ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf("    ) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("   / / ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  / /_ ");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____|");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("3")) {
+    if(countStart == 1) {
+     System.out.printf("  ____  ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |___ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf("   __) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  |__ < ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  ___) |");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("4")) {
+    if(countStart == 1) {
+     System.out.printf("  _  _   ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" | || |  ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | || |_ ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" |__   _|");
+    }
+    if(countStart == 5) {
+     System.out.printf("    | |  ");
+    }
+    if(countStart == 6) {
+     System.out.printf("    |_|  ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("5")) {
+    if(countStart == 1) {
+     System.out.printf("  _____ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" | ____|");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | |__  ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" |___ \\ ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  ___) |");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("6")) {
+    if(countStart == 1) {
+     System.out.printf("    __  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("   / /  ");
+    }
+    if(countStart == 3) {
+     System.out.printf("  / /_  ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" | '_ \\ ");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("7")) {
+    if(countStart == 1) {
+     System.out.printf("  ______ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |____  |");
+    }
+    if(countStart == 3) {
+     System.out.printf("     / / ");
+    }
+    if(countStart == 4) {
+     System.out.printf("    / /  ");
+    }
+    if(countStart == 5) {
+     System.out.printf("   / /   ");
+    }
+    if(countStart == 6) {
+     System.out.printf("  /_/    ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("8")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  > _ < ");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("9")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  \\__, |");
+    }
+    if(countStart == 5) {
+     System.out.printf("    / / ");
+    }
+    if(countStart == 6) {
+     System.out.printf("   /_/  ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).startsWith("0")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | | | |");
+    }
+    if(countStart == 4) {
+     System.out.printf(" | | | |");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | |_| |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   /////////////////////////////////////////////////////////////////////////
+   if(String.valueOf(cARDGAMENUM).endsWith("1")) {
+    if(countStart == 1) {
+     System.out.printf("  __ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" /_ |");
+    }
+    if(countStart == 3) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 5) {
+     System.out.printf("  | |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  |_|");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("2")) {
+    if(countStart == 1) {
+     System.out.printf("  ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |__ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf("    ) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("   / / ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  / /_ ");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____|");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("3")) {
+    if(countStart == 1) {
+     System.out.printf("  ____  ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |___ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf("   __) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  |__ < ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  ___) |");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("4")) {
+    if(countStart == 1) {
+     System.out.printf("  _  _   ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" | || |  ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | || |_ ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" |__   _|");
+    }
+    if(countStart == 5) {
+     System.out.printf("    | |  ");
+    }
+    if(countStart == 6) {
+     System.out.printf("    |_|  ");
+    }
+
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("5")) {
+    if(countStart == 1) {
+     System.out.printf("  _____ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" | ____|");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | |__  ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" |___ \\ ");
+    }
+    if(countStart == 5) {
+     System.out.printf("  ___) |");
+    }
+    if(countStart == 6) {
+     System.out.printf(" |____/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("6")) {
+    if(countStart == 1) {
+     System.out.printf("    __  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("   / /  ");
+    }
+    if(countStart == 3) {
+     System.out.printf("  / /_  ");
+    }
+    if(countStart == 4) {
+     System.out.printf(" | '_ \\ ");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("7")) {
+    if(countStart == 1) {
+     System.out.printf("  ______ ");
+    }
+    if(countStart == 2) {
+     System.out.printf(" |____  |");
+    }
+    if(countStart == 3) {
+     System.out.printf("     / / ");
+    }
+    if(countStart == 4) {
+     System.out.printf("    / /  ");
+    }
+    if(countStart == 5) {
+     System.out.printf("   / /   ");
+    }
+    if(countStart == 6) {
+     System.out.printf("  /_/    ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("8")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  > _ < ");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("9")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | (_) |");
+    }
+    if(countStart == 4) {
+     System.out.printf("  \\__, |");
+    }
+    if(countStart == 5) {
+     System.out.printf("    / / ");
+    }
+    if(countStart == 6) {
+     System.out.printf("   /_/  ");
+    }
+   }
+   if(String.valueOf(cARDGAMENUM).endsWith("0")) {
+    if(countStart == 1) {
+     System.out.printf("   ___  ");
+    }
+    if(countStart == 2) {
+     System.out.printf("  / _ \\ ");
+    }
+    if(countStart == 3) {
+     System.out.printf(" | | | |");
+    }
+    if(countStart == 4) {
+     System.out.printf(" | | | |");
+    }
+    if(countStart == 5) {
+     System.out.printf(" | |_| |");
+    }
+    if(countStart == 6) {
+     System.out.printf("  \\___/ ");
+    }
+   }
+   System.out.println("");
+   countStart++; 
+  }
+ }
+
+
+ private static void dealerBust() {
+  System.out.printf("______           _            ______           _   _ _ _ _ _ _ \n"
+    + "|  _  \\         | |           | ___ \\         | | | | | | | | |\n"
+    + "| | | |___  __ _| | ___ _ __  | |_/ /_   _ ___| |_| | | | | | |\n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| | ___ \\ | | / __| __| | | | | | |\n"
+    + "| |/ /  __/ (_| | |  __/ |    | |_/ / |_| \\__ \\ |_|_|_|_|_|_|_|\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|    \\____/ \\__,_|___/\\__(_|_|_|_|_|_)\n"
+    + "");
+
+ }
+
+ private static void printDealerwin() {
+  System.out.printf("______           _             _    _             \n"
+    + "|  _  \\         | |           | |  | |            \n"
+    + "| | | |___  __ _| | ___ _ __  | |  | | ___  _ __  \n"
+    + "| | | / _ \\/ _` | |/ _ \\ '__| | |/\\| |/ _ \\| '_ \\ \n"
+    + "| |/ /  __/ (_| | |  __/ |    \\  /\\  / (_) | | | |\n"
+    + "|___/ \\___|\\__,_|_|\\___|_|     \\/  \\/ \\___/|_| |_|\n");
+
+ }
+
+ private static void WinningPrints() {
+  int i = 1;
+  i = IR4.getRandomNumber(1, 3);
+  if (i == 1) {
+   System.out.printf("         _________ _        _        _______  _______ \n|\\     /|\\__   __/( (    /|( (    /|(  ____ \\(  ____ )\n"
+     + "| )   ( |   ) (   |  \\  ( ||  \\  ( || (    \\/| (    )|\n| | _ | |   | |   |   \\ | ||   \\ | || (__    | (____)|\n"
+     + "| |( )| |   | |   | (\\ \\) || (\\ \\) ||  __)   |     __)\n"
+     + "| || || |   | |   | | \\   || | \\   || (      | (\\ (   \n"
+     + "| () () |___) (___| )  \\  || )  \\  || (____/\\| ) \\ \\__\n"
+     + "(_______)\\_______/|/    )_)|/    )_)(_______/|/   \\__/\n");
+  }
+  if (i == 2) {
+   System.out.printf("      ___                       ___           ___           ___           ___     \n"
+     + "     /\\__\\          ___        /\\__\\         /\\__\\         /\\  \\         /\\  \\    \n"
+     + "    /:/ _/_        /\\  \\      /::|  |       /::|  |       /::\\  \\       /::\\  \\   \n"
+     + "   /:/ /\\__\\       \\:\\  \\    /:|:|  |      /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\  \n"
+     + "  /:/ /:/ _/_      /::\\__\\  /:/|:|  |__   /:/|:|  |__   /::\\~\\:\\  \\   /::\\~\\:\\  \\ \n"
+     + " /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\ /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\\n"
+     + " \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  / \\/__|:|/:/  / \\:\\~\\:\\ \\/__/ \\/_|::\\/:/  /\n"
+     + "  \\::/_/:/  /  \\::/__/         |:/:/  /      |:/:/  /   \\:\\ \\:\\__\\      |:|::/  / \n"
+     + "   \\:\\/:/  /    \\:\\__\\         |::/  /       |::/  /     \\:\\ \\/__/      |:|\\/__/  \n"
+     + "    \\::/  /      \\/__/         /:/  /        /:/  /       \\:\\__\\        |:|  |    \n"
+     + "     \\/__/                     \\/__/         \\/__/         \\/__/         \\|__|    \n");
+
+  }
+  if (i == 3) {
+   System.out.printf(".------..------..------..------..------..------.\n"
+     + "|W.--. ||I.--. ||N.--. ||N.--. ||E.--. ||R.--. |\n"
+     + "| :/\\: || (\\/) || :(): || :(): || (\\/) || :(): \n"
+     + "| :\\/: || :\\/: || ()() || ()() || :\\/: || ()() |\n"
+     + "| '--'W|| '--'I|| '--'N|| '--'N|| '--'E|| '--'R|\n"
+     + "`------'`------'`------'`------'`------'`------'\n");
+
+  }
+  /////////////////////////////////////////  
+
+ }
+
+ private static int getMove() {
+  int move;
+  boolean run = true;
+  do{
+   System.out.printf("1. Hit\n");
+   System.out.printf("2. Stand\n");
+
+   move = IR4.getInteger("3. Quit");
+   if(move != 1 && move != 2 && move != 3) {
+    System.out.printf("Invald input\n");
+    run = true;
+   }
+
+  }while(!run);
+  return move;
+ }
+
+ private static double placeBets(double score) {
+
+
+  double temp = IR4.getDouble("Places Bets");
+  boolean run = true;
+  while(run) {
+   if(temp <= score && temp > 0) {
+    run = false;
+    return temp;
+   }
+   else {
+    System.out.printf("Invald input\n");
+    temp = IR4.getDouble("Places Bets");
+    run = true;
+   }
+  }
+  return temp;
+ }
+ 
 
 	private static Scanner input = new Scanner(System.in);
 	private static String username;
@@ -199,317 +1061,7 @@ public class Main {
 		}
 	}
 	
-	private static void mainGame() {
-		double score = 1500;
-		int lost = 0;
-		double bet;
-		boolean run = true;
-		int move;
-		int numberDraws = 2;
-		int drawFactor = 8; 
-		int compHit = 16;
-		int CARDGAMENUM = 21;
-		while(score >= 0) {
-			Deck playingDeck = new Deck();
-			Deck PlayerHand = new Deck();
-			Deck CompHand = new Deck();
-			playingDeck.createDeck();
-			playingDeck.shuffle();
-			//Winning number 
-			CARDGAMENUM = IR4.getRandomNumber(21, 61);
-			//Tells the AI how many times to hit 
-			compHit = CARDGAMENUM - 4 ;
-			System.out.println("Money = "+score);
-			System.out.println("Winnig Number: "+ CARDGAMENUM);
-			printWiningscore(CARDGAMENUM);
-
-			bet = placeBets(score);
-			numberDraws = CARDGAMENUM /drawFactor;
-			//Draw for player
-			for(int i = 1; i<= numberDraws; i++) {
-				PlayerHand.draw(playingDeck);
-			}
-			
-			//Draw for House 
-			for(int i = 2; i< numberDraws; i++) {
-				CompHand.draw(playingDeck);
-			}
-			
-			CompHand.draw(playingDeck);
-			
-			run = true;
-			while(run) {
-				System.out.println("*******************************");
-				System.out.println("Win- "+ wins+"  Lost- "+lost);
-				System.out.println("*******************************");
-				System.out.println("Hand- "+username);
-				System.out.println(PlayerHand.toString());
-				System.out.println("Sum ");
-				System.out.println(PlayerHand.cardValue());
-				System.out.println("*******************************");
-				System.out.println("Dealer hand ");
-				System.out.println(CompHand.toString());
-				System.out.println("Sum ");
-				System.out.println(CompHand.cardValue());
-				System.out.println("*******************************");
-				while(CompHand.cardValue() <= compHit) {
-					CompHand.draw(playingDeck);
-				}
-				move = getMove();
-
-
-				if(move == 1) {
-					PlayerHand.draw(playingDeck);
-					if(PlayerHand.cardValue() > CARDGAMENUM) {
-						System.out.println("*******************************");
-						System.out.println("Hand- "+username);
-						System.out.println(PlayerHand.toString());
-						System.out.println("Sum ");
-						System.out.println(PlayerHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
-						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
-						System.out.println(CompHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Bust!!!!!!");
-						lost = lost - 1;
-						score = score - bet;
-						//System.out.println(score);
-						run = false;
-					}
-					if(PlayerHand.cardValue() == CARDGAMENUM) {
-						System.out.println(CARDGAMENUM);
-						WinningPrints();
-						run = false;
-					}
-					if(CompHand.cardValue() > CARDGAMENUM) {
-						System.out.println("*******************************");
-						System.out.println("Hand- "+username);
-						System.out.println(PlayerHand.toString());
-						System.out.println("Sum ");
-						System.out.println(PlayerHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
-						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
-						System.out.println(CompHand.cardValue());
-						System.out.println("*******************************");
-						dealerBust();
-						WinningPrints();
-						 wins =  wins + 1;
-						score = score + bet;
-						//System.out.println(score);
-						run = false;
-					}
-
-
-				}
-				if(move == 2) {
-					run = false;
-
-					if(CompHand.cardValue() <= PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
-						System.out.println("*******************************");
-						System.out.println("Hand- "+username);
-						System.out.println(PlayerHand.toString());
-						System.out.println("Sum ");
-						System.out.println(PlayerHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
-						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
-						System.out.println(CompHand.cardValue());
-						System.out.println("*******************************");
-						WinningPrints();
-						 wins =  wins +1;
-						score =score  + bet;
-						System.out.println(score);
-
-					}
-					if(CompHand.cardValue() >= PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
-						System.out.println("*******************************");
-						System.out.println("Hand- "+username);
-						System.out.println(PlayerHand.toString());
-						System.out.println("Sum ");
-						System.out.println(PlayerHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
-						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
-						System.out.println(CompHand.cardValue());
-						System.out.println("*******************************");
-						printDealerwin();
-						lost = lost - 1;
-						score =score  - bet;
-						System.out.println(score);
-					}
-					if(CompHand.cardValue() >  CARDGAMENUM) {
-						System.out.println("*******************************");
-						System.out.println("Hand- "+username);
-						System.out.println(PlayerHand.toString());
-						System.out.println("Sum ");
-						System.out.println(PlayerHand.cardValue());
-						System.out.println("*******************************");
-						System.out.println("Dealer hand ");
-						System.out.println(CompHand.toString());
-						System.out.println("Sum ");
-						System.out.println(CompHand.cardValue());
-						System.out.println("*******************************");
-						dealerBust();
-						WinningPrints();
-						 wins =  wins +1;
-						run = false;
-
-					}
-				}			
-			}
-		}
-	}
-
-	private static void printWiningscore(int cARDGAMENUM) {
-		System.out.printf(" _    _ _             _               _   _                 _ \n"
-				+ "| |  | (_)           (_)             | | | |               | |\n"
-				+ "| |  | |_ _ __  _ __  _ _ __   __ _  | |_| | __ _ _ __   __| |\n"
-				+ "| |/\\| | | '_ \\| '_ \\| | '_ \\ / _` | |  _  |/ _` | '_ \\ / _` |\n"
-				+ "\\  /\\  / | | | | | | | | | | | (_| | | | | | (_| | | | | (_| |\n"
-				+ " \\/  \\/|_|_| |_|_| |_|_|_| |_|\\__, | \\_| |_/\\__,_|_| |_|\\__,_|\n"
-				+ "                               __/ |                          \n"
-				+ "                              |___/                           \n");
-	NumberPrinter(cARDGAMENUM);	
-	}
-
-	private static void NumberPrinter(int cARDGAMENUM) {
-		if(String.valueOf(cARDGAMENUM).contains("1")) {
-			System.out.printf("");
-			}
-			if(String.valueOf(cARDGAMENUM).contains("2")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("3")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("4")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("5")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("6")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("7")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("8")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("9")) {
-				System.out.printf("");
-				}
-			if(String.valueOf(cARDGAMENUM).contains("0")) {
-				System.out.printf("");
-				}
-			
-			
-		}
-		
-
-	private static void dealerBust() {
-		System.out.printf("______           _            ______           _   _ _ _ _ _ _ \n"
-				+ "|  _  \\         | |           | ___ \\         | | | | | | | | |\n"
-				+ "| | | |___  __ _| | ___ _ __  | |_/ /_   _ ___| |_| | | | | | |\n"
-				+ "| | | / _ \\/ _` | |/ _ \\ '__| | ___ \\ | | / __| __| | | | | | |\n"
-				+ "| |/ /  __/ (_| | |  __/ |    | |_/ / |_| \\__ \\ |_|_|_|_|_|_|_|\n"
-				+ "|___/ \\___|\\__,_|_|\\___|_|    \\____/ \\__,_|___/\\__(_|_|_|_|_|_)\n"
-				+ "");
-		
-	}
-
-	private static void printDealerwin() {
-		System.out.printf("______           _             _    _             \n"
-				+ "|  _  \\         | |           | |  | |            \n"
-				+ "| | | |___  __ _| | ___ _ __  | |  | | ___  _ __  \n"
-				+ "| | | / _ \\/ _` | |/ _ \\ '__| | |/\\| |/ _ \\| '_ \\ \n"
-				+ "| |/ /  __/ (_| | |  __/ |    \\  /\\  / (_) | | | |\n"
-				+ "|___/ \\___|\\__,_|_|\\___|_|     \\/  \\/ \\___/|_| |_|\n");
-		
-	}
-
-	private static void WinningPrints() {
-		int i = 1;
-		i = IR4.getRandomNumber(1, 3);
-		if (i == 1) {
-			System.out.printf("         _________ _        _        _______  _______ \n|\\     /|\\__   __/( (    /|( (    /|(  ____ \\(  ____ )\n"
-					+ "| )   ( |   ) (   |  \\  ( ||  \\  ( || (    \\/| (    )|\n| | _ | |   | |   |   \\ | ||   \\ | || (__    | (____)|\n"
-					+ "| |( )| |   | |   | (\\ \\) || (\\ \\) ||  __)   |     __)\n"
-					+ "| || || |   | |   | | \\   || | \\   || (      | (\\ (   \n"
-					+ "| () () |___) (___| )  \\  || )  \\  || (____/\\| ) \\ \\__\n"
-					+ "(_______)\\_______/|/    )_)|/    )_)(_______/|/   \\__/\n");
-		}
-		if (i == 2) {
-			System.out.printf("      ___                       ___           ___           ___           ___     \n"
-					+ "     /\\__\\          ___        /\\__\\         /\\__\\         /\\  \\         /\\  \\    \n"
-					+ "    /:/ _/_        /\\  \\      /::|  |       /::|  |       /::\\  \\       /::\\  \\   \n"
-					+ "   /:/ /\\__\\       \\:\\  \\    /:|:|  |      /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\  \n"
-					+ "  /:/ /:/ _/_      /::\\__\\  /:/|:|  |__   /:/|:|  |__   /::\\~\\:\\  \\   /::\\~\\:\\  \\ \n"
-					+ " /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\ /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\\n"
-					+ " \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  / \\/__|:|/:/  / \\:\\~\\:\\ \\/__/ \\/_|::\\/:/  /\n"
-					+ "  \\::/_/:/  /  \\::/__/         |:/:/  /      |:/:/  /   \\:\\ \\:\\__\\      |:|::/  / \n"
-					+ "   \\:\\/:/  /    \\:\\__\\         |::/  /       |::/  /     \\:\\ \\/__/      |:|\\/__/  \n"
-					+ "    \\::/  /      \\/__/         /:/  /        /:/  /       \\:\\__\\        |:|  |    \n"
-					+ "     \\/__/                     \\/__/         \\/__/         \\/__/         \\|__|    \n");
-			
-		}
-		if (i == 3) {
-			System.out.printf(".------..------..------..------..------..------.\n"
-					+ "|W.--. ||I.--. ||N.--. ||N.--. ||E.--. ||R.--. |\n"
-					+ "| :/\\: || (\\/) || :(): || :(): || (\\/) || :(): \n"
-					+ "| :\\/: || :\\/: || ()() || ()() || :\\/: || ()() |\n"
-					+ "| '--'W|| '--'I|| '--'N|| '--'N|| '--'E|| '--'R|\n"
-					+ "`------'`------'`------'`------'`------'`------'\n");
 	
-}
-/////////////////////////////////////////		
-		
-	}
-
-	private static int getMove() {
-		int move;
-		boolean run = true;
-		do {
-			System.out.println("1. Hit");
-
-			move = IR4.getInteger("2. Stand");
-			if(move != 1 && move != 2) {
-				System.out.println("Invald input");
-				run = true;
-			}
-
-		} while(!run);
-			return move;
-	}
-
-	private static double placeBets(double score) {
-
-
-		double temp = IR4.getDouble("Places Bets, or bet 0 to quit ");
-		boolean run = true;
-		while(run) {
-			if(temp <= score && temp > 0) {
-				run = false;
-				return temp;
-			}
-			else if(temp == 0) 
-				displayGame();
-			
-			else {
-				System.out.println("Invald input");
-				temp = IR4.getDouble("Places Bets");
-				run = true;
-			}
-		}
-		return temp;
-	}
 		
 
 	//Enter number for prompt to the user
@@ -700,3 +1252,4 @@ public class Main {
 		return q;
 	}
 }
+

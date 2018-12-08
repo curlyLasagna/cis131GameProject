@@ -1,4 +1,4 @@
-package blackjackbuildone;
+
 import java.io.*;
 import java.util.*;
 
@@ -117,20 +117,7 @@ public class ProjectFileIO_v2 {
         String bankRuptcies = getLine();
         String currency = getLine();
     
-        writeNewPlayer(name, password, Integer.parseInt(wins), Integer.parseInt(loses), Integer.parseInt(extremeRounds),
-        		Integer.parseInt(fNRounds), Integer.parseInt(nBJRounds), Integer.parseInt(fFRounds), Integer.parseInt(bJCount), 
-        		Integer.parseInt(creditsEarned), Integer.parseInt(creditsLost), Integer.parseInt(highestCredits), 
-        		Integer.parseInt(bankRuptcies), currency);
-    }
-    
-    //ADJUST AS NECESSARY!
-    private static void writeNewPlayer(String name, String password, int wins, int loses, int extremeRounds, int fnRounds, 
-    		int nBjROunds, int ffRounds, int bjCount, int creditsPlus, int creditsMinus, int peakCredit, int bankruptcies, 
-    		String currency) {
-        
-    	Player playerNew = new Player(name, password, wins, loses, extremeRounds, fnRounds, nBjROunds, ffRounds, bjCount, 
-        		creditsPlus, creditsMinus, peakCredit, bankruptcies, currency);
-    	
+
         playerArrayList.add(playerNew);
     }
     
@@ -239,7 +226,7 @@ public class ProjectFileIO_v2 {
     
     //Returns a Player object
     public static Player getPlayer(String name, String password){
-    	//Use this method for log in authentication? 
+     //Use this method for log in authentication? 
        for (int i = 0; i < playerArrayList.size(); i++){
            if (playerArrayList.get(i).getName().equals(name)
             && playerArrayList.get(i).getPassword().equals(password))
@@ -259,6 +246,7 @@ public class ProjectFileIO_v2 {
                playerArrayList.remove(i);
                playerArrayList.add(newPlayer); 
                return;
+
            }
        }
         System.out.println("Error in updatePlayer. Player not found.");

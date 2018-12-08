@@ -1,17 +1,17 @@
-package blackjackbuildone;
+
 
 public class hand{
-	public String Card;
+ public String Card;
 
-	public String getCard() {
-		return Card;
-	}
+ public String getCard() {
+  return Card;
+ }
 
-	public void setCard(String card) {
-		Card = card;
-	}
-	public void CardDisplayCard() {
-		String top1 = " .-------.";
+ public void setCard(String card) {
+  Card = card;
+ }
+ public void CardDisplayCard() {
+  String top1 = " .-------.";
         String top2 = " |       |";
         String top3 = " |_______|";
 
@@ -73,4 +73,4 @@ public class hand{
             }            
         }
     }
-	}
+ }
