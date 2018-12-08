@@ -152,38 +152,26 @@ public class Main {
 			displayThanks();
 			quit = true;
 			break;
-		default:
-			System.out.printf("Enter 1 - 6 and try again\n");
-			displayMenu();
-			quit = true;
-			break;
-			
 		}
 		return quit;
 	}
 	
-	static void displayGame() {
-	}
-		
-	
 	static void displayPlay() throws IOException, InterruptedException {
 		System.out.printf("%35s\n","Play");
 		System.out.println("1. Extreme Blackjack!\n" +
-						   "2. Extras\n" +
-						   "3. Back");
-		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 3, "Invalid input, try again")) {
+						   "2. Back");
+		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 2, "Invalid input, try again")) {
 		case 1:
 			mainGame();
 			break;
 		case 2:
-			displayExtreme();
-			break;
-		case 3:
 			displayMenu();
 			break;
-		default:
-			
 		}
+	}
+	
+	static void displayGame() {
+		
 	}
 	
 	static void displayExtreme() throws IOException, InterruptedException {
@@ -208,12 +196,9 @@ public class Main {
 		case 5:
 			displayPlay();
 			break;
-		default:
-			System.err.println("Enter 1 - 5 and try again");
-			displayExtreme();
-			break;
 		}
 	}
+	
 	private static void mainGame() {
 		double score = 1500;
 		int lost = 0;
@@ -580,18 +565,16 @@ public class Main {
 		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCurrency());
 		System.out.println("Enter new currency name or enter 'q' to go back");
 		String newCurrency = input.next();
-		if(newCurrency.equals("q"))
+		if(newCurrency.equalsIgnoreCase("q"))
 			displaySetting();
 		else
 		System.out.println();
-		//NullPointerException on getPlayer method if alias has been changed
 		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setCurrency(newCurrency);
 		System.out.println("Currency successfully changed");
 		ProjectFileIO_v2.writeFile();
 		displaySetting();
 	}
 	
-//	Under construction
 	static void changeAlias() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		String newAlias = "";
@@ -603,17 +586,20 @@ public class Main {
 				System.err.println("Alias already taken, choose another one");
 				System.out.println("Enter new name");
 				newAlias = input.next();
+
+				if(newAlias.equalsIgnoreCase("q")) {
+					displaySetting();
+					break;
+					}
+				else {
+					ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setName(newAlias);
+					currentPlayer.setName(newAlias);
+					System.out.println("Alias successfully changed");
+					ProjectFileIO_v2.writeFile();
+					displaySetting();
+					}
+				}
 			}
-		}
-		if(newAlias.equals("q"))
-			displaySetting();
-		else 
-			
-		ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setName(newAlias);
-		currentPlayer.setName(newAlias);
-		System.out.println("Alias successfully changed");
-		ProjectFileIO_v2.writeFile();
-		displaySetting();
 		}
 	
 	
@@ -654,7 +640,7 @@ public class Main {
 		sortHighScores(scores, users);
 		
 		for(int x=0;x<playerSize;x++) {
-			System.out.printf("%-25s%25d\n",users[x] , scores[x]);
+			System.out.printf("%-25s%27d\n",users[x] , scores[x]);
 		}
 		
 		 System.out.println("Press q to go back");
@@ -704,24 +690,6 @@ public class Main {
                           "								___/                 ");
 		System.out.println("Thank you for playing :)");
 	}
-	
-	
-//	static Integer getChoice(int low, int high) {
-//		String choice = input.next();
-//		Integer selection = 0;
-//		while(!choice.matches("\\d{1}")) {
-//			System.err.println("Invalid input, try again");
-//			choice = input.next();
-//			selection = Integer.valueOf(choice);
-//
-//		while(selection > high || selection < low) {
-//			System.err.println("Enter " + low + "-" + high + " and try again");
-//			choice = input.next();
-//			selection = Integer.valueOf(choice);
-//			}
-//		}
-//		return selection;
-//	}
 	
 	static String pressQ() {
 		String q = input.next();
