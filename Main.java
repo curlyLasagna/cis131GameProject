@@ -123,7 +123,7 @@ public class Main {
 		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 6, "Invalid input, try again")) {
 		case 1:
 			//Play menu
-			displayPlay();
+			mainGame();
 			quit = true;
 			break;
 		case 2:
@@ -153,74 +153,12 @@ public class Main {
 		return quit;
 	}
 
-	static void displayPlay() throws IOException, InterruptedException {
-		System.out.printf("%35s\n","Play");
-		System.out.println("1. Extreme Blackjack!\n" +
-				"2. Back");
-		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 2, "Invalid input, try again")) {
-		case 1:
-			mainGame();
-			break;
-		case 2:
-			displayMenu();
-			break;
-		}
-	}
+
 
 	static void displayGame() {
 
 	}
 
-	static void displayExtreme() throws IOException, InterruptedException {
-		System.out.printf("%25s\n", "Extras");
-		System.out.println("1. Fight Night\n" +
-				"2. Not BlackJack\n" +
-				"3. Fire\n" + 
-				"4. Rules\n" +
-				"5. Back");
-
-		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 5, "Invalid input, try again")) {
-
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			displayExtraRules();
-			break;
-		case 5:
-			displayPlay();
-			break;
-		}
-	}
-
-
-
-
-	//Enter number for prompt to the user
-	static void displayExtraRules() throws IOException, InterruptedException {
-		System.out.println("Fight Night\n" +
-				">Betting is set to your max credits\n" + 
-				">Minimum of 5 rounds\n" +
-				">After 5 rounds, you may quit\n" +
-				">0 credits will cause to lose\n");
-		System.out.println("Not BlackJack\n" +
-				">If either dealer or user hits a blackjack, they lose\n" + 
-				">If dealer wins, your bet is tripled and you\n" +
-				"lost that amount from your stack\n" +
-				"If you win, your bet is tripled and you're awarded the amount\n");
-		System.out.println("For Fire\n" +
-				">If you win 4 rounds in a row, you're awarded twice the\n" +
-				"amount of your total bets in those 4 rounds\n" +
-				"If you lose 4 rounds in a row, you're total credits are\n" +
-				"reduced twice the amount of your total bets in those 4 rounds\n");
-		System.out.println("press q to go back");
-
-		if(pressQ().equals("q"))
-			displayExtreme();  
-	}
 
 
 	static void displaySetting() throws IOException, InterruptedException {
