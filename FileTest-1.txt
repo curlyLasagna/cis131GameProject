@@ -1,0 +1,23 @@
+***********************************
+* Blackjack Extreme .69
+* Authors: Luis Gascon & Austin Connick
+***********************************
+>>> Global Settings >>>
+There are no global settings 
+>>> End of Global Settings >>>
+===== Player#0 =====
+luis
+peen
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+credits
+--- End of File ---

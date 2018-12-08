@@ -1,4 +1,4 @@
-
+package blackjackbuildone;
 //Austin 
 //Luis
 
@@ -21,7 +21,36 @@ import java.util.Scanner;
 
 public class Main {
 
-
+	private static Scanner input = new Scanner(System.in);
+	private static String username;
+	private static String passwd;
+	private static int wins;
+	private static int loses;
+	private static int extremeWins;
+	private static int fNRounds;
+	private static int nBJROunds;
+	private static int fFRounds;
+	private static int bJCount;
+	private static int creditsEarned;
+	private static int creditsLost; 
+	private static int highestCredits;
+	private static int bankRuptcies;
+	private static String currency = "credits";
+	private static Player currentPlayer = new Player
+	(username, passwd, wins, loses, extremeWins,
+	fNRounds, nBJROunds, fFRounds, bJCount,
+	creditsEarned, creditsLost, highestCredits,
+	bankRuptcies, currency);
+	
+	public static void main(String[] args) 
+	throws IOException, InterruptedException {
+		
+		ProjectFileIO_v2.readFile();
+		System.out.println("Welcome to BlackJack Extreme\nPlease log in :)\n");
+		logIn();
+		while(!displayMenu());
+		
+	}
 
  private static void mainGame() throws IOException {
   double score = 1500;
@@ -882,36 +911,6 @@ public class Main {
  }
  
 
-	private static Scanner input = new Scanner(System.in);
-	private static String username;
-	private static String passwd;
-	private static int wins;
-	private static int loses;
-	private static int extremeWins;
-	private static int fNRounds;
-	private static int nBJROunds;
-	private static int fFRounds;
-	private static int bJCount;
-	private static int creditsEarned;
-	private static int creditsLost; 
-	private static int highestCredits;
-	private static int bankRuptcies;
-	private static String currency = "credits";
-	private static Player currentPlayer = new Player
-	(username, passwd, wins, loses, extremeWins,
-	fNRounds, nBJROunds, fFRounds, bJCount,
-	creditsEarned, creditsLost, highestCredits,
-	bankRuptcies, currency);
-	
-	public static void main(String[] args) 
-	throws IOException, InterruptedException {
-		
-		ProjectFileIO_v2.readFile();
-		System.out.println("Welcome to BlackJack Extreme\nPlease log in :)\n");
-		logIn();
-		while(!displayMenu());
-		
-	}
 	
 	static void logIn() throws IOException {
 
