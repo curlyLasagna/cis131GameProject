@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private String password; 
     private int wins; 
+    private int loses;
     private int extremeRounds;
     private int fnRounds;
     private int nBJRounds;
@@ -19,13 +20,14 @@ public class Player {
         //no-arg constructor        
     }
    
-    public Player(String name, String password, int wins, int extremeRounds, int fnRounds,
+    public Player(String name, String password, int wins, int loses, int extremeRounds, int fnRounds,
 			int nBJRounds, int ffRounds, int bJCount, int creditsEarned, int creditsLost, int highestCredits,
 			int bankRuptcies, String currency) {
 		
 		this.name = name;
 		this.password = password;
 		this.wins = wins; 
+		this.loses = loses;
 		this.extremeRounds = extremeRounds;
 		this.fnRounds = fnRounds;
 		this.nBJRounds = nBJRounds;
@@ -36,6 +38,14 @@ public class Player {
 		this.highestCredits = highestCredits;
 		this.bankRuptcies = bankRuptcies;
 		this.currency = currency; 
+	}
+
+	public int getLoses() {
+		return loses;
+	}
+
+	public void setLoses(int loses) {
+		this.loses = loses;
 	}
 
 	public String getPassword() {

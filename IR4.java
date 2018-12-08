@@ -1,4 +1,5 @@
 package blackjackbuildone;
+
 /*******************************************************************************************************************
   * InputRoutinesWithScannerV4.java
   * Author: David A. Freitag
@@ -110,9 +111,10 @@ public class IR4 {
      */ 
    public static String getString(String msg) {
       String answer = "";
-      System.out.println(msg);
+
       try {
-         answer = keyboard.nextLine(); 
+        System.out.print(msg);
+        answer = keyboard.nextLine(); 
       }
       catch (Exception e) {
          System.err.println("Error reading input from user. Ending program.");
@@ -140,6 +142,7 @@ public class IR4 {
      */  
    public static int getInteger(String msg) {
       System.out.println(msg);
+      System.out.print("");
       while (!keyboard.hasNextInt()) {
          keyboard.nextLine();
          System.err.println("Invalid integer. Try again.");
@@ -156,6 +159,7 @@ public class IR4 {
      */ 
    public static double getDouble(String msg) {
       System.out.println(msg);
+      System.out.print("");
       while (!keyboard.hasNextDouble()) {
          keyboard.nextLine();
          System.err.println("Invalid number. Try again.");
@@ -179,16 +183,16 @@ public class IR4 {
           && answer.compareToIgnoreCase("no")  != 0) {
          
          if (answer.replace(" ", "").equals("")) {
-            System.err.println("Error: Missing y/n input.");
+            System.err.println("\t\t\t\t\t\t\t\tError: Missing y/n input.");
          } else {
             if (answer.compareToIgnoreCase("y")   != 0 
              && answer.compareToIgnoreCase("yes") != 0 
              && answer.compareToIgnoreCase("n")   != 0 
              && answer.compareToIgnoreCase("no")  != 0) {
-               System.err.println("Error: Unexpected input.");
+               System.err.println("\t\t\t\t\t\t\tError: Unexpected input.");
             }
          }
-         answer = getString(msg);
+         answer = getString("\t\t\t\t\t\t\t\t"+msg);
       } 
       
       if  (answer.compareToIgnoreCase("y")   == 0  
