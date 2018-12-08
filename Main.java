@@ -514,7 +514,16 @@ public class Main {
 
       creditsEarned = (creditsEarned + bet);
       System.out.println(creditsEarned);
+      run = false;
       updateplayer();
+
+     }
+     /////////////////////////////////////draw///////////////////////////////////////////////////////////////
+     if(CompHand.cardValue() == PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM && PlayerHand.cardValue() <= CARDGAMENUM) {
+    	 screenprint(CARDGAMENUM);
+    	 Print.Draw();
+    	 PlayerHand.reset(playingDeck);
+         CompHand.reset(playingDeck);
 
      }
      ////////////////////////////////////////////////////////AI wins////////////////////////////////////////////
@@ -530,6 +539,7 @@ public class Main {
       loses = loses + 1;
       creditsEarned = (creditsEarned - bet);
       System.out.println(creditsEarned);
+      run = false;
       updateplayer();
      }
      ////////////////////////////AI Bust///////////////////////////////////
