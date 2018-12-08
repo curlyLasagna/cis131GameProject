@@ -22,8 +22,12 @@ import java.util.Scanner;
 public class Main {
 
 	private static Scanner input = new Scanner(System.in);
+	
+	/*Fields for logging in purposes*/
 	private static String username;
 	private static String passwd;
+	
+	/*Fields for statistics purposes*/
 	private static int wins;
 	private static int loses;
 	private static int extremeWins;
@@ -35,12 +39,18 @@ public class Main {
 	private static int creditsLost; 
 	private static int highestCredits;
 	private static int bankRuptcies;
+	
+	/*New players are always defaulted to credits*/
 	private static String currency = "credits";
+	
+	/*Instantiate a currentPlayer Player object*/
 	private static Player currentPlayer = new Player
 	(username, passwd, wins, loses, extremeWins,
 	fNRounds, nBJROunds, fFRounds, bJCount,
 	creditsEarned, creditsLost, highestCredits,
 	bankRuptcies, currency);
+	
+
 	
 	public static void main(String[] args) 
 	throws IOException, InterruptedException {
@@ -48,6 +58,7 @@ public class Main {
 		ProjectFileIO_v2.readFile();
 		System.out.println("Welcome to BlackJack Extreme\nPlease log in :)\n");
 		logIn();
+		isNewPlayer(username);
 		while(!displayMenu());
 		
 	}
@@ -59,10 +70,13 @@ public class Main {
 		passwd = IR4.getString("Password: ");
 		checkPassword(username, passwd);
 		currentPlayer.setPassword(passwd);
-		isNewPlayer(username);
 
 	}
 	
+	/****************************************************************************
+	 Checks the password whether it's correct, depending on the user name entered 
+	 The user can log in as a different user by entering q
+	 ****************************************************************************/
 	static void checkPassword(String user, String pass) throws IOException {
 		
 		//Surprised this mess works
@@ -113,9 +127,10 @@ public class Main {
 			    " |                 |  __| /   \\  | | |    /|  __|| |\\/| |  __|                      | \n" + 
 			    " |                 | |___/ /^\\ \\ | | | |\\ \\| |___| |  | | |___                      | \n" + 
 			    " |                 \\____/\\/   \\/ \\_/ \\_| \\_\\____/\\_|  |_|____/                      |\n" +
-			    " +==================================================================================+\n" +
-				" |                                                                                  |\n" + 
-			    " |                                1. Play                                           |\n" +
+			    " +==================================================================================+"); 
+			System.out.printf(" %-1s%-59s%10s", "| Signed in as: ", ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getName(), "|\n");  
+        System.out.println(" |                                                                                  |\n" + 
+                " |                                1. Play                                           |\n" +
 				" |                                2. Settings                                       |\n" +
 			    " |                                3. Statistics                                     |\n" +
 				" |                                4. Hall of Fame                                   |\n" +
@@ -157,6 +172,8 @@ public class Main {
 		return quit;
 	}
 	
+	
+	//Play submenu 
 	static void displayPlay() throws IOException, InterruptedException {
 		System.out.printf("%35s\n","Play");
 		System.out.println("1. Extreme Blackjack!\n" +
@@ -172,61 +189,11 @@ public class Main {
 	}
 	
 	static void displayGame() {
-		
-	}
-	
-	static void displayExtreme() throws IOException, InterruptedException {
-		System.out.printf("%25s\n", "Extras");
-		System.out.println("1. Fight Night\n" +
-						   "2. Not BlackJack\n" +
-				 		   "3. Fire\n" + 
-						   "4. Rules\n" +
-				 		   "5. Back");
-		
-		switch(IR4.getIntegerBetweenLowAndHigh("", 1, 5, "Invalid input, try again")) {
-		
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			displayExtraRules();
-			break;
-		case 5:
-			displayPlay();
-			break;
-		}
+		//??
 	}
 	
 	
-		
-
-	//Enter number for prompt to the user
-	static void displayExtraRules() throws IOException, InterruptedException {
-		System.out.println("Fight Night\n" +
-						   ">Betting is set to your max credits\n" + 
-						   ">Minimum of 5 rounds\n" +
-						   ">After 5 rounds, you may quit\n" +
-						   ">0 credits will cause to lose\n");
-		System.out.println("Not BlackJack\n" +
-						   ">If either dealer or user hits a blackjack, they lose\n" + 
-						   ">If dealer wins, your bet is tripled and you\n" +
-						   "lost that amount from your stack\n" +
-						   "If you win, your bet is tripled and you're awarded the amount\n");
-		System.out.println("For Fire\n" +
-						   ">If you win 4 rounds in a row, you're awarded twice the\n" +
-						   "amount of your total bets in those 4 rounds\n" +
-						   "If you lose 4 rounds in a row, you're total credits are\n" +
-						   "reduced twice the amount of your total bets in those 4 rounds\n");
-		System.out.println("press q to go back");
-		
-		if(pressQ().equals("q"))
-			displayExtreme();		
-	}
-	
-	
+	//Setting submenu that allows the user to modify their account
 	static void displaySetting() throws IOException, InterruptedException {
 		System.out.printf("%42s\n", "Settings" );
 		System.out.println("1. Change currency \n"+ 							 
@@ -249,6 +216,7 @@ public class Main {
 		}
 	}
 	
+	//The option to change their in game currency 
 	static void changeCurrency() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		System.out.printf("%31s\n", "Change currency");
@@ -266,6 +234,8 @@ public class Main {
 		displaySetting();
 	}
 	
+	//The option to change their log in username. 
+	//Duplicate usernames are not allowed to avoid log in conflicts 
 	static void changeAlias() throws IOException, InterruptedException {
 		ProjectFileIO_v2.readFile();
 		String newAlias = "";
@@ -278,33 +248,28 @@ public class Main {
 				System.out.println("Enter new name");
 				newAlias = input.next();
 
-				if(newAlias.equalsIgnoreCase("q")) {
-					displaySetting();
-					break;
-					}
-				else {
+				// if(newAlias.equalsIgnoreCase("q")) {
+				// 	displaySetting();
+				// 	break;
+				// 	}
+				// else {
+                    }
+				}
 					ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).setName(newAlias);
 					currentPlayer.setName(newAlias);
 					System.out.println("Alias successfully changed");
 					ProjectFileIO_v2.writeFile();
 					displaySetting();
-					}
-				}
 			}
-		}
+		
 	
 	
 	static void displayStats() throws IOException, InterruptedException {
 		System.out.printf("%20s", "Statistics\n");
 		System.out.println("Wins: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getWins() +"\n" + 
 							"Loses: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getLoses() + "\n" +
-							"Extreme rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getExtremeRounds() + "\n" +
-							"Fight Night rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getFnRounds() + "\n" +
-							"Not BlackJack rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getnBJRounds() + "\n" +
-							"For Fire rounds: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getFfRounds() + "\n" +
 							"Blackjacks: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getbJCount() + "\n" +
 							"Credits earned: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsEarned() + "\n" +
-							"Credits lost: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsLost() + "\n" +
 							"Credits lost: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getCreditsLost() + "\n" +
 							"Highest credit : " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getHighestCredits() + "\n" +
 							"Bankruptcies: " + ProjectFileIO_v2.getPlayer(currentPlayer.getName(), passwd).getBankRuptcies() + "\n" +
@@ -313,6 +278,7 @@ public class Main {
 								displayMenu();
 	}
 	
+	//High score lists 
 	static void displayHOF() throws IOException, InterruptedException {
 		System.out.println("<=================== HALL OF FAME ===================>\n");
 		System.out.printf("%-20s%33s\n", "Hustler:", "Wins:");
@@ -371,15 +337,14 @@ public class Main {
 	static void displayThanks() {
 		//Displays a thank you message when user quits 
 		//Create an ASCII art 
-		System.out.println(" _______ _                 _                          _ \n" +
-						  "|__   __| |               | |                        | |\n" +
+		System.out.println(" ______                 _                          _ \n" +
+						  "|__  __|               | |                        | |\n" +
 						  "  |  | |__   __ _ _ __ | | __  _   _  ___  _   _  | |\n" +
 						  "  |  | '_ \\ / _` | '_ \\| |/ / | | | |/ _ \\| | | | | |\n" +
 						  "  |  | | | | (_| | | | |   <  | |_| | (_) | |_| | |_|\n" +
 						  "  |  |_| |_|\\__,_|_| |_|_|\\_\\  \\__, |\\___/ \\__,_| (_)\n" +
 						  "                                __/ |                \n" +
-                          "								___/                 ");
-		System.out.println("Thank you for playing :)");
+                          "		               |___/                 ");
 	}
 	
 	static String pressQ() {
@@ -391,7 +356,10 @@ public class Main {
 		return q;
 	}
 
+/*****************Game logic*******************/
+	
  private static void mainGame() throws IOException {
+  
   double score = 1500;
   int lost = 0;
   double bet = 0;
@@ -408,10 +376,18 @@ public class Main {
    Deck CompHand = new Deck();
    playingDeck.createDeck();
    playingDeck.shuffle();
+   
+   //Winning numbers 
    CARDGAMENUM = IR4.getRandomNumber(21, 61);
+   
    compHit = CARDGAMENUM - 6 ;
-   System.out.printf("Money = "+score+"\n");
+   
+   System.out.printf(currentPlayer.getCurrency()+": " +score+"\n");
+   
    printWiningscore(CARDGAMENUM);
+   
+   /*If user runs out of money to bet */
+   
    if(score <= 0) {
     runTwo = false;
     run = false;
@@ -419,6 +395,8 @@ public class Main {
     ProjectFileIO_v2.writeFile();
     ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
    }
+   
+   
    if(score > 0) {
     bet = placeBets(score);
    }
@@ -488,12 +466,14 @@ public class Main {
     move = getMove();
     ////////////////////Quit Add Save Stuff Here?/////////////////////////////////////////////////////////
     if(move == 3) {
+     String user = currentPlayer.getName();
      run = false;
      runTwo = false;
      ProjectFileIO_v2.writeFile();
-     ProjectFileIO_v2.getPlayer(username, passwd).setWins(wins);
-     ProjectFileIO_v2.getPlayer(username, passwd).setCreditsEarned(creditsEarned);
-     ProjectFileIO_v2.getPlayer(username, passwd).setCreditsLost(creditsLost);
+     ProjectFileIO_v2.getPlayer(user, passwd).setWins(wins);
+     ProjectFileIO_v2.getPlayer(user, passwd).setBankRuptcies(bankRuptcies);
+     ProjectFileIO_v2.getPlayer(user, passwd).setCreditsEarned(creditsEarned);
+     ProjectFileIO_v2.getPlayer(user, passwd).setCreditsLost(creditsLost);
 
 
     }
