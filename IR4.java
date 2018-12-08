@@ -111,8 +111,7 @@ public class IR4 {
      */ 
    public static String getString(String msg) {
       String answer = "";
-      System.out.println(msg);
-      
+
       try {
         System.out.print("");
         answer = keyboard.nextLine(); 
