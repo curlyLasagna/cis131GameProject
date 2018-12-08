@@ -368,13 +368,6 @@ public class Main {
    if(creditsEarned > 0) {
     bet = placeBets(creditsEarned);
    }
-   if(bet == 0) {
-	     run = false;
-	     runTwo = false;
-	     updateplayer();
-
-
-	    }
    numberDraws = CARDGAMENUM /drawFactor;
    for(int i = 1; i<= numberDraws; i++) {
     PlayerHand.draw(playingDeck);
@@ -390,9 +383,15 @@ public class Main {
     ProjectFileIO_v2.writeFile();
     ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
    }
+   if(bet == 0) {
+	     runTwo = false;
+	     updateplayer();
 
+
+	    }
    run = true;
-   while(run) {
+   while(run && bet != 0) {
+	  
 	   
     Print.dividers();
     System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
