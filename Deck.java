@@ -90,12 +90,12 @@ public class Deck{
   String top4 = " |       |";
   String top5 = " |       |";
   String top6 = " ._______.";
-
+//////////////////////////////one////////////
   for(Card aCard : this.cards) {
    counter = counter +1; 
   }
   System.out.printf("");
-  if(counter < 5) {
+ // if(counter < 5) {
    for(int i = 1; i <= counter; i++) {
     System.out.printf(""+top1+"\t");
 
@@ -139,260 +139,276 @@ public class Deck{
 
    }
    System.out.println("");
-  }
-  if(counter >= 5 && counter < 10) {
-   int countertwo;
-   
-   countertwo = counter - 5;
-   int rows = 5;
-   System.out.println("");
-
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(""+top1+"\t");
-
-   }
-   System.out.println("");
-
-   System.out.printf("");
-   /////////////////////////////problem
-   for(int i = 0; i < rows; i++) {
-    System.out.printf(cards.get(i)+"\t");
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(top2+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(top3+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(top4+"\t");
-
-   }
-
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(top5+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= rows; i++) {
-    System.out.printf(top6+"\t");
-
-   }
-
-
-   
-   System.out.println("");
-
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(""+top1+"\t");
-
-   }
-
-   
-   System.out.println("");
-
-   System.out.printf("");
-   /////////////////////problem two
-   for(int i = 0; i < countertwo; i++) {
-    System.out.printf(cards.get(i+5)+"\t");
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(top2+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(top3+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(top4+"\t");
-
-   }
-
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(top5+"\t");
-
-   }
-   System.out.println("");
-   System.out.printf("");
-   for(int i = 1; i <= countertwo; i++) {
-    System.out.printf(top6+"\t");
-
-   }
-  }
-   System.out.println("");
-   if(counter >= 10 ) {
-    int countertwo;
-    int counterthree;
-    countertwo = counter - 5;
-    counterthree = counter -10;
-    int rows = 5;
-    System.out.println("");
-
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(""+top1+"\t");
-
-    }
-    System.out.println("");
-
-    System.out.printf("");
-    /////////////////////////////problem
-    for(int i = 0; i < rows; i++) {
-     System.out.printf(cards.get(i)+"\t");
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top2+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top3+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top4+"\t");
-
-    }
-
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top5+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top6+"\t");
-
-    }
+////  if(counter >= 5 && counter < 10) {
+////   int countertwo;
+//   
+////countertwo = counter - 5;
+//   int rows = 5;
+//   System.out.println("");
+//
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(""+top1+"\t");
+//
+//   }
+//   System.out.println("");
+//
+//   System.out.printf("");
+//  
+//   for(int i = 0; i < rows; i++) {
+//    System.out.printf(cards.get(i)+"\t");
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(top2+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(top3+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(top4+"\t");
+//
+//   }
+//
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(top5+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= rows; i++) {
+//    System.out.printf(top6+"\t");
+//
+//   }
+//   System.out.println("");
 
 
-    
-    System.out.println("");
-
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(""+top1+"\t");
-
-    }
-
-    
-    System.out.println("");
-
-    System.out.printf("");
-    /////////////////////problem two
-    for(int i = 0; i < rows; i++) {
-     System.out.printf(cards.get(i+5)+"\t");
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top2+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top3+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top4+"\t");
-
-    }
-
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top5+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= rows; i++) {
-     System.out.printf(top6+"\t");
-
-    }
-    System.out.println("");
-    
-
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(""+top1+"\t");
-
-    }
-
-    
-    System.out.println("");
-
-    System.out.printf("");
-    /////////////////////problem two
-    for(int i = 0; i < counterthree; i++) {
-     System.out.printf(cards.get(i+10)+"\t");
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(top2+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(top3+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(top4+"\t");
-
-    }
-
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(top5+"\t");
-
-    }
-    System.out.println("");
-    System.out.printf("");
-    for(int i = 1; i <= counterthree; i++) {
-     System.out.printf(top6+"\t");
-
-    }
-    System.out.println("");
-  }
+  /////////////////////////////////////////////////// 
+//   System.out.println("");
+//
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(""+top1+"\t");
+//
+//   }
+//
+//   
+//   System.out.println("");
+//
+//   System.out.printf("");
+//   /////////////////////problem two
+//   for(int i = 0; i < countertwo; i++) {
+//    System.out.printf(cards.get(i+5)+"\t");
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(top2+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(top3+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(top4+"\t");
+//
+//   }
+//
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(top5+"\t");
+//
+//   }
+//   System.out.println("");
+//   System.out.printf("");
+//   for(int i = 1; i <= countertwo; i++) {
+//    System.out.printf(top6+"\t");
+//
+//   }
+//  }
+//   System.out.println("");
+//   if(counter >= 10 ) {
+//    int countertwo;
+//    int counterthree;
+//    countertwo = counter - 5;
+//    counterthree = counter -10;
+//    int rows = 5;
+//    System.out.println("");
+//
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(""+top1+"\t");
+//
+//    }
+//    System.out.println("");
+//
+//    System.out.printf("");
+//    /////////////////////////////problem
+//    for(int i = 0; i < rows; i++) {
+//     System.out.printf(cards.get(i)+"\t");
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top2+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top3+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top4+"\t");
+//
+//    }
+//
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top5+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top6+"\t");
+//
+//    }
+//
+//
+//    
+//    System.out.println("");
+//
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(""+top1+"\t");
+//
+//    }
+//
+//    
+//    System.out.println("");
+//
+//    System.out.printf("");
+//    /////////////////////problem two
+//    for(int i = 0; i < rows; i++) {
+//     System.out.printf(cards.get(i+5)+"\t");
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top2+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top3+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top4+"\t");
+//
+//    }
+//
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top5+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= rows; i++) {
+//     System.out.printf(top6+"\t");
+//
+//    }
+//    System.out.println("");
+//    
+//
+//    System.out.printf("");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(""+top1+"\t");
+//
+//    }
+//
+//    
+//    System.out.println("");
+//
+//    System.out.printf("");
+//    /////////////////////problem two
+//    for(int i = 0; i < counterthree; i++) {
+//     System.out.printf(cards.get(i+10)+"\t");
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(top2+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(top3+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(top4+"\t");
+//
+//    }
+//
+//    System.out.println("");
+//    System.out.printf("");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(top5+"\t");
+//
+//    }
+//    System.out.println("");
+//    System.out.printf("1
+//                        111
+//                        1
+//                        11
+//                        1
+//                        1
+//                        1
+//                        1
+//                        1
+//                        1
+//                        11
+//                        111
+//                        1
+//                        11111111111
+//                        11
+//                        1
+//                        1111");
+//    for(int i = 1; i <= counterthree; i++) {
+//     System.out.printf(top6+"\t");
+//
+//    }
+//    System.out.println("");
+//  }
 
 
 
