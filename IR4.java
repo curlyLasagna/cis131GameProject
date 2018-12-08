@@ -1,5 +1,4 @@
 
-
 /*******************************************************************************************************************
   * InputRoutinesWithScannerV4.java
   * Author: David A. Freitag
@@ -113,7 +112,7 @@ public class IR4 {
       String answer = "";
 
       try {
-        System.out.print("");
+        System.out.print(msg);
         answer = keyboard.nextLine(); 
       }
       catch (Exception e) {

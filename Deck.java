@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -78,7 +76,17 @@ public class Deck{
   }
   return totalValue;
  }
-
+public void reset(Deck set) {
+	int Deck = this.cards.size();
+	for(int i = 0; i < Deck; i++) {
+		set.addCard(this.getCard(i));
+		
+	}
+	for(int i =0; i < Deck; i++) {
+		this.removecard(0);
+	}
+	
+}
 
  @Override
  public String toString() {
