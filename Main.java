@@ -393,9 +393,9 @@ public class Main {
   return q;
  }
  static void mainGame() throws IOException {
-    double score = 1500;
-    int lost = 0;
-    double bet = 0;
+    
+    
+    int bet = 0;
     boolean run = true;
     int move;
     int numberDraws = 2;
@@ -403,22 +403,32 @@ public class Main {
     int compHit = 16;
     int CARDGAMENUM = 21;
     boolean runTwo = true;
+//    ProjectFileIO_v2.writeFile();
+//	 score = ProjectFileIO_v2.getPlayer(username, passwd).getCreditsEarned();
+		 
     while(runTwo) {
+    	 if(creditsEarned <= 0) {
+    		 System.out.println("Thank you for your time have 1500 on us");
+    		 creditsEarned = 1500;
+    		 updateplayer();
+    		 
+    	 }
+    	 
      playingDeck.createDeck();
      playingDeck.shuffle();
      CARDGAMENUM = IR4.getRandomNumber(21, 61);
      compHit = CARDGAMENUM - 6 ;
-     System.out.printf("Money = "+score+"\n");
+     System.out.printf("Money = "+creditsEarned+"\n");
      Print.printWiningscore(CARDGAMENUM);
-     if(score <= 0) {
+     if(creditsEarned <= 0) {
       runTwo = false;
       run = false;
       bankRuptcies++;
       ProjectFileIO_v2.writeFile();
       ProjectFileIO_v2.getPlayer(username, passwd).setBankRuptcies(bankRuptcies);
      }
-     if(score > 0) {
-      bet = placeBets(score);
+     if(creditsEarned > 0) {
+      bet = placeBets(creditsEarned);
      }
      numberDraws = CARDGAMENUM /drawFactor;
      for(int i = 1; i<= numberDraws; i++) {
@@ -428,7 +438,7 @@ public class Main {
       CompHand.draw(playingDeck);
      }
      CompHand.draw(playingDeck);
-     if(score <= 0) {
+     if(creditsEarned <= 0) {
       runTwo = false;
       run = false;
       bankRuptcies++;
@@ -439,16 +449,19 @@ public class Main {
      run = true;
      while(run) {
       Print.dividers();
-      System.out.printf("Win- "+ wins+"  Lost- "+lost+"\n");
+      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
       screenprint(CARDGAMENUM);
       if(PlayerHand.cardValue() > CARDGAMENUM) {
        Print.dividers();
        Print.bustprint();
        Print.dividers();
-       lost = lost + 1;
-       score = score - bet;
-       creditsLost = (int) (creditsLost + bet);
+       loses = loses + 1;
+       creditsEarned = (creditsEarned + bet);
+       PlayerHand.reset(playingDeck);
+       CompHand.reset(playingDeck);
        run = false;
+       
+       updateplayer();
 
       }
       ////////////////////////////////21/insta win////////////////////////////////////////////////
@@ -458,10 +471,11 @@ public class Main {
        PlayerHand.reset(playingDeck);
        CompHand.reset(playingDeck);
        run = false;
+       updateplayer();
       }
 
       move = getMove();
-      ////////////////////Quit Add Save Stuff Here?/////////////////////////////////////////////////////////
+      ////////////////////Quit Add Save/////////////////////////////////////////////////////////
       if(move == 3) {
        run = false;
        runTwo = false;
@@ -474,27 +488,38 @@ public class Main {
       if(move == 1) {
        PlayerHand.draw(playingDeck);
        if(PlayerHand.cardValue() > CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
         screenprint(CARDGAMENUM);
         Print.bustprint();
-        lost = lost + 1;
-        score = score - bet;
+        loses = loses + 1;
+        creditsEarned = (int) (creditsEarned - bet);
         PlayerHand.reset(playingDeck);
         CompHand.reset(playingDeck);
-        creditsLost = (int) (creditsLost + bet);
+        creditsEarned = (creditsEarned + bet);
         //System.out.println(score);
         run = false;
+        updateplayer();
        }
        //////////////////////////////////////21////////////////////////////////////
        if(PlayerHand.cardValue() == CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
         screenprint(CARDGAMENUM);
         Print.WinningPrints();
         PlayerHand.reset(playingDeck);
         CompHand.reset(playingDeck);
-        score = score + bet;
+        creditsEarned = (creditsEarned + bet);
         run = false;
+        updateplayer();
        }
        ////////////////////////////////comp Win///////////////////////////////
        if(CompHand.cardValue() > CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
         screenprint(CARDGAMENUM);
         Print.dealerBust();
         Print.dividers();
@@ -503,10 +528,11 @@ public class Main {
         CompHand.reset(playingDeck);
         Print.dividers();
         wins =  wins + 1;
-        score = score + bet;
-        creditsEarned = (int) (creditsEarned + bet);
+        
+        creditsEarned = (creditsEarned + bet);
         //System.out.println(score);
         run = false;
+        updateplayer();
        }
 
 
@@ -524,6 +550,9 @@ public class Main {
 //       Print.dividers();
        /////////////////////////////////////////////////Player wins//////////////////////////////////////////////////////////////////////////////////
        if(CompHand.cardValue() <= PlayerHand.cardValue()&& PlayerHand.cardValue() <= CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
 
         screenprint(CARDGAMENUM);
         Print.WinningPrints();
@@ -531,24 +560,32 @@ public class Main {
         CompHand.reset(playingDeck);
         Print.dividers();
         wins =  wins + 1;
-        score =score  + bet;
-        creditsEarned = (int) (creditsEarned + bet);
-        System.out.println(score);
+        
+        creditsEarned = (creditsEarned + bet);
+        System.out.println(creditsEarned);
+        updateplayer();
 
        }
        ////////////////////////////////////////////////////////AI wins////////////////////////////////////////////
        else if(CompHand.cardValue() >= PlayerHand.cardValue() && CompHand.cardValue() <= CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
         screenprint(CARDGAMENUM);
         Print.printDealerwin();
         PlayerHand.reset(playingDeck);
         CompHand.reset(playingDeck);
         Print.dividers();
-        lost = lost + 1;
-        score =score  - bet;
-        System.out.println(score);
+        loses = loses + 1;
+        creditsEarned = (creditsEarned - bet);
+        System.out.println(creditsEarned);
+        updateplayer();
        }
        ////////////////////////////AI Bust///////////////////////////////////
        if(CompHand.cardValue() >  CARDGAMENUM) {
+    	   Print.dividers();
+    	      System.out.printf("Win- "+ wins+"  Lost- "+loses+"\n");
+
         screenprint(CARDGAMENUM);
         Print.dealerBust();
         Print.dividers();
@@ -557,8 +594,9 @@ public class Main {
         CompHand.reset(playingDeck);
         Print.dividers();
         wins =  wins +1;
-        score = score + bet;
+        creditsEarned = creditsEarned + bet;
         run = false;
+        updateplayer();
 
 
        }
@@ -580,6 +618,7 @@ public class Main {
  private static void updateplayer() throws IOException {
    ProjectFileIO_v2.writeFile();
       ProjectFileIO_v2.getPlayer(username, passwd).setWins(wins);
+      ProjectFileIO_v2.getPlayer(username, passwd).setLoses(loses);
       ProjectFileIO_v2.getPlayer(username, passwd).setCreditsEarned(creditsEarned);
       ProjectFileIO_v2.getPlayer(username, passwd).setCreditsLost(creditsLost);
 
@@ -620,10 +659,10 @@ public class Main {
     return move;
    }
 
-   private static double placeBets(double score) {
+   private static int placeBets(int score) {
 
 
-    double temp = IR4.getDouble("Places Bets");
+    int temp = IR4.getInteger("Places Bets");
     boolean run = true;
     while(run) {
      if(temp <= score && temp > 0) {
@@ -632,7 +671,7 @@ public class Main {
      }
      else {
       System.out.printf("Invald input\n");
-      temp = IR4.getDouble("Places Bets");
+      temp = IR4.getInteger("Places Bets");
       run = true;
      }
     }
