@@ -426,13 +426,13 @@ if(run != false) {
     move = getMove();
 }
     ////////////////////Quit Add Save/////////////////////////////////////////////////////////
-    if(move == 3) {
-     run = false;
-     runTwo = false;
-     updateplayer();
-
-
-    }
+//    if(move == 3) {
+//     run = false;
+//     runTwo = false;
+//     updateplayer();
+//
+//
+//    }
 
     ////////////////////////////Hit/////////////////////////////////////////////////////////////////
     if(move == 1 && run != false) {
@@ -602,7 +602,7 @@ if(run != false) {
   Print.dividers();
   Print.printSum();
   Print.dividers();
-  System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinnig Number: "+ CARDGAMENUM +"\n");
+  System.out.print("Computer: "+CompHand.cardValue()+"     "+username + ": "+PlayerHand.cardValue()+"\t\tWinning Number: "+ CARDGAMENUM +"\n");
   Print.dividers();
 
 
@@ -612,10 +612,10 @@ if(run != false) {
   boolean run = true;
   do{
    System.out.printf("1. Hit\n");
-   System.out.printf("2. Stand\n");
+   //System.out.printf("2. Stand\n");
 
-   move = IR4.getInteger("3. Quit");
-   if(move != 1 && move != 2 && move != 3) {
+   move = IR4.getInteger("2. Stand");
+   if(move != 1 && move != 2) {
     System.out.printf("Invald input\n");
     run = true;
    }
@@ -627,7 +627,7 @@ if(run != false) {
  private static int placeBets(int score) {
 
 
-  int temp = IR4.getInteger("Places Bets or 0 to Qiut");
+  int temp = IR4.getInteger("Places Bets or 0 to Quit");
   boolean run = true;
   while(run) {
    if(temp <= score && temp > 0) {
